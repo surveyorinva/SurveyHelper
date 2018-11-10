@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="20dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/announcement_image_background"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="150dp" />
+
+            <ProgressBar
+                android:id="@+id/announcement_image_background_progress"
+                android:indeterminate="true"
+                android:layout_centerInParent="true"
+                android:layout_width="80dp"
+                android:layout_height="80dp" />
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="@color/colorTransparent125"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/announcement_button_action_dont_show"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
+
+            <TextView
+                android:text="@string/staff_feed_popup_feed_announcement_game_dont_show_again"
+                style="@style/Labels.Body.Normal.Light"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

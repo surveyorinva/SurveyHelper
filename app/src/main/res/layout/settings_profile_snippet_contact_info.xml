@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_marginStart="10dp"
+    android:background="@color/app_background_light"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/profile_item_1_header"
+        android:text="@string/appSettings_profile_content_contact_header"
+        style="@style/Labels.List.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="5dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginStart="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_email_dark_24dp"
+            android:tint="@color/settings_profile_contact_icons"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/profile_contact_email_address"
+            style="@style/Labels.Body.Normal.Hyperlink"
+            android:autoLink="email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginStart="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_local_phone_dark_24dp"
+            android:tint="@color/settings_profile_contact_icons"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/profile_contact_phone_office"
+            style="@style/Labels.Body.Normal.Hyperlink"
+            android:autoLink="phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginStart="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_phone_android_dark_24dp"
+            android:tint="@color/settings_profile_contact_icons"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/profile_contact_phone_mobile"
+            style="@style/Labels.Body.Normal.Hyperlink"
+            android:autoLink="phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <TextView
+        android:id="@+id/profile_item_2_header"
+
+        android:text="@string/appSettings_profile_content_contact_personal"
+        style="@style/Labels.List.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="5dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginStart="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_cake_dark_24dp"
+
+            android:tint="@color/settings_profile_contact_icons"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/profile_contact_birthday"
+            style="@style/Labels.Body.Normal.Hyperlink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <TextView
+        android:id="@+id/profile_item_3_header"
+        android:text="@string/appSettings_profile_content_contact_access"
+        style="@style/Labels.List.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="5dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginStart="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_key_dark_24dp"
+            android:tint="@color/settings_profile_contact_icons"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/profile_contact_access_level"
+            style="@style/Labels.Body.Normal.Hyperlink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/app_background_light"
+    android:orientation="vertical"
+    android:layout_marginTop="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/about_item_1_header"
+        android:text="@string/appSettings_general_about_header_legal"
+        style="@style/Labels.List.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/rl_about_Item_1"
+        android:background="@drawable/button_hollow"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/about_item_1_value"
+            android:text="@string/appSettings_general_about_terms_of_use"
+            style="@style/Labels.List.Items"
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_below="@+id/about_item_1_value"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"/>
+
+
+    </RelativeLayout>
+
+    <View
+        android:background="@color/grey_400"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_about_Item_2"
+        android:background="@drawable/button_hollow"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/about_item_2_value"
+            android:text="@string/appSettings_general_about_privacy_policy"
+            style="@style/Labels.List.Items"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_below="@+id/about_item_2_value"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"/>
+
+    </RelativeLayout>
+
+    <View
+        android:background="@color/grey_400"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_about_Item_3"
+        android:background="@drawable/button_hollow"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/about_item_3_value"
+            android:text="@string/appSettings_general_about_open_source_licenses"
+            style="@style/Labels.List.Items"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_below="@+id/about_item_3_value"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"/>
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/about_item_4_header"
+        android:text="@string/appSettings_general_about_header_about"
+        style="@style/Labels.List.Title"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/rl_about_Item_4"
+        android:background="@drawable/button_hollow"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/about_item_4_value"
+            android:text="@string/appSettings_general_about_version"
+            style="@style/Labels.List.Items"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/general_item_4_desc"
+            android:text="@string/app_version"
+            style="@style/Labels.List.Details"
+            android:layout_below="@+id/about_item_4_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

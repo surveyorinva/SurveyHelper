@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- START xml_defaults -->
+<defaultsMap>
+    <entry>
+        <key>application_enabled</key>
+        <value>true</value>
+    </entry>
+
+    <entry>
+        <key>application_enabled_reason</key>
+        <value>null</value>
+    </entry>
+
+    <entry>
+        <key>application_cache_expiration</key>
+        <value>0</value>
+    </entry>
+
+    <entry>
+        <key>sign_up_enabled</key>
+        <value>true</value>
+    </entry>
+
+    <entry>
+        <key>application_legal_terms_current</key>
+        <value>null</value>
+    </entry>
+
+    <entry>
+        <key>event_promo</key>
+        <value>false</value>
+    </entry>
+
+    <entry>
+        <key>event_promo_title</key>
+        <value>null</value>
+    </entry>
+
+    <entry>
+        <key>event_promo_background</key>
+        <value>null</value>
+    </entry>
+
+    <entry>
+        <key>theme_staff_company_top_page_0</key>
+        <value>null</value>
+    </entry>
+
+    <entry>
+        <key>theme_staff_company_top_page_1</key>
+        <value>null</value>
+    </entry>
+
+    <entry>
+        <key>theme_staff_company_top_page_2</key>
+        <value>null</value>
+    </entry>
+
+    <entry>
+        <key>theme_staff_company_bottom_page_0</key>
+        <value>null</value>
+    </entry>
+
+    <entry>
+        <key>theme_staff_company_bottom_page_1</key>
+        <value>null</value>
+    </entry>
+
+    <entry>
+        <key>theme_staff_company_bottom_page_2</key>
+        <value>null</value>
+    </entry>
+
+
+</defaultsMap>
+    <!-- END xml_defaults -->

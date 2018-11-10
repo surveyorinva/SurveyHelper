@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/app_Bar_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_alignParentTop="true"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/login_content_margin_start"
+            android:layout_marginTop="@dimen/login_content_margin_top"
+            android:layout_marginEnd="@dimen/login_content_margin_end"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/signIn_user_name_first"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:iconSignifier="@drawable/ic_person_dark_24dp"
+                app:hasFocus="true"
+                app:helperText=" "
+                app:isResponsiveIconColor="true"
+                app:labelText="@string/appLogin_sign_in_user_name_first"
+                app:useDenseSpacing="false">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/signIn_user_name_first_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/appLogin_sign_in_user_name_first"
+                    android:imeOptions="actionNext"
+                    android:nextFocusDown="@id/signIn_user_name_last_value"
+                    android:inputType="textCapWords|textAutoComplete"
+                    android:maxLines="1"
+                    android:popupElevation="5dp"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/signIn_user_name_last"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:iconSignifier="@drawable/ic_person_light_24dp"
+                app:hasFocus="false"
+                app:helperText=" "
+                app:isResponsiveIconColor="true"
+                app:labelText="@string/appLogin_sign_in_user_name_last"
+                app:useDenseSpacing="false">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/signIn_user_name_last_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/appLogin_sign_in_user_name_last"
+                    android:imeOptions="actionNext"
+                    android:nextFocusDown="@id/signIn_email_value"
+                    android:inputType="textCapWords|textAutoComplete"
+                    android:maxLines="1"
+                    android:popupElevation="5dp"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/signIn_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:iconSignifier="@drawable/ic_email_dark_24dp"
+                app:hasFocus="false"
+                app:helperText=" "
+                app:isResponsiveIconColor="true"
+                app:labelText="@string/appLogin_sign_in_email"
+                app:useDenseSpacing="false">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/signIn_email_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/appLogin_sign_in_email"
+                    android:imeOptions="actionNext"
+                    android:nextFocusDown="@id/signIn_password_value"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:popupElevation="5dp"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/signIn_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:iconSignifier="@drawable/ic_key_dark_24dp"
+                app:endIcon="@drawable/ic_visibility_dark_24dp"
+                app:hasFocus="false"
+                app:isResponsiveIconColor="true"
+                app:helperText=" "
+                app:labelText="@string/appLogin_sign_in_password"
+                app:useDenseSpacing="false">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/signIn_password_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/appLogin_sign_in_password"
+                    android:imeOptions="actionNext"
+                    android:nextFocusDown="@id/signIn_access_key_value"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:popupElevation="5dp"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/signIn_access_key"
+                android:layout_width="@dimen/login_content_width_field_access_key"
+                android:layout_height="wrap_content"
+                app:iconSignifier="@drawable/ic_extension_dark_24dp"
+                app:hasFocus="false"
+                app:helperText=" "
+                app:isResponsiveIconColor="true"
+                app:labelText="@string/appLogin_sign_in_app_access_code"
+                app:useDenseSpacing="false"
+                app:maxCharacters="@integer/login_access_key_max">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/signIn_access_key_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/appLogin_sign_in_app_access_code"
+                    android:imeOptions="actionDone"
+                    android:nextFocusDown="@id/btn_signUp_action"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:popupElevation="5dp"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/login_content_space_between_buttons" />
+
+            <Button
+                android:id="@+id/btn_signUp_action"
+                android:text="@string/general_signUp"
+                style="@style/Buttons.Raised.Light"
+                android:layout_marginStart="@dimen/login_content_button_login_marginStart"
+                android:layout_marginEnd="@dimen/login_content_button_login_marginEnd"
+                android:textSize="@dimen/login_button_text_size_override"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>

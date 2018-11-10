@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryNormal">#d20700</color>
+    <color name="colorPrimaryLight">#ff5231</color>
+    <color name="colorPrimaryDark">#980000</color>
+
+    <color name="colorAccent">#d20700</color>
+
+    <color name="colorSecondary">#FFFFFF</color>
+    <color name="colorSecondaryLight">#FFFFFF</color>
+    <color name="colorSecondaryDark">#CCCCCC</color>
+    
+    <color name="colorTextPrimary">#ffffff</color>
+    <color name="colorTextSecondary">#000000</color>
+    <color name="colorTextHyperlink">@color/colorPrimaryNormal</color>
+
+    <color name="navViewSelectorColor">@color/grey_400</color>
+
+
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorTransparent125">#7d000000</color>
+
+    <color name="grey_400">#BDBDBD</color>
+    <color name="grey_800">#424242</color>
+
+    <color name="app_splash_background">@color/colorPrimaryNormal</color>
+    <color name="app_background_light">#FFFFFF</color>
+    <color name="app_background_dark">#000000</color>
+
+    <color name="app_Bar_background">#ffffff</color>
+    <color name="app_Bar_background_backdrop">@color/colorPrimaryNormal</color>
+
+    <color name="app_BottomBar_background">@color/colorPrimaryNormal</color>
+    <color name="app_BottomNav_background">@color/colorPrimaryNormal</color>
+
+    <color name="app_Icon_dark_color">#000000</color>
+    <color name="app_Icon_light_color">#ffffff</color>
+
+    <color name="app_Edit_text_background">@color/app_background_light</color>
+
+    <color name="app_Progress_circle_color_start">@color/colorAccent</color>
+    <color name="app_Progress_circle_color_end">#00ffffff</color>
+
+    <color name="appIntro_page1_color">#E91E63</color>
+    <color name="appIntro_page2_color">#9C27B0</color>
+    <color name="appIntro_page3_color">#009688</color>
+    <color name="appIntro_page4_color">#FF9800</color>
+    <color name="appIntro_pagefinish_color">#5D4037</color>
+
+    <color name="appIntro_bar_color">#80d6ff</color>
+    <color name="appIntro_seperator_color">#ffffff</color>
+
+    <color name="login_purple_500">#9C27B0</color>
+    <color name="login_deep_purple_500">#673AB7</color>
+    <color name="login_indigo_500">#3F51B5</color>
+    <color name="login_blue_500">#2196F3</color>
+    <color name="login_cyan_500">#00BCD4</color>
+    <color name="login_light_blue_500">#03A9F4</color>
+
+    <color name="settings_header_blue_500">#2196F3</color>
+    <color name="settings_profile_contact_icons">@color/colorTextSecondary</color>
+
+</resources>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/settings_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            layout="@layout/app_bar_top_a_regular"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/settings_header"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/login_content_tab_layout"
+            android:background="@drawable/app_tab_bar_back"
+            app:tabMode="fixed"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/colorAccent"
+            app:tabIndicatorHeight="@dimen/app_navigation_tab_indicator_half"
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:theme="@style/AppThemeView.TabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_navigation_tab_height_half"/>
+
+        <LinearLayout
+            android:layout_below="@id/login_content_tab_layout"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/login_content_view_pager"
+                android:layout_weight="1"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

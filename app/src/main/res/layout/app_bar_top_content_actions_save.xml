@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Button
+        android:id="@+id/appBar_top_action_finish"
+        android:text="@string/general_finish"
+        style="@style/Buttons.Flat.Dark"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/button_rounded_hollow_dark"
+        android:textSize="@dimen/labels_button"
+        android:layout_marginEnd="@dimen/app_bar_button_finish_margin_end"
+        android:layout_centerVertical="true"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:visibility="gone"/>
+
+
+</merge>

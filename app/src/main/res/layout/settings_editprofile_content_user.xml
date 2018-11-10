@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_alignParentTop="true"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/login_content_margin_start"
+            android:layout_marginTop="@dimen/login_content_margin_top"
+            android:layout_marginEnd="@dimen/login_content_margin_end"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/editProfile_user_name_first"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:iconSignifier="@drawable/ic_person_dark_24dp"
+                app:hasFocus="true"
+                app:helperText=" "
+                app:isResponsiveIconColor="true"
+                app:labelText="@string/appLogin_sign_in_user_name_first"
+                app:useDenseSpacing="false">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/editProfile_user_name_first_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/appLogin_sign_in_user_name_first"
+                    android:imeOptions="actionNext"
+                    android:nextFocusDown="@id/signIn_user_name_last_value"
+                    android:inputType="textCapWords|textAutoComplete"
+                    android:maxLines="1"
+                    android:popupElevation="5dp"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/editProfile_user_name_last"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:iconSignifier="@drawable/ic_person_light_24dp"
+                app:hasFocus="false"
+                app:helperText=" "
+                app:isResponsiveIconColor="true"
+                app:labelText="@string/appLogin_sign_in_user_name_last"
+                app:useDenseSpacing="false">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/editProfile_user_name_last_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/appLogin_sign_in_user_name_last"
+                    android:imeOptions="actionNext"
+                    android:nextFocusDown="@id/editProfile_phone_office"
+                    android:inputType="textCapWords|textAutoComplete"
+                    android:maxLines="1"
+                    android:popupElevation="5dp"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/editProfile_phone_office"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:iconSignifier="@drawable/ic_local_phone_dark_24dp"
+                app:hasFocus="false"
+                app:helperText=" "
+                app:isResponsiveIconColor="true"
+                app:labelText="@string/appSettings_profile_content_phone_number_office"
+                app:useDenseSpacing="false">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/editProfile_phone_office_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/appSettings_profile_content_phone_number_office"
+                    android:imeOptions="actionNext"
+                    android:nextFocusDown="@id/editProfile_phone_mobile"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:popupElevation="5dp"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/editProfile_phone_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:iconSignifier="@drawable/ic_phone_android_dark_24dp"
+                app:hasFocus="false"
+                app:isResponsiveIconColor="true"
+                app:helperText=" "
+                app:labelText="@string/appSettings_profile_content_phone_number_mobile"
+                app:useDenseSpacing="false">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/editProfile_phone_mobile_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/appSettings_profile_content_phone_number_mobile"
+                    android:imeOptions="actionGo"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:popupElevation="5dp"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_calendar_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/editProfile_user_birthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:iconSignifier="@drawable/ic_cake_dark_24dp"
+                    app:hasFocus="false"
+                    app:enabled="true"
+                    app:helperText=" "
+                    app:isResponsiveIconColor="true"
+                    app:labelText="@string/appSettings_profile_content_user_birthday"
+                    app:useDenseSpacing="false">
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/editProfile_user_birthday_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/appSettings_profile_content_user_birthday"
+                        android:imeOptions="actionDone"
+                        android:focusable="false"
+                        android:enabled="true"
+                        android:inputType=""
+                        android:maxLines="1"
+                        android:popupElevation="5dp"
+                        android:text="" />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <Button
+                    android:id="@+id/btn_calendar_picker"
+                    android:background="@color/colorTransparent"
+                    android:layout_alignParentTop="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+</merge>

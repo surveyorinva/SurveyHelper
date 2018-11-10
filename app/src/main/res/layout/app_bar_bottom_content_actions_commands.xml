@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/appBar_bottom_action_command_1"
+            android:layout_marginEnd="@dimen/app_bottom_bar_commands_margin_between"
+            android:layout_width="@dimen/app_bar_ic_size"
+            android:layout_height="@dimen/app_bar_ic_size"
+            android:visibility="gone"
+            android:background="@color/colorTransparent"
+            android:src="@drawable/ic_settings_light_24dp"
+            />
+
+        <ImageButton
+            android:id="@+id/appBar_bottom_action_command_2"
+            android:layout_marginEnd="@dimen/app_bottom_bar_commands_margin_between"
+            android:layout_width="@dimen/app_bar_ic_size"
+            android:layout_height="@dimen/app_bar_ic_size"
+            android:visibility="gone"
+            android:background="@color/colorTransparent"
+            android:src="@drawable/ic_settings_light_24dp" />
+
+        <ImageButton
+            android:id="@+id/appBar_bottom_action_command_3"
+            android:layout_marginEnd="@dimen/app_bottom_bar_commands_margin_between"
+            android:layout_width="@dimen/app_bar_ic_size"
+            android:layout_height="@dimen/app_bar_ic_size"
+            android:visibility="gone"
+            android:background="@color/colorTransparent"
+            android:src="@drawable/ic_settings_light_24dp" />
+
+        <ImageButton
+            android:id="@+id/appBar_bottom_action_command_4"
+            android:layout_width="@dimen/app_bar_ic_size"
+            android:layout_height="@dimen/app_bar_ic_size"
+            android:visibility="gone"
+            android:background="@color/colorTransparent"
+            android:src="@drawable/ic_settings_light_24dp" />
+
+
+    </LinearLayout>
+
+
+
+</merge>

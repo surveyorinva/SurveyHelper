@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:padding="10dp">
+
+
+    <TextView
+        android:id="@+id/dialogOpenCamera"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/app_dialog_choose_image_from_camera"
+        android:textSize="15sp"
+        style="@style/Labels.Dialog"
+        android:gravity="center_vertical"
+        />
+
+    <TextView
+        android:id="@+id/dialogChoosePhoto"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/app_dialog_choose_image_from_storage"
+        android:textSize="15sp"
+        style="@style/Labels.Dialog"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/dialogOpenCamera"/>
+
+
+
+</RelativeLayout>

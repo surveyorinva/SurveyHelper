@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/app_Bar_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+            android:id="@+id/signIn_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:panelBackgroundColor="@color/app_Edit_text_background"
+            app:iconSignifier="@drawable/ic_person_dark_24dp"
+            app:hasFocus="true"
+            app:hasClearButton = "true"
+            app:helperText=" "
+            app:isResponsiveIconColor="true"
+            app:labelText="@string/appLogin_sign_in_email"
+            app:useDenseSpacing="false">
+
+            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                android:id="@+id/signIn_email_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/appLogin_sign_in_email"
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@id/signIn_password_value"
+                android:inputType="textEmailAddress|textAutoComplete|textAutoCorrect"
+                android:maxLines="1"
+                android:popupElevation="5dp"
+                android:text="" />
+
+        </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+        <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+            android:id="@+id/signIn_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:panelBackgroundColor="@color/app_Edit_text_background"
+            app:iconSignifier="@drawable/ic_key_dark_24dp"
+            app:endIcon="@drawable/ic_visibility_dark_24dp"
+            app:hasFocus="false"
+            app:isResponsiveIconColor="true"
+            app:labelText="@string/appLogin_sign_in_password"
+            app:useDenseSpacing="false">
+
+            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                android:id="@+id/signIn_password_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/appLogin_sign_in_password"
+                android:imeOptions="actionDone"
+                android:nextFocusDown="@id/btn_signin_action"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:popupElevation="5dp"
+                android:text="" />
+
+        </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <Button
+                android:id="@+id/btn_signin_forgot_password"
+                style="@style/Buttons.Flat.Dark"
+                android:background="@null"
+                android:focusable="false"
+                android:text="@string/appLogin_sign_in_forgot_password"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/labels_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/login_content_space_between_buttons" />
+
+        <Button
+            android:id="@+id/btn_signin_action"
+            android:text="@string/general_login"
+            style="@style/Buttons.Raised.Light"
+            android:layout_marginStart="@dimen/login_content_button_login_marginStart"
+            android:layout_marginEnd="@dimen/login_content_button_login_marginEnd"
+            android:textSize="@dimen/login_button_text_size_override"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/app_bar_height_portrait">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar_top_actions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/app_bar_back_backdrop">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/appBar_top_action_nav_menu"
+                    android:layout_width="@dimen/app_bar_ic_size"
+                    android:layout_height="@dimen/app_bar_ic_size"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/colorTransparent"
+                    android:src="@drawable/ic_menu_light_24dp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <Button
+                    android:id="@+id/appBar_top_action_nav_display_map"
+                    style="@style/Buttons.Flat.Light"
+                    android:layout_width="90dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@color/colorTransparent"
+                    android:drawableStart="@drawable/ic_add_location_light_24dp"
+                    android:text="@string/general_map"
+                    app:layout_constraintEnd_toStartOf="@+id/view2" />
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="1dp"
+                    android:layout_height="28dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/colorTextPrimary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/appBar_top_action_nav_display_list"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/appBar_top_action_nav_display_list"
+                    style="@style/Buttons.Flat.Light"
+                    android:layout_width="90dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/background_rectangle_hollow_light"
+                    android:drawableStart="@drawable/ic_view_list_light_24dp"
+                    android:text="@string/general_list"
+                    app:layout_constraintEnd_toStartOf="@+id/view" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="1dp"
+                    android:layout_height="28dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/colorTextPrimary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/appBar_top_action_nav_backdrop"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/appBar_top_action_nav_backdrop"
+                    android:layout_width="@dimen/app_bar_ic_size"
+                    android:layout_height="@dimen/app_bar_ic_size"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/colorTransparent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_action_filter_light_24dp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+            <include
+                layout="@layout/app_bar_top_content_actions_save" />
+
+            <include
+                layout="@layout/app_bar_top_content_actions_settings"/>
+
+            <include
+                layout="@layout/app_bar_top_content_actions_menu"/>
+
+
+        </RelativeLayout>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ProgressBar
+        android:id="@+id/app_bar_progress_bar"
+        android:indeterminate="true"
+        android:layout_below="@+id/appBar_top_actions"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_progress_height"
+        android:visibility="gone"/>
+
+</RelativeLayout>

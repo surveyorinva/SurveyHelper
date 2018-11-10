@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:background="@color/colorTransparent"
+    android:layout_centerHorizontal="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="128dp">
+
+    <RelativeLayout
+        android:background="@drawable/app_dialog_custom_background"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="128dp">
+
+        <ImageView
+            android:id="@+id/check"
+            android:layout_marginStart="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="@null"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/bm_action_checkbox_green"/>
+
+        <TextView
+            android:text="@string/appLogin_sign_in_success_authentication"
+            style="@style/Labels.Dialog.Custom.Light"
+            android:textSize="20dp"
+            android:layout_toEndOf="@id/check"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

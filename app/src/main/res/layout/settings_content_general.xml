@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone">
+
+    <TextView
+        android:id="@+id/general_item_1_header"
+        android:text="I am a Header"
+        style="@style/Labels.List.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/rl_general_Item_1"
+        android:background="@drawable/button_hollow"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/general_item_1_value"
+            android:text="I am The List Header"
+            style="@style/Labels.List.Items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/general_item_1_desc"
+            android:text="I am a description of the Setting"
+            style="@style/Labels.List.Details"
+            android:layout_below="@+id/general_item_1_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.github.angads25.toggle.LabeledSwitch
+            android:id="@+id/general_item_1_switch"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_width="@dimen/switch_width_normal"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/setup_content_header_margin_top"
+            android:layout_marginEnd="@dimen/setup_content_header_margin_start"
+            android:textSize="@dimen/labels_body_normal"
+            app:on="false"
+            app:textOn="@string/general_agree"
+            app:textOff=""
+            app:colorOn="@color/colorPrimaryNormal"
+            app:colorBorder="#D3D3D3"/>
+
+    </RelativeLayout>
+
+    <View
+        android:background="@color/grey_400"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_general_Item_2"
+        android:background="@drawable/button_hollow"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/general_item_2_value"
+            android:text="I am The List Header"
+            style="@style/Labels.List.Items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/general_item_2_desc"
+            android:text="I am a description of the Setting"
+            style="@style/Labels.List.Details"
+            android:layout_below="@+id/general_item_2_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

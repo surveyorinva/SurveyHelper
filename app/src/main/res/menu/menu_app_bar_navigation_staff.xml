@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_item_1"
+        android:icon="@drawable/menu_selector_nav_staff_feed"
+        android:title="@string/menu_nav_command_staff_action_1">
+    </item>
+
+    <item
+        android:id="@+id/navigation_item_2"
+        android:icon="@drawable/menu_selector_nav_staff_company"
+        android:title="@string/menu_nav_command_staff_action_2">
+    </item>
+
+    <item
+        android:id="@+id/navigation_item_3"
+        android:icon="@drawable/menu_selector_nav_staff_project"
+        android:title="@string/menu_nav_command_staff_action_3">
+    </item>
+
+
+</menu>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/app_background_light"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:text="@string/appSetup_terms_header"
+        android:textSize="@dimen/labels_body_normal"
+        android:textColor="@color/grey_800"
+        android:layout_marginStart="@dimen/setup_content_header_margin_start"
+        android:layout_marginTop="@dimen/setup_content_header_margin_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <RelativeLayout
+        android:layout_marginStart="@dimen/setup_content_header_margin_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <Button
+            android:id="@+id/btn_view_terms_of_use"
+            style="@style/Buttons.Raised.Dark.Ghost"
+            android:text="@string/appSetup_terms_button_view"
+            android:textSize="@dimen/labels_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <com.github.angads25.toggle.LabeledSwitch
+            android:id="@+id/switch_terms_agree"
+            android:layout_alignParentEnd="true"
+            android:layout_width="@dimen/switch_width_normal"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/setup_content_header_margin_top"
+            android:layout_marginEnd="@dimen/setup_content_header_margin_start"
+            android:textSize="@dimen/labels_body_normal"
+            app:on="false"
+            app:textOn="@string/general_agree"
+            app:textOff=""
+            app:colorOn="@color/colorPrimaryNormal"
+            app:colorBorder="#D3D3D3"/>
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+</LinearLayout>

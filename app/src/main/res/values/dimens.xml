@@ -1,0 +1,106 @@
+<resources>
+    <dimen name="app_bar_height_portrait">56dp</dimen>
+    <dimen name="app_bar_height_landscape">48dp</dimen>
+    <dimen name="app_bar_height_extended_portrait">100dp</dimen>
+    <dimen name="app_bar_ic_size">24dp</dimen>
+    <dimen name="app_bar_progress_height">2dp</dimen>
+
+    <dimen name="app_bar_ic_nav_off_margin_start">16dp</dimen>
+    <dimen name="app_bar_text_header_margin_start">72dp</dimen>
+    <dimen name="app_bar_button_finish_margin_end">16dp</dimen>
+
+    <dimen name="app_bottom_bar_height_layout">86dp</dimen>
+    <dimen name="app_bottom_bar_height_portrait">56dp</dimen>
+    <dimen name="app_bottom_bar_commands_margin_start">16dp</dimen>
+    <dimen name="app_bottom_bar_commands_margin_between">24dp</dimen>
+
+    <dimen name="app_navigation_bar_height_layout">68dp</dimen>
+    <dimen name="app_navigation_bar_height_portrait">56dp</dimen>
+    <dimen name="navigation_ic_button_size">25dp</dimen>
+
+    <dimen name="app_navigation_tab_height">48dp</dimen>
+    <dimen name="app_navigation_tab_indicator">4dp</dimen>
+
+    <dimen name="app_navigation_tab_height_half">24dp</dimen>
+    <dimen name="app_navigation_tab_indicator_half">2dp</dimen>
+
+    <dimen name="progress_circle_size">25dp</dimen>
+
+    <dimen name="fab_size">56dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="fab_elevation">6dp</dimen>
+
+    <dimen name="button_margin">16dp</dimen>
+    <dimen name="button_padding_start">5dp</dimen>
+    <dimen name="button_padding_end">5dp</dimen>
+
+    <dimen name="app_backdrop_reveal_height">200dp</dimen>
+
+
+    <!-- Text Sizes -->
+    <dimen name="labels_appBar_text">20sp</dimen>
+    <dimen name="labels_heading">40sp</dimen>
+    <dimen name="labels_titles">20sp</dimen>
+    <dimen name="labels_emphasis">14dp</dimen>
+
+    <dimen name="labels_navigation_normal">13sp</dimen>
+
+    <dimen name="labels_body_normal">14sp</dimen>
+    <dimen name="labels_body_secondary">14sp</dimen>
+
+    <dimen name="labels_lists_titles">14sp</dimen>
+    <dimen name="labels_lists_items">16sp</dimen>
+    <dimen name="labels_lists_details">14sp</dimen>
+
+    <dimen name="labels_modal_title">20sp</dimen>
+    <dimen name="labels_modal_summary">16sp</dimen>
+
+    <dimen name="labels_captions">14sp</dimen>
+    <dimen name="labels_button">14sp</dimen>
+    <dimen name="labels_input">16sp</dimen>
+
+    <!--Switch Sizes-->
+    <dimen name="switch_width_normal">80dp</dimen>
+
+
+    <!--AppIntro-->
+    <dimen name="intro_dim_margin_top">15dp</dimen>
+    <dimen name="intro_dim_margin_start">10dp</dimen>
+    <dimen name="intro_dim_margin_end">10dp</dimen>
+    <dimen name="intro_dim_padding_start">30dp</dimen>
+    <dimen name="intro_dim_padding_end">30dp</dimen>
+
+    <!--Login-->
+    <dimen name="login_dim_padding">20dp</dimen>
+    <dimen name="login_button_text_size_override">20sp</dimen>
+
+    <dimen name="login_content_welcome_margin_top">50dp</dimen>
+    <dimen name="login_content_welcome_margin">30dp</dimen>
+
+    <dimen name="login_content_tab_margin_top">150dp</dimen>
+
+    <dimen name="login_content_button_login_marginStart">10dp</dimen>
+    <dimen name="login_content_button_login_marginEnd">10dp</dimen>
+    <dimen name="login_content_button_login_padding">10dp</dimen>
+    <dimen name="login_content_space_between_fields">20dp</dimen>
+    <dimen name="login_content_space_between_buttons">25dp</dimen>
+    <dimen name="login_content_width_field_access_key">250dp</dimen>
+
+    <dimen name="login_content_margin_top">5dp</dimen>
+    <dimen name="login_content_margin_start">5dp</dimen>
+    <dimen name="login_content_margin_end">15dp</dimen>
+
+    <dimen name="login_image_transition_full">250dp</dimen>
+
+    <!--Login Forgot Password-->
+    <dimen name="login_forgot_password_logo_size">150dp</dimen>
+
+    <!--Setup-->
+    <dimen name="setup_content_header_margin_start">10dp</dimen>
+    <dimen name="setup_content_header_margin_top">10dp</dimen>
+
+
+    <!--Entry-->
+    <dimen name="entry_content_progress_margin_bottom">10dp</dimen>
+
+</resources>

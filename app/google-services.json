@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "354216254947",
+    "firebase_url": "https://surveyhelper-c7863.firebaseio.com",
+    "project_id": "surveyhelper-c7863",
+    "storage_bucket": "surveyhelper-c7863.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354216254947:android:23ea63d95df907d2",
+        "android_client_info": {
+          "package_name": "com.survlogic.surveyhelper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "354216254947-oh41tcadj6o8umkq5crvugd0e15n59c3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.survlogic.surveyhelper",
+            "certificate_hash": "eb00cdfd80b59b345bf05257b21c5d13e9110fa1"
+          }
+        },
+        {
+          "client_id": "354216254947-ge9gilm0vg3qc36jj0sb76s2kuvdg4ki.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpDysO2nDnhmCBnUAXfC1blVsWX-cV41I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "354216254947-ge9gilm0vg3qc36jj0sb76s2kuvdg4ki.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

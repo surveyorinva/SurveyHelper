@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Setup Activity-->
+
+    <string-array name="setup_steps_subtitles">
+        <item>@string/appSetup_terms_header</item>
+        <item>@string/appSetup_login_header</item>
+        <item>@string/appSetup_settings_header</item>
+
+    </string-array>
+
+
+</resources>

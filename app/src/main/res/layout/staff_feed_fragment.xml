@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/app_background_light"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+
+    <LinearLayout
+        android:id="@+id/ll_feed_fragment_container"
+        style="@style/Widget.App.Backdrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/app_bar_height_portrait"
+        android:paddingBottom="100dp">
+
+        <include
+            layout="@layout/staff_feed_fragment_backdrop"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:elevation="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            layout="@layout/app_bar_top_a_backdrop"/>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/feed_front_view"
+        android:background="@drawable/app_backdrop_shape_edge"
+        android:elevation="1dp"
+        android:layout_marginTop="@dimen/app_bar_height_portrait"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/appBackdrop_top_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:theme="@style/Labels.Toolbar.Dark"
+                android:gravity="center_vertical" />
+
+            <ImageButton
+                android:id="@+id/btnAppFeedNavigator"
+                android:src="@drawable/ic_arrow_drop_down_dark_24dp"
+                android:background="@color/colorTransparent"
+                android:layout_width="@dimen/app_bar_ic_size"
+                android:layout_height="@dimen/app_bar_ic_size" />
+
+
+        </LinearLayout>
+
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/project_swipe_layout"
+            android:layout_marginTop="@dimen/app_bar_height_portrait"
+            android:background="@color/app_background_light"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/feed_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </RelativeLayout>
+
+
+
+
+</FrameLayout>

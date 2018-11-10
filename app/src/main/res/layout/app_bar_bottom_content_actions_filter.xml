@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageButton
+        android:id="@+id/appBar_top_action_filter"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/app_bar_button_finish_margin_end"
+        android:layout_centerVertical="true"
+        android:layout_width="@dimen/app_bar_ic_size"
+        android:layout_height="@dimen/app_bar_ic_size"
+        android:visibility="gone"
+        android:background="@color/colorTransparent"
+        android:src="@drawable/ic_settings_light_24dp" />
+
+</merge>

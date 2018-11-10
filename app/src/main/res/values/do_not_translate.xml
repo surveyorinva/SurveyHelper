@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<!-- Preferences -->
+
+    <!--Dialog Fragments-->
+    <string name="app_dialog_name_select_photo">SelectPhotoDialog</string>
+
+    <!--Application Level-->
+    <string name="pref_app_first_run">pref_app_first_run</string>  <!--Application Run for the 1st time-->
+    <string name="pref_app_demo_mode">pref_app_demo_mode</string> <!--Application is loaded in demo mode-->
+    <string name="pref_app_available">pref_app_available</string>
+    <string name="pref_app_available_reason">pref_app_available_reason</string>
+
+    <string name="pref_app_online_access">pref_app_online_access</string>  <!--Application can accept new user sign-up from mobile app-->
+    <string name="pref_app_legal_terms_of_use_url">pref_app_legal_terms_of_use</string>
+
+    <string name="pref_app_remote_config_cache_expire_time">pref_app_remote_config_refresh_time</string> <!--Time to check for new changes in Remote Config-->
+    
+    <string name="pref_firebase_user_verified">pref_firebase_user_verified</string>
+    <string name="pref_firebase_user_logged_in">pref_firebase_user_logged_in</string>
+    <string name="pref_firebase_user_id">pref_firebase_user_id</string>
+    <string name="pref_firebase_user_email">pref_firebase_user_email</string>
+    <string name="pref_firebase_user_password">pref_firebasse_user_password</string>
+    <string name="pref_firebase_user_name_first">pref_firebase_user_name_first</string>
+    <string name="pref_firebase_user_name_last">pref_firebase_user_name_last</string>
+    <string name="pref_firebase_user_access_key">pref_firebase_user_access_key</string>
+    <string name="pref_firebase_user_access_key_secure">pref_firebase_user_access_key_secure</string>
+    <string name="pref_firebase_user_access_level">pref_firebase_user_access_level</string>
+
+    <string name="pref_feed_reward">pref_feed_reward</string>
+    <string name="pref_feed_reward_topic">pref_feed_reward_topic</string>
+    <string name="pref_feed_reward_url">pref_feed_reward_url</string>
+    <string name="pref_feed_show_reward">pref_feed_show_reward</string>
+
+
+    <string name="theme_staff_company_top_page_0">theme_staff_company_top_page_0</string>
+    <string name="theme_staff_company_top_page_1">theme_staff_company_top_page_1</string>
+    <string name="theme_staff_company_top_page_2">theme_staff_company_top_page_2</string>
+
+    <string name="theme_staff_company_bottom_page_0">theme_staff_company_bottom_page_0</string>
+    <string name="theme_staff_company_bottom_page_1">theme_staff_company_bottom_page_1</string>
+    <string name="theme_staff_company_bottom_page_2">theme_staff_company_bottom_page_2</string>
+    
+<!--Intent Keys-->
+    <string name="KEY_LOGIN_SUCCESSFUL">KEY_LOGIN_SUCCESSFUL</string>
+    <string name="KEY_PARENT_ACTIVITY">KEY_PARENT_ACTIVITY</string>
+    <string name="KEY_FIRESTORE_USER">KEY_FIRESTORE_USER</string>
+
+
+<!--Class Names-->
+    <string name="CLASS_SETUP">CLASS_SETUP</string>
+    <string name="CLASS_ENTRY">CLASS_ENTRY</string>
+    <string name="CLASS_MAIN">CLASS_MAIN</string>
+    <string name="CLASS_STAFF_FEED">CLASS_STAFF_FEED</string>
+    <string name="CLASS_FRAGMENT_PROFILE">CLASS_FRAGMENT_PROFILE</string>
+    <string name="CLASS_SETTINGS_LEGAL_TERMS">CLASS_SETTINGS_LEGAL_TERMS</string>
+    <string name="CLASS_SETTINGS_LEGAL_PRIVACY">CLASS_SETTINGS_LEGAL_PRIVACY</string>
+    <string name="CLASS_SETTINGS_ABOUT">CLASS_SETTINGS_ABOUT</string>
+
+<!--Remote Config Keys-->
+    <string name="CONFIG_KEY_APP_ACCESS">application_enabled</string>
+    <string name="CONFIG_KEY_APP_ACCESS_REASON">application_enabled_reason</string>
+    <string name="CONFIG_KEY_APP_CACHE_EXP">application_cache_expiration</string>
+    
+    <string name="CONFIG_KEY_APP_SIGN_UP_ALLOWED">sign_up_enabled</string>
+
+    <string name="CONFIG_KEY_APP_LEGAL_TERMS_OF_USE">application_legal_terms_current</string>
+    <string name="CONFIG_KEY_APP_LEGAL_PRIVACY_POLICY">application_legal_privacy_current</string>
+
+    <string name="CONFIG_KEY_FEED_REWARD">event_promo</string>
+    <string name="CONFIG_KEY_FEED_REWARD_TOPIC">event_promo_title</string>
+    <string name="CONFIG_KEY_FEE_REWARD_DETAILS">event_promo_background</string>
+
+    <string name="CONFIG_THEME_STAFF_COMPANY_TOP_PAGE_0">theme_staff_company_top_page_0</string>
+    <string name="CONFIG_THEME_STAFF_COMPANY_BOTTOM_PAGE_0">theme_staff_company_bottom_page_0</string>
+
+    <string name="CONFIG_THEME_STAFF_COMPANY_TOP_PAGE_1">theme_staff_company_top_page_1</string>
+    <string name="CONFIG_THEME_STAFF_COMPANY_BOTTOM_PAGE_1">theme_staff_company_bottom_page_1</string>
+
+    <string name="CONFIG_THEME_STAFF_COMPANY_TOP_PAGE_2">theme_staff_company_top_page_2</string>
+    <string name="CONFIG_THEME_STAFF_COMPANY_BOTTOM_PAGE_2">theme_staff_company_bottom_page_2</string>
+
+</resources>

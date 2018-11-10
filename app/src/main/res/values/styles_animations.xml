@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="popup_window_animation_explode">
+        <item name="android:windowEnterAnimation">@anim/anim_popup_explode_on_enter</item>
+        <item name="android:windowExitAnimation">@anim/anim_popup_explode_on_exit</item>
+    </style>
+
+    <style name="popup_window_animation_slide_down">
+        <item name="android:windowEnterAnimation">@anim/anim_popup_slide_on_enter</item>
+        <item name="android:windowExitAnimation">@anim/anim_popup_slide_on_exit</item>
+    </style>
+
+
+
+</resources>

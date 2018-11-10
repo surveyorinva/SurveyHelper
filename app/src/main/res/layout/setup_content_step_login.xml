@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/app_background_light"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_view_go_to_login_action_pre_login"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:visibility="visible">
+
+        <Button
+            android:id="@+id/btn_view_go_to_login_activity"
+            style="@style/Buttons.Raised.Grey"
+            android:text="@string/appSetup_login_button_view"
+            android:textSize="@dimen/labels_button"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_view_go_to_login_action_post_login"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/lbl_view_go_to_login_welcome_header"
+                android:text="@string/general_welcome"
+                android:textColor="@color/colorPrimaryNormal"
+                style="@style/Labels.Emphasis"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/lbl_view_go_to_login_welcome_value"
+                style="@style/Labels.Title.Dark"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@id/lbl_view_go_to_login_welcome_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <Button
+                android:id="@+id/btn_view_user_logged_in"
+                style="@style/Buttons.Raised.Dark.Ghost"
+                android:textSize="@dimen/labels_input"
+                android:textColor="@color/colorPrimaryNormal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+
+        </RelativeLayout>
+
+</LinearLayout>

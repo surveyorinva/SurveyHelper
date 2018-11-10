@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/app_Bar_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_header"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            layout="@layout/app_bar_top_a_regular"/>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/rl_header"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/login_content_margin_start"
+        android:layout_marginTop="@dimen/login_content_margin_top"
+        android:layout_marginEnd="@dimen/login_content_margin_end"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_marginTop="50dp"
+            android:src="@drawable/bm_app_logo_light"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="@dimen/login_forgot_password_logo_size"
+            android:layout_height="@dimen/login_forgot_password_logo_size" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:text="@string/appLogin_forgot_password_title"
+            style="@style/Labels.Title.Dark"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+        <TextView
+            android:text="@string/appLogin_forgot_password_summary"
+            style="@style/Labels.Body.Normal.Dark"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+        <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+            android:id="@+id/signIn_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:iconSignifier="@drawable/ic_email_dark_24dp"
+            app:hasFocus="false"
+            app:helperText=" "
+            app:isResponsiveIconColor="true"
+            app:labelText="@string/appLogin_sign_in_email"
+            app:useDenseSpacing="false">
+
+            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                android:id="@+id/signIn_email_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/appLogin_sign_in_email"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:popupElevation="5dp"
+                android:text="" />
+
+        </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+        <Button
+            android:id="@+id/btn_forgot_password_action"
+            android:text="@string/appLogin_forgot_password_button"
+            style="@style/Buttons.Raised.Light"
+            android:layout_marginStart="@dimen/login_content_button_login_marginStart"
+            android:layout_marginEnd="@dimen/login_content_button_login_marginEnd"
+            android:textSize="@dimen/login_button_text_size_override"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

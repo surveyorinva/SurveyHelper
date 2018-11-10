@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="login_access_key_max">5</integer>
+    <integer name="remote_config_cache_expire_time_default">3600</integer>
+
+    <!--Intent Codes-->
+    <integer name="INTENT_REQUEST_FIREBASE_LOGIN">1000</integer>
+
+
+</resources>

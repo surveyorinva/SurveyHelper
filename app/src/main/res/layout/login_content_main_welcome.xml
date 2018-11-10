@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlroot_login_main"
+    android:background="@drawable/login_background_survey"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        layout="@layout/login_content_main_welcome_summary"/>
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:weightSum="100"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="155dp">
+
+        <Button
+            android:id="@+id/btn_login"
+            android:text="@string/general_login"
+            style="@style/Buttons.Outline.Light"
+            android:textSize="@dimen/login_button_text_size_override"
+            android:layout_weight="40"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_weight="8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_signup"
+            android:text="@string/general_signUp"
+            style="@style/Buttons.Raised.Light"
+            android:textSize="@dimen/login_button_text_size_override"
+            android:layout_weight="40"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="240dp"
+        android:layout_height="68dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/bm_app_brand"
+        android:tint="@color/colorTextPrimary" />
+
+
+</RelativeLayout>
+

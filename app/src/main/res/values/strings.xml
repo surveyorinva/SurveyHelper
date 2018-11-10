@@ -1,0 +1,328 @@
+<resources>
+    <string name="app_name">christopher</string>
+    <string name="app_developer_name">christopher</string>
+    <string name="app_version">1.000.00 Bld 1</string>
+
+    <!--General App strings-->
+    <string name="general_welcome">Welcome</string>
+    <string name="general_save">Save</string>
+    <string name="general_finish">Finish</string>
+    <string name="general_on">On</string>
+    <string name="general_off">Off</string>
+    <string name="general_finished">Done</string>
+    <string name="general_cancel">Cancel</string>
+    <string name="general_edit">Edit</string>
+    <string name="general_start">Start</string>
+    <string name="general_stop">Stop</string>
+    <string name="general_yes">Yes</string>
+    <string name="general_no">No</string>
+    <string name="general_add">Add</string>
+    <string name="general_post">Post</string>
+    <string name="general_clear">Clear</string>
+    <string name="general_none">None</string>
+    <string name="general_solve">Solve</string>
+    <string name="general_delete">Delete</string>
+    <string name="general_open">Open</string>
+    <string name="general_close">Close</string>
+    <string name="general_share">Share</string>
+    <string name="general_exit_app">Exiting…</string>
+    <string name="general_exit_app_instructions">Please click BACK again to exit</string>
+    <string name="general_loading_status">Loading…</string>
+    <string name="general_blank"> </string>
+    <string name="general_default">default</string>
+    <string name="general_menu_settings">Settings</string>
+    <string name="general_menu_about">About</string>
+    <string name="general_options">Options</string>
+    <string name="general_home">Home</string>
+    <string name="general_login">Login</string>
+    <string name="general_signUp">Sign Up</string>
+    <string name="general_locked">Locked</string>
+    <string name="general_signedOut">Signed Out</string>
+    <string name="general_agree">Agree</string>
+    <string name="general_loading">Loading…</string>
+    <string name="general_location">Location</string>
+    <string name="general_map">Map</string>
+    <string name="general_list">List</string>
+    <string name="general_filter">Filter</string>
+    <string name="general_learn_more">Learn More</string>
+
+    <string name="menu_nav_command_action_1">Survey</string>
+    <string name="menu_nav_command_action_2">Points</string>
+    <string name="menu_nav_command_action_3">Map</string>
+    <string name="menu_nav_command_action_4">Inverse</string>
+
+    <string name="app_set_for_staff">christopher\'s Staff View</string>
+
+    <string name="menu_nav_command_staff_action_1">Feed</string>
+    <string name="menu_nav_command_staff_action_2">Company</string>
+    <string name="menu_nav_command_staff_action_3">Projects</string>
+
+
+    <!-- Application-->
+    <!--Dialog Picker-->
+    <string name="app_dialog_choose_image_from_storage">Pick image from Gallery</string>
+    <string name="app_dialog_choose_image_from_camera">Take Photo</string>
+
+    <!-- appIntro -->
+    <string name="appIntro_page1_header">I am a Header</string>
+    <string name="appIntro_page1_summary">
+        <![CDATA[
+
+            I am the summary section of the page.  I will describe
+            the general summary of the program on Page 1.
+
+        ]]>
+    </string>
+
+    <string name="appIntro_page2_header">I am a Header</string>
+    <string name="appIntro_page2_summary">
+        <![CDATA[
+
+            I am the summary section of the page.  I will describe
+            the general summary of the program on Page 2.
+
+        ]]>
+    </string>
+
+    <string name="appIntro_page3_header">I am a Header</string>
+    <string name="appIntro_page3_summary">
+        <![CDATA[
+
+            I am the summary section of the page.  I will describe
+            the general summary of the program on Page 3.
+
+        ]]>
+    </string>
+
+    <string name="appIntro_page4_header">I am a Header</string>
+    <string name="appIntro_page4_summary">
+        <![CDATA[
+
+            I am the summary section of the page.  I will describe
+            the general summary of the program on Page 4.
+
+        ]]>
+    </string>
+
+
+    <string name="appIntro_page_finish_header">Finishing Up</string>
+    <string name="appIntro_page_finish_summary">
+        <![CDATA[
+
+            We are now finished setting up permissions.  Moving to setting up
+            application information next!
+
+        ]]>
+    </string>
+
+    <!--appLogin-->
+
+    <string name="appLogin_sign_in_user_name_first">First Name</string>
+    <string name="appLogin_sign_in_user_name_last">Last Name</string>
+    <string name="appLogin_sign_in_email">Email Address</string>
+    <string name="appLogin_sign_in_password">Password</string>
+    <string name="appLogin_sign_in_verify_password">Verify Password</string>
+    <string name="appLogin_sign_in_forgot_password">Forgot Password?</string>
+    <string name="appLogin_sign_in_app_access_code">Access Code</string>
+
+    <string name="appLogin_sign_in_error_user_email_blank">Email Address Required…</string>
+    <string name="appLogin_sign_in_error_password_blank">Password Required…</string>
+    <string name="appLogin_sign_in_error_user_first_blank">First Name Required…</string>
+    <string name="appLogin_sign_in_error_user_last_blank">Last Name Required…</string>
+    <string name="appLogin_sign_in_error_access_key_blank">Company Provided Access Key Required…</string>
+    <string name="appLogin_sign_in_error_access_key_wrong">Company Provided Access Key is Not Correct</string>
+
+    <string name="appLogin_sign_in_error_access_key_no_cloud_title">Connection Error</string>
+    <string name="appLogin_sign_in_error_access_key_no_cloud_value">Cannot contact the Cloud Service.  Please try again.</string>
+
+    <string name="appLogin_sign_in_error_authentication_fail">Authentication failed. </string>
+
+    <string name="appLogin_sign_in_success_authentication">Login Successful!</string>
+
+    <string name="appLogin_main_header">Welcome!</string>
+    <string name="appLogin_main_summary">
+        <![CDATA[
+
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu
+            tempus urna. Aenean in lacus eget purus pretium dignissim. Orci.
+
+        ]]>
+    </string>
+
+    <string name="appLogin_sign_up_closed_header">Sorry!</string>
+    <string name="appLogin_sign_up_closed_summary">
+        <![CDATA[
+
+            The User Access for this app is currently closed.
+            Please try again later.
+
+        ]]>
+    </string>
+
+    <string name="firebase_login_status_for_debug">Firebase Authentication</string>
+    <string name="firebase_email_password_status_fmt">Email User: %1$s (verified: %2$b) \n</string>
+    <string name="firebase_status_fmt">Firebase User: %s</string>
+    <string name="firebase_welcome_fmt">Welcome %s</string>
+
+
+    <string name="firebase_email_verification_title">User Account Not Verified</string>
+    <string name="firebase_email_verification_summary">
+        <![CDATA[
+
+            Your email address has not been verified by this application.
+            Please check your email for Instructions on verifying your account.
+            Not all application functions will work until you verify with our server.
+
+        ]]>
+
+    </string>
+
+    <string name="firebase_email_verification_confirmation">Verification Email Sent to: </string>
+    <string name="firebase_email_error_verification">Failed to Send a Verification Email. \n Please try again or contact us </string>
+
+    <string name="firebase_exception_title_default">Oops! Something Went Wrong</string>
+    <string name="firebase_exception_title_token">"Oops! Bad Token"</string>
+    <string name="firebase_exception_title_credential">Oops! Credential Error</string>
+    <string name="firebase_exception_title_email">Oops! Email Error</string>
+    <string name="firebase_exception_title_password">Oops! Password Error</string>
+    <string name="firebase_exception_title_sign_in">Oops! Error Signing In"</string>
+    <string name="firebase_exception_title_sign_up">Oops! Error Signing Up"</string>
+    <string name="firebase_exception_title_session_time_out">Oops! Session Timed Out</string>
+
+    <string name="firebase_exception_subject_default">The connection to the server timed out.  Please check your credentials and try again.</string>
+    <string name="firebase_exception_subject_ERROR_INVALID_CUSTOM_TOKEN">"The custom token format is incorrect. Please check the documentation."</string>
+    <string name="firebase_exception_subject_ERROR_CUSTOM_TOKEN_MISMATCH">"The custom token corresponds to a different audience."</string>
+    <string name="firebase_exception_subject_ERROR_INVALID_CREDENTIAL">"The supplied auth credential is malformed or has expired."</string>
+    <string name="firebase_exception_subject_ERROR_INVALID_EMAIL">"The email address is badly formatted."</string>
+    <string name="firebase_exception_subject_ERROR_WRONG_PASSWORD">"The password is not correct.  Please try again.</string>
+    <string name="firebase_exception_subject_ERROR_USER_MISMATCH">"The supplied credentials do not correspond to the previously signed in user."</string>
+    <string name="firebase_exception_subject_ERROR_REQUIRES_RECENT_LOGIN">"This operation is sensitive and requires recent authentication. Log in again before retrying this request."</string>
+    <string name="firebase_exception_subject_ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL">"An account already exists with the same email address but different sign-in credentials. Sign in using a provider associated with this email address."</string>
+    <string name="firebase_exception_subject_ERROR_EMAIL_ALREADY_IN_USE">"The email address already exists.  Please try again."</string>
+    <string name="firebase_exception_subject_ERROR_CREDENTIAL_ALREADY_IN_USE">"This credential is already associated with a different user account."</string>
+    <string name="firebase_exception_subject_ERROR_USER_DISABLED">"The user account has been disabled by an administrator."</string>
+    <string name="firebase_exception_subject_ERROR_USER_TOKEN_EXPIRED">"The user's credential is no longer valid. The user must sign in again."</string>
+    <string name="firebase_exception_subject_ERROR_USER_NOT_FOUND">"User Not found.  Please try again or Sign Up to create a new account."</string>
+    <string name="firebase_exception_subject_ERROR_INVALID_USER_TOKEN">"The users credential is no longer valid. The user must sign in again."</string>
+    <string name="firebase_exception_subject_ERROR_OPERATION_NOT_ALLOWED">"This operation is not allowed. You must enable this service in the console."</string>
+    <string name="firebase_exception_subject_ERROR_WEAK_PASSWORD">"The given password is invalid."</string>
+
+    <string name="appLogin_forgot_password_title">Forgot Password?</string>
+    <string name="appLogin_forgot_password_summary">We just need your registered Email address to send you a instructions on how to reset your password</string>
+    <string name="appLogin_forgot_password_button">Reset Password</string>
+
+    <string name="appLogin_forgot_password_status_success_title">Email Sent!</string>
+    <string name="appLogin_forgot_password_status_success_summary">"We have sent you instructions to reset your password!"</string>
+
+    <!--appSetup-->
+
+    <string name="app_startup_title">Setup</string>
+
+    <string name="appSetup_terms_header">Review this Apps Policies</string>
+    <string name="appSetup_terms_button_view">View Terms of Use</string>
+
+    <string name="appSetup_login_header">Setup On-line Services</string>
+    <string name="appSetup_login_button_view">Register/Login to App</string>
+
+    <string name="appSetup_settings_header">Review this Apps Settings</string>
+    <string name="appSetup_settings_button_view">Settings</string>
+
+    <string name="vertical_form_stepper_form_confirm_button">Complete Setup</string>
+
+    <string name="appSetup_terms_dialog_header">Terms and Conditions \n of Mobile App Use</string>
+
+    <string name="appSetup_sign_in_error_user_account_not_found_title">User Account Error</string>
+    <string name="appSetup_sign_in_error_user_account_not_found_summary">We cannot resolve your User Account. Please try again or contact us.</string>
+
+    <!--appSettings-->
+    <string name="appSettings_tab_name_general">General</string>
+    <string name="appSettings_tab_name_profile">Profile</string>
+
+    <string name="appSettings_general_about_header_legal">Legal</string>
+    <string name="appSettings_general_about_terms_of_use">Terms of Use</string>
+    <string name="appSettings_general_about_privacy_policy">Privacy Policy</string>
+    <string name="appSettings_general_about_open_source_licenses">Open Source Licenses</string>
+
+    <string name="appSettings_general_about_header_about">About</string>
+    <string name="appSettings_general_about_version">Version</string>
+
+    <string name="appSettings_profile_content_contact_header">Contact Information</string>
+    <string name="appSettings_profile_content_contact_personal">Personal Information</string>
+    <string name="appSettings_profile_content_contact_access">Access Information</string>
+
+    <string name="appSettings_profile_content_user_profile_posts">Posts</string>
+    <string name="appSettings_profile_content_user_points_header">Points</string>
+    <string name="appSettings_profile_content_user_points_month">Month</string>
+    <string name="appSettings_profile_content_user_points_all">All Time</string>
+
+    <string name="appSettings_profile_action_edit_your_profile">Edit Your Profile</string>
+    <string name="appSettings_profile_content_phone_number_office">Office Number</string>
+    <string name="appSettings_profile_content_phone_number_mobile">Mobile Number</string>
+    <string name="appSettings_profile_content_user_birthday">Birthday</string>
+
+    <string name="appSettings_profile_logout_error_due_to_being_in_setup_title">Cannot Logout</string>
+    <string name="appSettings_profile_logout_error_due_to_being_in_setup_summary">You cannot logout until after setup is complete.</string>
+
+    <string name="appSettings_about_setup_header">Setup Application</string>
+    <string name="appSettings_about_setup_is_app_setup_summary">Is Setup Complete</string>
+    <string name="appSettings_about_setup_is_app_setup_description">Has Setup run properly on this device. \nChange to No to re-run setup.</string>
+
+
+    <!--Staff_Feed-->
+    <string name="staff_feed_navigation_announcements">Announcements</string>
+    <string name="staff_feed_navigation_feed_corporate">Company Wide Feed</string>
+    <string name="staff_feed_navigation_feed_by_team_header">Filter By Team</string>
+
+    <string name="staff_feed_navigation_launcher_header">Launcher</string>
+    <string name="staff_feed_navigation_footer_command_invite">Invite</string>
+    <string name="staff_feed_navigation_footer_command_addGroup">Add</string>
+    <string name="staff_feed_navigation_footer_command_settings">Settings</string>
+    <string name="staff_feed_navigation_footer_command_support">Support</string>
+
+    <string name="staff_feed_card_tag_announcement">Announcement</string>
+    <string name="staff_feed_card_tag_event">Event</string>
+
+    <string name="staff_feed_card_event_going">Going</string>
+    <string name="staff_feed_card_event_not_going">Not Going</string>
+
+    <string name="staff_feed_popup_feed_announcement_game_dont_show_again">Don\'t Show this Again Today</string>
+
+    <string name="staff_feed_popup_feed_status_first_load">Loading for the First Time \n This May Take A Few Seconds</string>
+    <string name="staff_feed_popup_feed_status_no_items">Sorry! \nNo Items Available Currently</string>
+    <string name="staff_feed_popup_feed_add_no_items">Sorry! \nNo Items Available Currently</string>
+
+    <string name="staff_feed_card_feed_post_time_just_now">Just Now</string>
+    <string name="staff_feed_card_feed_post_time_few_minutes_ago">A few minutes ago</string>
+    <string name="staff_feed_card_feed_post_time_minutes_fmt">%1$s minutes ago</string>
+    <string name="staff_feed_card_feed_post_time_hours_fmt">%1$s hours ago</string>
+    <string name="staff_feed_card_feed_post_time_days_fmt">%1$s days ago</string>
+
+
+    <!--Staff_Company-->
+    <string name="staff_company_fragment_header">Company Pages</string>
+    <string name="staff_company_fragment_tab_item_1">News</string>
+    <string name="staff_company_fragment_tab_item_2">Contacts</string>
+    <string name="staff_company_fragment_tab_item_3">Policy</string>
+
+    <string name="staff_company_fragment_tab_item_services">Services</string>
+
+    <!--Staff_Projects-->
+    <string name="staff_project_fragment_header_show_all_projects">Show All Projects</string>
+
+    <!--content Description for Images-->
+    <string name="content_app_logo">Application Logo for @string/app_name</string>
+
+
+    <!--Sample String-->
+    <string name="appSample_title">Lorem ipsum dolor sit amet</string>
+
+    <string name="appSample_summary">
+        <![CDATA[
+
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu
+            tempus urna. Aenean in lacus eget purus pretium dignissim. Orci.
+
+        ]]>
+    </string>
+
+</resources>

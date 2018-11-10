@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.design.bottomappbar.BottomAppBar
+        android:id="@+id/appBar_bottom"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_height="@dimen/app_bottom_bar_height_portrait"
+        android:background="@drawable/app_bottom_bar_back"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:fabAlignmentMode="end"
+        app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
+        app:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+
+    </android.support.design.bottomappbar.BottomAppBar>
+
+    <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+        android:id="@+id/appBar_bottom_navigation_view"
+        android:layout_width="250dp"
+        android:layout_height="@dimen/app_bottom_bar_height_portrait"
+        android:background="@color/colorPrimaryDark"
+        app:layout_anchor="@+id/appBar_bottom"
+        app:layout_anchorGravity="start|center"
+        app:elevation="0dp"
+        app:itemIconTint="@drawable/menu_selector_nav_staff_color_state"
+        app:itemTextColor="@drawable/menu_selector_nav_staff_color_state"
+        app:menu="@menu/menu_app_bar_navigation_staff">
+
+    </com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx>
+
+
+    <LinearLayout
+        android:weightSum="100"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bottom_bar_height_portrait"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_weight="90"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:id="@+id/rl_special_launcher_forms"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/btn_special_launcher_form"
+                android:background="@drawable/background_rectangle_hollow_light"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/image_special_launcher"
+                android:src="@drawable/ic_view_list_light_24dp"
+                android:background="@color/colorTransparent"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
+
+            <TextView
+                android:text="@string/staff_company_fragment_tab_item_services"
+                style="@style/Labels.Navigation.Normal.Light"
+                android:layout_marginTop="33dp"
+                android:layout_marginBottom="2dp"
+                android:textSize="12sp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/appBar_bottom_fab"
+        android:src="@drawable/ic_home_dark_24dp"
+        android:tint="@color/colorPrimaryNormal"
+        app:backgroundTint="@android:color/white"
+        app:fabCustomSize="@dimen/fab_size"
+        app:elevation="@dimen/fab_elevation"
+        app:borderWidth="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@id/appBar_bottom"/>
+
+
+</android.support.design.widget.CoordinatorLayout>
