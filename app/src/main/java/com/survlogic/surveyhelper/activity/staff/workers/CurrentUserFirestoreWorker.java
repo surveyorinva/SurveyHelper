@@ -96,12 +96,12 @@ public class CurrentUserFirestoreWorker implements FirestoreDatabaseUserListener
     private FirestoreUser mFirestoreUser;
     private FirestoreAppAccessKeys mFirestoreUserAccessKey;
 
-    public CurrentUserFirestoreWorker(Context context, CurrentUserWorkerListener listner) {
+    public CurrentUserFirestoreWorker(Context context, CurrentUserWorkerListener listener) {
         Log.d(TAG, "Current User Firestore Worker: Started-------------------------------------> ");
         this.mContext = context;
         this.mActivity = (Activity) context;
 
-        this.mWorkerListener = listner;
+        this.mWorkerListener = listener;
     }
 
     public boolean onStart(){

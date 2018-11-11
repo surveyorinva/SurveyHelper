@@ -59,6 +59,8 @@ public class EditProfileController implements FirestoreDatabaseUserListener {
     public void setUserBirthday(Date userBirthday) {
         this.mUserBirthday = userBirthday;
         mFirestoreUser.setProfile_birthday(userBirthday);
+        mFirestoreUser.setProfile_birthday_long(userBirthday.getTime());
+
     }
 
     private void initController(){
@@ -72,7 +74,6 @@ public class EditProfileController implements FirestoreDatabaseUserListener {
     }
 
     public void onStart(FirestoreUser firestoreUser){
-        Log.d(TAG, "onStart: Started");
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         mFirestoreUser = firestoreUser;
 

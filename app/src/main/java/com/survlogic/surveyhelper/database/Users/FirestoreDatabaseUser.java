@@ -139,7 +139,8 @@ public class FirestoreDatabaseUser {
                 "display_name",user.getDisplay_name(),
                 "telephone_mobile",user.getTelephone_mobile(),
                 "telephone_office",user.getTelephone_office(),
-                "profile_birthday",user.getProfile_birthday()
+                "profile_birthday",user.getProfile_birthday(),
+                "profile_birthday_long",user.getProfile_birthday_long()
 
         ).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

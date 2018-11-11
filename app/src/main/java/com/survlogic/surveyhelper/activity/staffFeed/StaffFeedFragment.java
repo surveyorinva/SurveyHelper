@@ -79,6 +79,8 @@ public class StaffFeedFragment extends Fragment implements StaffFeedController.S
 
         showAnnouncementAtStart();
 
+        mFeedController.fetchAllFeeds();
+
     }
 
     private void initView(){

@@ -283,7 +283,6 @@ public class PreferenceLoader {
     }
 
     public void setAnnouncementShowReward(boolean isShow, boolean isForceSave){
-        Log.d(TAG, "to_delete: Setting Show Reward to: " + isShow);
         editor = sharedPreferences.edit();
         editor.putBoolean(mContext.getString(R.string.pref_feed_show_reward),isShow);
 

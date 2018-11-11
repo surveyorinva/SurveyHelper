@@ -22,6 +22,7 @@ public class FirestoreUser implements Parcelable {
     private String access_key_secure;
     private String profile_pic_url;
     private Date profile_birthday;
+    private long profile_birthday_long;
 
     private int feed_posts, rewards_total, rewards_current;
 
@@ -35,6 +36,7 @@ public class FirestoreUser implements Parcelable {
         this.telephone_mobile = user.telephone_mobile;
         this.telephone_office = user.telephone_office;
         this.profile_birthday = user.profile_birthday;
+        this.profile_birthday_long = user.profile_birthday_long;
         this.access_level = user.access_level;
         this.access_key_secure = user.access_key_secure;
         this.profile_pic_url = user.profile_pic_url;
@@ -116,6 +118,14 @@ public class FirestoreUser implements Parcelable {
         this.profile_birthday = profile_birthday;
     }
 
+    public long getProfile_birthday_long() {
+        return profile_birthday_long;
+    }
+
+    public void setProfile_birthday_long(long profile_birthday_long) {
+        this.profile_birthday_long = profile_birthday_long;
+    }
+
     public int getFeed_posts() {
         return feed_posts;
     }
@@ -156,12 +166,12 @@ public class FirestoreUser implements Parcelable {
         dest.writeLong(this.telephone_office);
         dest.writeLong(this.telephone_mobile);
         dest.writeLong(this.profile_birthday != null ? this.profile_birthday.getTime() : -1);
+        dest.writeLong(this.profile_birthday_long);
         dest.writeInt(this.feed_posts);
         dest.writeInt(this.rewards_current);
         dest.writeInt(this.rewards_total);
         dest.writeParcelable(this.timestamp, flags);
     }
-
 
     protected FirestoreUser(Parcel in) {
         this.user_id = in.readString();
@@ -174,6 +184,7 @@ public class FirestoreUser implements Parcelable {
         this.telephone_mobile = in.readLong();
         long tmpProfile_birthday = in.readLong();
         this.profile_birthday = tmpProfile_birthday == -1 ? null : new Date(tmpProfile_birthday);
+        this.profile_birthday_long = in.readLong();
         this.feed_posts = in.readInt();
         this.rewards_current = in.readInt();
         this.rewards_total = in.readInt();

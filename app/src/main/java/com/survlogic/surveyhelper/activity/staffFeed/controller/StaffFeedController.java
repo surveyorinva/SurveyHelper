@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.Gravity;
@@ -23,11 +24,19 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.survlogic.surveyhelper.R;
+import com.survlogic.surveyhelper.activity.staffFeed.model.FeedAnnouncement;
+import com.survlogic.surveyhelper.activity.staffFeed.model.FeedBirthday;
+import com.survlogic.surveyhelper.activity.staffFeed.workers.AnnouncementGenerator;
+import com.survlogic.surveyhelper.activity.staffFeed.workers.BirthdayGenerator;
 import com.survlogic.surveyhelper.model.AppSettings;
 import com.survlogic.surveyhelper.model.AppStaticSettings;
+import com.survlogic.surveyhelper.utils.DialogUtils;
 import com.survlogic.surveyhelper.utils.PreferenceLoader;
 
-public class StaffFeedController {
+import java.util.ArrayList;
+
+public class StaffFeedController implements AnnouncementGenerator.AnnouncementGeneratorListener,
+                                            BirthdayGenerator.BirthdayGeneratorListener {
 
     private static final String TAG = "StaffFeedController";
 
@@ -36,6 +45,38 @@ public class StaffFeedController {
         void refreshFragmentUI();
         void sendFeedCategory(String feedCategory);
 
+    }
+
+    /**
+     *AnnouncementGeneratorListener
+     */
+    @Override
+    public void returnAnnouncementList(ArrayList<FeedAnnouncement> announcementList) {
+        isWorkerFeedAnnouncementReturnOk = true;
+        this.mListAnnouncements = announcementList;
+
+    }
+
+    @Override
+    public void returnNoAnnouncements(boolean isErrorState) {
+        //Todo Handle Error Message
+        DialogUtils.showToast(mContext,"Whoops.  Error.  Need to fix this!");
+    }
+
+    /**
+     *BirthdayGeneratorListener
+     */
+
+    @Override
+    public void returnBirthdayList(ArrayList<FeedBirthday> birthdayList) {
+        isWorkerFeedBirthdayReturnOk = true;
+        this.mListBirthdays = birthdayList;
+    }
+
+    @Override
+    public void returnNoBirthdays(boolean isErrorState) {
+        //Todo Handle Error Message
+        DialogUtils.showToast(mContext,"Whoops.  Error.  Need to fix this!");
     }
 
     private Context mContext;
@@ -49,6 +90,16 @@ public class StaffFeedController {
 
     private FloatingActionButton fabActionAnnouncement;
     private boolean isPopupWindowShown = false;
+
+    private AnnouncementGenerator announcementGenerator;
+    private boolean isWorkerFeedAnnouncementSet = false;
+    private boolean isWorkerFeedAnnouncementReturnOk = false;
+    private ArrayList<FeedAnnouncement> mListAnnouncements = new ArrayList<>();
+
+    private BirthdayGenerator birthdayGenerator;
+    private boolean isWorkerFeedBirthdaySet = false;
+    private boolean isWorkerFeedBirthdayReturnOk = false;
+    private ArrayList<FeedBirthday> mListBirthdays = new ArrayList<>();
 
 
     public StaffFeedController(Context context, StaffFeedControllerListener listener) {
@@ -75,7 +126,15 @@ public class StaffFeedController {
     }
 
     private void initWorkers(){
+        if(!isWorkerFeedAnnouncementSet){
+            announcementGenerator = new AnnouncementGenerator(mContext,this);
+            isWorkerFeedAnnouncementSet = true;
+        }
 
+        if(!isWorkerFeedBirthdaySet){
+            birthdayGenerator = new BirthdayGenerator(mContext,this);
+            isWorkerFeedBirthdaySet = true;
+        }
 
     }
 
@@ -98,6 +157,20 @@ public class StaffFeedController {
         rlSpecialActionButton.setVisibility(View.GONE);
 
     }
+
+    public void fetchAllFeeds(){
+        Log.d(TAG, "to_delete: Fetching Feed from Controller");
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                announcementGenerator.onStart();
+                birthdayGenerator.onStart();
+            }
+        }, 3000);
+
+    }
+
+
 
     public void createPopUpFeedNavigator(View anchorView){
         String title;
@@ -234,8 +307,6 @@ public class StaffFeedController {
             }
         });
 
-
-
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
 
@@ -284,6 +355,5 @@ public class StaffFeedController {
         popupWindowFeedItems.showAtLocation(llContainer, Gravity.TOP,0,0);
         isPopupWindowShown = true;
     }
-
 
 }

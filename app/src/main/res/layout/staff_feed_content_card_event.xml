@@ -23,6 +23,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <ImageView
+                    android:id="@+id/event_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp" />
+
                 <TextView
                     android:id="@+id/event_text_header"
                     style="@style/Labels.Title.Dark"
@@ -62,8 +67,6 @@
                         app:layout_constraintEnd_toStartOf="@+id/event_tag"
                         app:layout_constraintStart_toStartOf="parent" />
 
-
-
                 </android.support.constraint.ConstraintLayout>
 
             </RelativeLayout>
@@ -75,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rl_header"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="3dp">
 
                 <ImageView
                     android:layout_gravity="center_vertical"
