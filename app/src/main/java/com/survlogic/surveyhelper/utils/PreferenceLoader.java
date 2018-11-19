@@ -109,6 +109,15 @@ public class PreferenceLoader {
         return staticSettings;
     }
 
+    public boolean isFeedEventStyleLight(){
+        return sharedPreferences.getBoolean(mContext.getString(R.string.pref_feed_event_text_is_light),true);
+
+    }
+
+    public String getFeedPublicRoom(){
+        return sharedPreferences.getString(mContext.getString(R.string.pref_feed_default_public_room),"");
+    }
+
     public void setAppFirstRun(boolean appFirstRun, boolean isForceSave) {
         settings.setFirstRun(appFirstRun);
 
@@ -262,6 +271,31 @@ public class PreferenceLoader {
         }else {
             editor.apply();
         }
+    }
+
+    public void setRemoteConfigFeedDefaultPublicRoom(String defaultPublicRoom, boolean isForceSave){
+        editor = sharedPreferences.edit();
+        editor.putString(mContext.getString(R.string.pref_feed_default_public_room),defaultPublicRoom);
+
+        if(isForceSave){
+            editor.commit();
+        }else{
+            editor.apply();
+        }
+
+    }
+
+
+    public void setRemoteConfigFeedStyle(boolean isEventThemeLight, boolean isForceSave){
+        editor = sharedPreferences.edit();
+        editor.putBoolean(mContext.getString(R.string.pref_feed_event_text_is_light),isEventThemeLight);
+
+        if(isForceSave){
+            editor.commit();
+        }else{
+            editor.apply();
+        }
+
     }
 
     public void setRemoteConfigAnnouncements(boolean isPromo, @Nullable String backgroundUrl, @Nullable String promoAnnoucement, boolean isForceSave){

@@ -16,7 +16,7 @@ public class AnnouncementGenerator implements FirestoreDatabaseFeedAnnouncement.
 
     public interface AnnouncementGeneratorListener{
         void returnAnnouncementList(ArrayList<FeedAnnouncement> announcementList);
-        void returnNoAnnouncements(boolean isErrorState);
+        void returnNAnnouncementsError(boolean isErrorState);
     }
 
 
@@ -28,7 +28,7 @@ public class AnnouncementGenerator implements FirestoreDatabaseFeedAnnouncement.
 
     @Override
     public void fetchFeedAnnouncementGetError(boolean isError) {
-        mWorkerListener.returnNoAnnouncements(isError);
+        mWorkerListener.returnNAnnouncementsError(isError);
     }
 
     private Context mContext;

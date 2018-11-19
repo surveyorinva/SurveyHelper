@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.design.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.MaterialComponents.CardView"
+    app:cardElevation="@dimen/app_card_elevation"
+    android:layout_marginStart="@dimen/app_card_margins"
+    android:layout_marginEnd="@dimen/app_card_margins"
+    android:layout_marginTop="@dimen/app_card_margin_top"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <android.support.design.card.MaterialCardView
-        style="@style/Widget.MaterialComponents.CardView"
-        app:cardElevation="0dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="225dp">
+    android:layout_height="wrap_content"
+    android:minHeight="225dp"
+    tools:ignore="ContentDescription">
 
         <RelativeLayout
             android:layout_marginBottom="10dp"
@@ -24,20 +25,16 @@
 
                 <ImageView
                     android:id="@+id/announcement_image_background"
+                    android:scaleType="fitXY"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
-                <TextView
-                    android:text="@string/staff_feed_card_tag_announcement"
-                    style="@style/Labels.Emphasis.Dark"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="4dp"
-                    android:layout_above="@id/event_text_header"
-                    android:background="@drawable/background_rectangle_hollow_dark"
-                    android:gravity="center"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content" />
-
+                <ProgressBar
+                    android:id="@+id/announcement_image_background_progress"
+                    android:layout_centerInParent="true"
+                    android:indeterminate="true"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
 
                 <TextView
                     android:id="@+id/event_text_header"
@@ -75,8 +72,5 @@
 
         </RelativeLayout>
 
+</android.support.design.card.MaterialCardView>
 
-    </android.support.design.card.MaterialCardView>
-
-
-</LinearLayout>

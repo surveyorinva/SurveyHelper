@@ -33,6 +33,9 @@
     <string name="pref_feed_reward_url">pref_feed_reward_url</string>
     <string name="pref_feed_show_reward">pref_feed_show_reward</string>
 
+    <string name="pref_feed_event_text_is_light">pref_feed_event_text_is_light</string>
+
+    <string name="pref_feed_default_public_room">pref_feed_default_public_room</string>
 
     <string name="theme_staff_company_top_page_0">theme_staff_company_top_page_0</string>
     <string name="theme_staff_company_top_page_1">theme_staff_company_top_page_1</string>
@@ -71,6 +74,10 @@
     <string name="CONFIG_KEY_FEED_REWARD">event_promo</string>
     <string name="CONFIG_KEY_FEED_REWARD_TOPIC">event_promo_title</string>
     <string name="CONFIG_KEY_FEE_REWARD_DETAILS">event_promo_background</string>
+
+    <string name="CONFIG_KEY_FEED_STYLE_EVENT_STYLE_LIGHT">feed_event_text_is_light</string>
+    <string name="CONFIG_KEY_FEED_DEFAULT_PUBLIC_ROOM">feed_default_public_room</string>
+
 
     <string name="CONFIG_THEME_STAFF_COMPANY_TOP_PAGE_0">theme_staff_company_top_page_0</string>
     <string name="CONFIG_THEME_STAFF_COMPANY_BOTTOM_PAGE_0">theme_staff_company_bottom_page_0</string>

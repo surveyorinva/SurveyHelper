@@ -7,5 +7,18 @@
     <!--Intent Codes-->
     <integer name="INTENT_REQUEST_FIREBASE_LOGIN">1000</integer>
 
+    <integer name="FEED_SYSTEM_DEFAULT">0</integer>
+    <integer name="FEED_SYSTEM_EMPTY">1</integer>
+    <integer name="FEED_ANNOUNCEMENT">101</integer>
+    <integer name="FEED_EVENT">201</integer>
+    <integer name="FEED_BIRTHDAY_HEADER_TODAY">301</integer>
+    <integer name="FEED_BIRTHDAY_TODAY">302</integer>
+    <integer name="FEED_BIRTHDAY_HEADER_FUTURE">303</integer>
+    <integer name="FEED_BIRTHDAY_FUTURE">304</integer>
+    <integer name="FEED_FEED_ITEM">401</integer>
+
+    <integer name="FEED_ITEM_SYSTEM_DEFAULT">0</integer>
+    <integer name="FEED_ITEM_GEOTAG_PRJ">1001</integer>
+    <integer name="FEED_CHECK_IN_PRJ">1002</integer>
 
 </resources>

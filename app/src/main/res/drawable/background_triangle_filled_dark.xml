@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100.000000px"
+    android:height="100.000000px"
+    android:viewportWidth="100.000000"
+    android:viewportHeight="100.000000">
+
+    <group
+        android:name="background">
+
+        <path
+            android:name="fill"
+            android:strokeColor="@color/colorPrimaryNormal"
+            android:strokeWidth="2"
+            android:fillColor="@color/colorPrimaryNormal"
+            android:pathData="M1,99 0,99 99,0 99,99 z "/>
+
+        <path
+            android:name="outline"
+            android:strokeColor="@color/colorPrimaryDark"
+            android:strokeWidth="5"
+            android:pathData="M-5,100 100,100 100,0"/>
+
+    </group>
+
+
+</vector>

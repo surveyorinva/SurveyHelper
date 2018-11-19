@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.survlogic.surveyhelper.activity.staffFeed.model.FeedBirthday;
-import com.survlogic.surveyhelper.database.Feed.FirestoreDatabaseFeedAnnouncement;
 import com.survlogic.surveyhelper.database.Feed.FirestoreDatabaseFeedBirthday;
 
 import java.util.ArrayList;
@@ -16,18 +15,21 @@ public class BirthdayGenerator implements FirestoreDatabaseFeedBirthday.FeedBirt
     private static final String TAG = "BirthdayGenerator";
 
     public interface BirthdayGeneratorListener{
-        void returnBirthdayList(ArrayList<FeedBirthday> birthdayList);
+        void returnBirthdayList(ArrayList<FeedBirthday> birthdayListToday, ArrayList<FeedBirthday> birthdayListAhead );
         void returnNoBirthdays(boolean isErrorState);
     }
 
     /**
      *FeedBirthdayListener
      */
+
     @Override
-    public void fetchBirthdayAll(ArrayList<FeedBirthday> birthdayList) {
-        this.mListBirthdays = birthdayList;
+    public void fetchBirthdayAll(ArrayList<FeedBirthday> birthdayListToday, ArrayList<FeedBirthday> birthdayListAhead) {
+        this.mListBirthdaysToday = birthdayListToday;
+        this.mListBirthdaysFuture = birthdayListAhead;
         callFilterList();
     }
+
 
     @Override
     public void fetchFeedBirthdayGetError(boolean isError) {
@@ -38,7 +40,8 @@ public class BirthdayGenerator implements FirestoreDatabaseFeedBirthday.FeedBirt
     private Activity mActivity;
     private BirthdayGeneratorListener mWorkerListener;
 
-    private ArrayList<FeedBirthday> mListBirthdays = new ArrayList<>();
+    private ArrayList<FeedBirthday> mListBirthdaysToday = new ArrayList<>();
+    private ArrayList<FeedBirthday> mListBirthdaysFuture = new ArrayList<>();
 
     public BirthdayGenerator(Context context, BirthdayGeneratorListener listener) {
         this.mContext = context;
@@ -58,9 +61,7 @@ public class BirthdayGenerator implements FirestoreDatabaseFeedBirthday.FeedBirt
      * Potentially filter arraylist after returning from Firestore in the future
      */
     private void callFilterList(){
-        if(mListBirthdays.size() >0){
-            mWorkerListener.returnBirthdayList(mListBirthdays);
-        }
+        mWorkerListener.returnBirthdayList(mListBirthdaysToday, mListBirthdaysFuture);
 
 
     }

@@ -15,7 +15,7 @@ public class FeedAnnouncement implements Parcelable {
     private String news_header;
     private String news_body;
     private String details_url;
-    private long date_posted, date_expire;
+    private long date_posted, date_expire, date_expire_day_of_year;
 
 
     public FeedAnnouncement() {
@@ -29,6 +29,7 @@ public class FeedAnnouncement implements Parcelable {
         this.details_url = announcement.details_url;
         this.date_posted = announcement.date_posted;
         this.date_expire = announcement.date_expire;
+        this.date_expire_day_of_year = announcement.date_expire_day_of_year;
 
     }
 
@@ -89,6 +90,14 @@ public class FeedAnnouncement implements Parcelable {
     }
 
 
+    public long getDate_expire_day_of_year() {
+        return date_expire_day_of_year;
+    }
+
+    public void setDate_expire_day_of_year(long date_expire_day_of_year) {
+        this.date_expire_day_of_year = date_expire_day_of_year;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -99,20 +108,22 @@ public class FeedAnnouncement implements Parcelable {
         dest.writeString(this.announcement_id);
         dest.writeString(this.news_header);
         dest.writeString(this.news_body);
-        dest.writeString(this.background_url);
         dest.writeString(this.details_url);
+        dest.writeString(this.background_url);
         dest.writeLong(this.date_posted);
         dest.writeLong(this.date_expire);
+        dest.writeLong(this.date_expire_day_of_year);
     }
 
     protected FeedAnnouncement(Parcel in) {
         this.announcement_id = in.readString();
         this.news_header = in.readString();
         this.news_body = in.readString();
-        this.background_url = in.readString();
         this.details_url = in.readString();
+        this.background_url = in.readString();
         this.date_posted = in.readLong();
         this.date_expire = in.readLong();
+        this.date_expire_day_of_year = in.readLong();
     }
 
     public static final Parcelable.Creator<FeedAnnouncement> CREATOR = new Parcelable.Creator<FeedAnnouncement>() {

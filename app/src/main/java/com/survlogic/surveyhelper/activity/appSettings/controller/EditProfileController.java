@@ -12,6 +12,7 @@ import com.survlogic.surveyhelper.database.Users.FirestoreDatabaseUserListener;
 import com.survlogic.surveyhelper.model.FirestoreUser;
 import com.survlogic.surveyhelper.utils.PreferenceLoader;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class EditProfileController implements FirestoreDatabaseUserListener {
@@ -59,7 +60,12 @@ public class EditProfileController implements FirestoreDatabaseUserListener {
     public void setUserBirthday(Date userBirthday) {
         this.mUserBirthday = userBirthday;
         mFirestoreUser.setProfile_birthday(userBirthday);
-        mFirestoreUser.setProfile_birthday_long(userBirthday.getTime());
+
+        Calendar cal1 = Calendar.getInstance();
+        cal1.setTime(userBirthday);
+        long dayOfYear = cal1.get(Calendar.DAY_OF_YEAR);
+
+        mFirestoreUser.setProfile_birthday_long(dayOfYear);
 
     }
 

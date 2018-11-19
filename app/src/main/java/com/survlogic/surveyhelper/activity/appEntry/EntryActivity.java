@@ -95,6 +95,8 @@ public class EntryActivity extends AppCompatActivity implements WelcomeControlle
     private void initStaticRemoteConfigSettings(){
         remoteConfigLoader.fetchRemoteConfigTheme();
         remoteConfigLoader.fetchRemoteConfigAnnouncements();
+        remoteConfigLoader.fetchRemoteConfigFeedStyle();
+        remoteConfigLoader.fetchRemoteConfigFeedDefaultPublicRoom();
     }
 
 

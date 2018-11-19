@@ -7,6 +7,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +21,10 @@ import com.survlogic.surveyhelper.R;
 import com.survlogic.surveyhelper.activity.staffFeed.controller.StaffFeedController;
 import com.survlogic.surveyhelper.activity.staff.inter.StaffActivityListener;
 import com.survlogic.surveyhelper.inter.NavigationIconClickListener;
+import com.survlogic.surveyhelper.utils.PreferenceLoader;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class StaffFeedFragment extends Fragment implements StaffFeedController.StaffFeedControllerListener {
     private static final String TAG = "StaffFeedFragment";
@@ -39,6 +46,8 @@ public class StaffFeedFragment extends Fragment implements StaffFeedController.S
     private Context mContext;
 
     private View v;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private ImageButton ibBackdrop, ibNavigator, ibFeedNavigator;
     private TextView tvFragmentName;
@@ -76,10 +85,16 @@ public class StaffFeedFragment extends Fragment implements StaffFeedController.S
     @Override
     public void onStart() {
         super.onStart();
+        Date today = Calendar.getInstance().getTime();
+
+        PreferenceLoader preferenceLoader = new PreferenceLoader(mContext);
+        String feed_room = preferenceLoader.getFeedPublicRoom();
+
+        mFeedController.setFeedQueryDateToShow(today);
+        mFeedController.setFeedRoomToShow(feed_room);
+        mFeedController.fetchAllFeeds();
 
         showAnnouncementAtStart();
-
-        mFeedController.fetchAllFeeds();
 
     }
 
@@ -119,6 +134,13 @@ public class StaffFeedFragment extends Fragment implements StaffFeedController.S
                 mFeedController.createPopUpFeedNavigator(ibFeedNavigator);
             }
         });
+
+        swipeRefreshLayout = v.findViewById(R.id.feed_swipe_layout);
+        mFeedController.setSwipeRefreshLayout(swipeRefreshLayout);
+
+        RecyclerView recyclerView = v.findViewById(R.id.feed_recycler_view);
+        mFeedController.setRecyclerView(recyclerView);
+
 
     }
 

@@ -36,6 +36,9 @@
 
     <dimen name="app_backdrop_reveal_height">200dp</dimen>
 
+    <dimen name="app_card_margins">8dp</dimen>
+    <dimen name="app_card_margin_top">15dp</dimen>
+    <dimen name="app_card_elevation">5dp</dimen>
 
     <!-- Text Sizes -->
     <dimen name="labels_appBar_text">20sp</dimen>

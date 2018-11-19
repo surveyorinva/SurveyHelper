@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -13,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +27,13 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.survlogic.surveyhelper.R;
 import com.survlogic.surveyhelper.activity.staffCompany.controller.StaffCompanyController;
 import com.survlogic.surveyhelper.activity.staff.inter.StaffActivityListener;
+import com.survlogic.surveyhelper.activity.staffFeed.workers.FeedCompiler;
 import com.survlogic.surveyhelper.activity.template.SampleFragment;
 import com.survlogic.surveyhelper.adapters.ViewPagerAdapter;
 import com.survlogic.surveyhelper.model.ThemeSettings;
 import com.survlogic.surveyhelper.utils.PreferenceLoader;
+
+import java.util.Calendar;
 
 public class StaffCompanyFragment extends Fragment implements StaffCompanyController.StaffCompanyControllerListener {
     private static final String TAG = "StaffFeedFragment";
@@ -64,6 +70,9 @@ public class StaffCompanyFragment extends Fragment implements StaffCompanyContro
 
     private StaffActivityListener mActivityListener;
     private StaffCompanyController mCompanyController;
+
+    private boolean isBitmapsLoadedFromNetwork = false;
+    private int mPageToLoad = 0;
 
     @Nullable
     @Override
@@ -140,7 +149,7 @@ public class StaffCompanyFragment extends Fragment implements StaffCompanyContro
 
             @Override
             public void onPageSelected(int position) {
-                setImagesPages(position);
+                initImagesPages(position);
 
             }
 
@@ -150,7 +159,7 @@ public class StaffCompanyFragment extends Fragment implements StaffCompanyContro
             }
         });
 
-        setImagesPages(0);
+        initImagesPages(0);
 
 
     }
@@ -164,27 +173,52 @@ public class StaffCompanyFragment extends Fragment implements StaffCompanyContro
     }
 
     private void initImagePages(){
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         PreferenceLoader preferenceLoader = new PreferenceLoader(mContext);
 
-        ThemeSettings themeSettings = new ThemeSettings(preferenceLoader.getThemeSettings());
+        final ThemeSettings themeSettings = new ThemeSettings(preferenceLoader.getThemeSettings());
 
-        mImagePage0Top = new BitmapDrawable(getResources(),mImageLoader.loadImageSync(themeSettings.getStaffCompanyPage0Top()));
-        mImagePage0Bottom = new BitmapDrawable(getResources(),mImageLoader.loadImageSync(themeSettings.getStaffCompanyPage0Bottom()));
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    mImagePage0Top = new BitmapDrawable(getResources(),mImageLoader.loadImageSync(themeSettings.getStaffCompanyPage0Top()));
+                    mImagePage0Bottom = new BitmapDrawable(getResources(),mImageLoader.loadImageSync(themeSettings.getStaffCompanyPage0Bottom()));
 
-        mImagePage1Top = new BitmapDrawable(getResources(),mImageLoader.loadImageSync(themeSettings.getStaffCompanyPage1Top()));
-        mImagePage1Bottom = new BitmapDrawable(getResources(),mImageLoader.loadImageSync(themeSettings.getStaffCompanyPage1Bottom()));
+                    mImagePage1Top = new BitmapDrawable(getResources(),mImageLoader.loadImageSync(themeSettings.getStaffCompanyPage1Top()));
+                    mImagePage1Bottom = new BitmapDrawable(getResources(),mImageLoader.loadImageSync(themeSettings.getStaffCompanyPage1Bottom()));
 
-        mImagePage2Top = new BitmapDrawable(getResources(),mImageLoader.loadImageSync(themeSettings.getStaffCompanyPage2Top()));
-        mImagePage2Bottom = new BitmapDrawable(getResources(),mImageLoader.loadImageSync(themeSettings.getStaffCompanyPage2Bottom()));
+                    mImagePage2Top = new BitmapDrawable(getResources(),mImageLoader.loadImageSync(themeSettings.getStaffCompanyPage2Top()));
+                    mImagePage2Bottom = new BitmapDrawable(getResources(),mImageLoader.loadImageSync(themeSettings.getStaffCompanyPage2Bottom()));
 
+                    mImagePage0TopUri = Uri.parse(themeSettings.getStaffCompanyPage0Top());
 
-        mImagePage0TopUri = Uri.parse(themeSettings.getStaffCompanyPage0Top());
+                    isBitmapsLoadedFromNetwork = true;
+
+                }catch (Exception e){
+                    Log.e(TAG, e.getLocalizedMessage());
+                }
+            }
+        });
+        thread.start();
     }
 
 
-    private void setImagesPages(int position){
+    private void initImagesPages(int position) {
         imsHeaderView = v.findViewById(R.id.switcherTop);
         imsTabView = v.findViewById(R.id.switcherBottom);
+
+        mPageToLoad = position;
+
+        LoadBackgroundImagesAsyncTask task = new LoadBackgroundImagesAsyncTask();
+        task.execute();
+
+    }
+
+    private void setImagePages(int position){
 
         switch (position){
             case 0:
@@ -208,6 +242,54 @@ public class StaffCompanyFragment extends Fragment implements StaffCompanyContro
         }
 
     }
+
+    private class LoadBackgroundImagesAsyncTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            Long t = Calendar.getInstance().getTimeInMillis();
+            while(!isBitmapsLoadedFromNetwork && Calendar.getInstance().getTimeInMillis()-t < 10000){
+                try {
+                    Thread.sleep(1000);
+
+                    publishProgress();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+
+        }
+
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            Log.d(TAG, "to_delete: Starting Post Execute ");
+            if(isBitmapsLoadedFromNetwork){
+                setImagePages(mPageToLoad);
+
+            }else{
+                //Todo Show Error Message Here
+                Log.d(TAG, "to_delete: Timed Out! ");
+
+            }
+
+        }
+
+    }
+
 
 
 

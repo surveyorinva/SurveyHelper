@@ -5,109 +5,106 @@ import android.os.Parcelable;
 
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 @IgnoreExtraProperties
 public class FeedEvent implements Parcelable {
 
-    private String backgroundUrl;
-    private String eventHeader;
-    private String eventBody;
-    private Date eventStartDate, eventEndDate;
-    private String detailsUrl;
-    private boolean isGoing;
-    private Date postedDate, expireDate;
+    private String background_url;
+    private String event_header;
+    private String event_body;
+    private long date_event;
+    private String details_url;
+    private long date_expire;
+    private long date_expire_day_of_year;
+    private ArrayList<String> whos_going;
 
     public FeedEvent() {
     }
 
+
     public FeedEvent(FeedEvent event){
-        this.backgroundUrl = event.backgroundUrl;
-        this.eventHeader = event.eventHeader;
-        this.eventBody = event.eventBody;
+        this.event_header = event.event_header;
+        this.event_body = event.event_body;
 
-        this.eventStartDate = event.eventStartDate;
-        this.eventEndDate = event.eventEndDate;
+        this.date_event = event.date_event;
 
-        this.detailsUrl = event.detailsUrl;
-        this.isGoing = event.isGoing;
+        this.details_url = event.details_url;
+        this.background_url = event.background_url;
 
-        this.postedDate = event.postedDate;
-        this.expireDate = event.expireDate;
+        this.date_expire = event.date_expire;
+        this.date_expire_day_of_year = event.date_expire_day_of_year;
+
+        this.whos_going = event.whos_going;
 
     }
 
-    public String getBackgroundUrl() {
-        return backgroundUrl;
+    public String getBackground_url() {
+        return background_url;
     }
 
-    public void setBackgroundUrl(String backgroundUrl) {
-        this.backgroundUrl = backgroundUrl;
+    public void setBackground_url(String background_url) {
+        this.background_url = background_url;
     }
 
-    public String getEventHeader() {
-        return eventHeader;
+    public String getEvent_header() {
+        return event_header;
     }
 
-    public void setEventHeader(String eventHeader) {
-        this.eventHeader = eventHeader;
+    public void setEvent_header(String event_header) {
+        this.event_header = event_header;
     }
 
-    public String getEventBody() {
-        return eventBody;
+    public String getEvent_body() {
+        return event_body;
     }
 
-    public void setEventBody(String eventBody) {
-        this.eventBody = eventBody;
+    public void setEvent_body(String event_body) {
+        this.event_body = event_body;
     }
 
-    public Date getEventStartDate() {
-        return eventStartDate;
+    public long getEvent_start_date() {
+        return date_event;
     }
 
-    public void setEventStartDate(Date eventStartDate) {
-        this.eventStartDate = eventStartDate;
+    public void setEvent_start_date(long event_start_date) {
+        this.date_event = event_start_date;
     }
 
-    public Date getEventEndDate() {
-        return eventEndDate;
+    public String getDetails_url() {
+        return details_url;
     }
 
-    public void setEventEndDate(Date eventEndDate) {
-        this.eventEndDate = eventEndDate;
+    public void setDetails_url(String details_url) {
+        this.details_url = details_url;
     }
 
-    public String getDetailsUrl() {
-        return detailsUrl;
+    public long getExpire_date() {
+        return date_expire;
     }
 
-    public void setDetailsUrl(String detailsUrl) {
-        this.detailsUrl = detailsUrl;
+    public void setExpire_date(long expire_date) {
+        this.date_expire = expire_date;
     }
 
-    public boolean isGoing() {
-        return isGoing;
+    public long getDate_expire_day_of_year() {
+        return date_expire_day_of_year;
     }
 
-    public void setGoing(boolean going) {
-        isGoing = going;
+    public void setDate_expire_day_of_year(long date_expire_day_of_year) {
+        this.date_expire_day_of_year = date_expire_day_of_year;
     }
 
-    public Date getPostedDate() {
-        return postedDate;
+    public ArrayList<String> getWhos_going() {
+        return whos_going;
     }
 
-    public void setPostedDate(Date postedDate) {
-        this.postedDate = postedDate;
+    public void setWhos_going(ArrayList<String> whos_going) {
+        this.whos_going = whos_going;
     }
 
-    public Date getExpireDate() {
-        return expireDate;
-    }
-
-    public void setExpireDate(Date expireDate) {
-        this.expireDate = expireDate;
-    }
 
     @Override
     public int describeContents() {
@@ -116,31 +113,25 @@ public class FeedEvent implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.eventHeader);
-        dest.writeString(this.eventBody);
-        dest.writeLong(this.eventStartDate != null ? this.eventStartDate.getTime() : -1);
-        dest.writeLong(this.eventEndDate != null ? this.eventEndDate.getTime() : -1);
-        dest.writeString(this.backgroundUrl);
-        dest.writeString(this.detailsUrl);
-        dest.writeByte(this.isGoing ? (byte) 1 : (byte) 0);
-        dest.writeLong(this.postedDate != null ? this.postedDate.getTime() : -1);
-        dest.writeLong(this.expireDate != null ? this.expireDate.getTime() : -1);
+        dest.writeString(this.event_header);
+        dest.writeString(this.event_body);
+        dest.writeLong(this.date_event);
+        dest.writeString(this.background_url);
+        dest.writeString(this.details_url);
+        dest.writeLong(this.date_expire);
+        dest.writeLong(this.date_expire_day_of_year);
+        dest.writeStringList(this.whos_going);
     }
 
     protected FeedEvent(Parcel in) {
-        this.eventHeader = in.readString();
-        this.eventBody = in.readString();
-        long tmpEventStartDate = in.readLong();
-        this.eventStartDate = tmpEventStartDate == -1 ? null : new Date(tmpEventStartDate);
-        long tmpEventEndDate = in.readLong();
-        this.eventEndDate = tmpEventEndDate == -1 ? null : new Date(tmpEventEndDate);
-        this.backgroundUrl = in.readString();
-        this.detailsUrl = in.readString();
-        this.isGoing = in.readByte() != 0;
-        long tmpPostedDate = in.readLong();
-        this.postedDate = tmpPostedDate == -1 ? null : new Date(tmpPostedDate);
-        long tmpExpireDate = in.readLong();
-        this.expireDate = tmpExpireDate == -1 ? null : new Date(tmpExpireDate);
+        this.event_header = in.readString();
+        this.event_body = in.readString();
+        this.date_event = in.readLong();
+        this.background_url = in.readString();
+        this.details_url = in.readString();
+        this.date_expire = in.readLong();
+        this.date_expire_day_of_year = in.readLong();
+        this.whos_going = in.createStringArrayList();
     }
 
     public static final Parcelable.Creator<FeedEvent> CREATOR = new Parcelable.Creator<FeedEvent>() {

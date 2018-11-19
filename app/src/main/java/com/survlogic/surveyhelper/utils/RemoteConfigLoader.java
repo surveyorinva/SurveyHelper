@@ -114,6 +114,14 @@ public class RemoteConfigLoader {
         mPreferenceLoader.setAnnouncementShowReward(true,true);
     }
 
+    public void fetchRemoteConfigFeedStyle(){
+        mPreferenceLoader.setRemoteConfigFeedStyle(mFirebaseRemoteConfig.getBoolean(mActivity.getResources().getString(R.string.CONFIG_KEY_FEED_STYLE_EVENT_STYLE_LIGHT)),true);
+    }
+
+    public void fetchRemoteConfigFeedDefaultPublicRoom(){
+        mPreferenceLoader.setRemoteConfigFeedDefaultPublicRoom(mFirebaseRemoteConfig.getString(mActivity.getResources().getString(R.string.CONFIG_KEY_FEED_DEFAULT_PUBLIC_ROOM)),true);
+    }
+
     private long getRemoteConfigCacheExpireTime(){
         Log.d(TAG, "Remote Config: Cache Time: " + mPreferenceLoader.getSettings().getAppRemoteConfigCacheExpireTime());
 

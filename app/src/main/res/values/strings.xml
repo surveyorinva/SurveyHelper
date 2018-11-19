@@ -282,6 +282,9 @@
     <string name="staff_feed_card_tag_announcement">Announcement</string>
     <string name="staff_feed_card_tag_event">Event</string>
 
+    <string name="staff_feed_list_header_birthday_today">Today\'s Birthdays</string>
+    <string name="staff_feed_list_header_birthday_future">Upcoming Birthdays</string>
+
     <string name="staff_feed_card_event_going">Going</string>
     <string name="staff_feed_card_event_not_going">Not Going</string>
 

@@ -71,7 +71,8 @@
 
 
         <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/project_swipe_layout"
+            android:id="@+id/feed_swipe_layout"
+            android:elevation="0dp"
             android:layout_marginTop="@dimen/app_bar_height_portrait"
             android:background="@color/app_background_light"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"

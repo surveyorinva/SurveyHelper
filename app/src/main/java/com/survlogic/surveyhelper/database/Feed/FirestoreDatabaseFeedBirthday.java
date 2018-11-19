@@ -2,6 +2,7 @@ package com.survlogic.surveyhelper.database.Feed;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,7 +25,7 @@ public class FirestoreDatabaseFeedBirthday {
     private static final String TAG = "FirestoreDatabaseFeedBi";
 
     public interface FeedBirthdayListener{
-        void fetchBirthdayAll(ArrayList<FeedBirthday> birthdayList);
+        void fetchBirthdayAll(ArrayList<FeedBirthday> birthdayListToday, ArrayList<FeedBirthday> birthdayListAhead);
         void fetchFeedBirthdayGetError(boolean isError);
     }
 
@@ -41,6 +42,17 @@ public class FirestoreDatabaseFeedBirthday {
     public void getFeedBirthdayFromFirestore(final Date dateToCheck){
         final ArrayList<FirestoreUser> mListUsers = new ArrayList<>();
         final ArrayList<FeedBirthday> mListFeedBirthdays = new ArrayList<>();
+        final ArrayList<FeedBirthday> mListFeedBirthdaysAhead = new ArrayList<>();
+
+        final Calendar birthday = Calendar.getInstance();
+        final Calendar compareToDateToday = Calendar.getInstance();
+        final Calendar compareToDateTomorrow = Calendar.getInstance();
+        final Calendar compareToDateDayAfterNext = Calendar.getInstance();
+
+        compareToDateTomorrow.add(Calendar.DAY_OF_YEAR, 1);
+        compareToDateDayAfterNext.add(Calendar.DAY_OF_YEAR,2);
+
+
         DocumentSnapshot mLastQueriedUserst;
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -50,9 +62,11 @@ public class FirestoreDatabaseFeedBirthday {
 
         if(mLastQueriedBirthdayList !=null){
             query = ref
-                    .startAfter(mLastQueriedBirthdayList);
+                    .startAfter(mLastQueriedBirthdayList)
+                    .orderBy("display_name");
         }else{
-            query = ref;
+            query = ref
+                    .orderBy("display_name");
 
         }
 
@@ -69,30 +83,44 @@ public class FirestoreDatabaseFeedBirthday {
                     if(task.getResult().size() !=0){
 
                         for (int i = 0; i < mListUsers.size(); i++){
-
                             FirestoreUser user = new FirestoreUser();
                             user.setFirestoreUser(mListUsers.get(i));
 
-                            Calendar birthday = Calendar.getInstance();
-                            Calendar compareToDate = Calendar.getInstance();
+                            if(user.getProfile_birthday() != null){
+                                birthday.setTime(user.getProfile_birthday());
+                                compareToDateToday.setTime(dateToCheck);
 
-                            birthday.setTime(user.getProfile_birthday());
-                            compareToDate.setTime(dateToCheck);
+                                boolean sameDay = birthday.get(Calendar.DAY_OF_YEAR) == compareToDateToday.get(Calendar.DAY_OF_YEAR);
+                                boolean sameTommorrow = birthday.get(Calendar.DAY_OF_YEAR) == compareToDateTomorrow.get(Calendar.DAY_OF_YEAR);
+                                boolean sameDayAfterNext = birthday.get(Calendar.DAY_OF_YEAR) == compareToDateDayAfterNext.get(Calendar.DAY_OF_YEAR);
 
-                            boolean sameDay = birthday.get(Calendar.DAY_OF_YEAR) == compareToDate.get(Calendar.DAY_OF_YEAR);
+                                if(sameDay){
+                                    FeedBirthday feedBirthday = new FeedBirthday();
+                                    feedBirthday.setUser_id(user.getUser_id());
+                                    feedBirthday.setProfile_name(user.getDisplay_name());
+                                    feedBirthday.setUserProfilePicUrl(user.getProfile_pic_url());
+                                    feedBirthday.setBirthDate(user.getProfile_birthday_long());
 
-                            if(sameDay){
-                                FeedBirthday feedBirthday = new FeedBirthday();
-                                feedBirthday.setUser_id(user.getUser_id());
-                                feedBirthday.setUserProfilePicUrl(user.getProfile_pic_url());
-                                feedBirthday.setBirthDate(user.getProfile_birthday_long());
+                                    mListFeedBirthdays.add(feedBirthday);
+                                }
 
-                                mListFeedBirthdays.add(feedBirthday);
+                                if(sameTommorrow || sameDayAfterNext){
+                                    FeedBirthday feedBirthday = new FeedBirthday();
+                                    feedBirthday.setUser_id(user.getUser_id());
+                                    feedBirthday.setProfile_name(user.getDisplay_name());
+                                    feedBirthday.setUserProfilePicUrl(user.getProfile_pic_url());
+
+                                    Date dateBirthday = user.getProfile_birthday();
+                                    long dateInLong = dateBirthday.getTime();
+                                    feedBirthday.setBirthDate(dateInLong);
+
+                                    mListFeedBirthdaysAhead.add(feedBirthday);
+                                }
                             }
-
                         }
 
-                        mListenerBirthday.fetchBirthdayAll(mListFeedBirthdays);
+                        mListenerBirthday.fetchBirthdayAll(mListFeedBirthdays, mListFeedBirthdaysAhead);
+
                     }else{
                         mListenerBirthday.fetchFeedBirthdayGetError(true);
                     }
