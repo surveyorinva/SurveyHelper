@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements RemoteConfigLoade
     private RemoteConfigLoader remoteConfigLoader;
 
     private WelcomeController mWelcomeController;
-
     @Override
     public void refreshUI(AppSettings settings) {
 
