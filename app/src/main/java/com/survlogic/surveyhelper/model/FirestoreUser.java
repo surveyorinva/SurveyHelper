@@ -8,6 +8,7 @@ import com.google.firebase.firestore.IgnoreExtraProperties;
 import com.google.firebase.firestore.ServerTimestamp;
 
 import java.util.Date;
+import java.util.List;
 
 @IgnoreExtraProperties
 public class FirestoreUser implements Parcelable {
@@ -23,7 +24,7 @@ public class FirestoreUser implements Parcelable {
     private String profile_pic_url;
     private Date profile_birthday;
     private long profile_birthday_long;
-
+    private List<String> private_room_member;
     private int feed_posts, rewards_total, rewards_current;
 
     public FirestoreUser() {
@@ -43,6 +44,7 @@ public class FirestoreUser implements Parcelable {
         this.feed_posts = user.feed_posts;
         this.rewards_total = user.rewards_total;
         this.rewards_current = user.rewards_current;
+        this.private_room_member = user.private_room_member;
     }
 
 
@@ -150,6 +152,15 @@ public class FirestoreUser implements Parcelable {
         this.rewards_current = rewards_current;
     }
 
+    public List<String> getPrivate_room_member() {
+        return private_room_member;
+    }
+
+    public void setPrivate_room_member(List<String> private_room_member) {
+        this.private_room_member = private_room_member;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -159,36 +170,38 @@ public class FirestoreUser implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.user_id);
         dest.writeString(this.display_name);
-        dest.writeString(this.access_level);
-        dest.writeString(this.access_key_secure);
-        dest.writeString(this.profile_pic_url);
         dest.writeString(this.email);
         dest.writeLong(this.telephone_office);
+        dest.writeString(this.access_level);
+        dest.writeString(this.access_key_secure);
         dest.writeLong(this.telephone_mobile);
+        dest.writeParcelable(this.timestamp, flags);
+        dest.writeString(this.profile_pic_url);
         dest.writeLong(this.profile_birthday != null ? this.profile_birthday.getTime() : -1);
         dest.writeLong(this.profile_birthday_long);
+        dest.writeStringList(this.private_room_member);
         dest.writeInt(this.feed_posts);
-        dest.writeInt(this.rewards_current);
         dest.writeInt(this.rewards_total);
-        dest.writeParcelable(this.timestamp, flags);
+        dest.writeInt(this.rewards_current);
     }
 
     protected FirestoreUser(Parcel in) {
         this.user_id = in.readString();
         this.display_name = in.readString();
-        this.access_level = in.readString();
-        this.access_key_secure = in.readString();
-        this.profile_pic_url = in.readString();
         this.email = in.readString();
         this.telephone_office = in.readLong();
+        this.access_level = in.readString();
+        this.access_key_secure = in.readString();
         this.telephone_mobile = in.readLong();
+        this.timestamp = in.readParcelable(Timestamp.class.getClassLoader());
+        this.profile_pic_url = in.readString();
         long tmpProfile_birthday = in.readLong();
         this.profile_birthday = tmpProfile_birthday == -1 ? null : new Date(tmpProfile_birthday);
         this.profile_birthday_long = in.readLong();
+        this.private_room_member = in.createStringArrayList();
         this.feed_posts = in.readInt();
-        this.rewards_current = in.readInt();
         this.rewards_total = in.readInt();
-        this.timestamp = in.readParcelable(Timestamp.class.getClassLoader());
+        this.rewards_current = in.readInt();
     }
 
     public static final Parcelable.Creator<FirestoreUser> CREATOR = new Parcelable.Creator<FirestoreUser>() {
