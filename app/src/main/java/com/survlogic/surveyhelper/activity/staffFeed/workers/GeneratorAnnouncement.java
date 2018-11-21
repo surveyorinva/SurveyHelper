@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AnnouncementGenerator implements FirestoreDatabaseFeedAnnouncement.FeedAnnouncmentListener {
+public class GeneratorAnnouncement implements FirestoreDatabaseFeedAnnouncement.FeedAnnouncmentListener {
 
-    private static final String TAG = "AnnouncementGenerator";
+    private static final String TAG = "GeneratorAnnouncement";
 
     public interface AnnouncementGeneratorListener{
         void returnAnnouncementList(ArrayList<FeedAnnouncement> announcementList);
-        void returnNAnnouncementsError(boolean isErrorState);
+        void returnAnnouncementsError(boolean isErrorState);
     }
 
 
@@ -28,7 +28,7 @@ public class AnnouncementGenerator implements FirestoreDatabaseFeedAnnouncement.
 
     @Override
     public void fetchFeedAnnouncementGetError(boolean isError) {
-        mWorkerListener.returnNAnnouncementsError(isError);
+        mWorkerListener.returnAnnouncementsError(isError);
     }
 
     private Context mContext;
@@ -37,7 +37,7 @@ public class AnnouncementGenerator implements FirestoreDatabaseFeedAnnouncement.
 
     private ArrayList<FeedAnnouncement> mListAnnouncements = new ArrayList<>();
 
-    public AnnouncementGenerator(Context context, AnnouncementGeneratorListener listener) {
+    public GeneratorAnnouncement(Context context, AnnouncementGeneratorListener listener) {
         this.mContext = context;
         this.mActivity = (Activity) context;
 

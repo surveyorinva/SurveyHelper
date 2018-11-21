@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class EventGenerator implements FirestoreDatabaseFeedEvent.FeedEventListener {
+public class GeneratorEvent implements FirestoreDatabaseFeedEvent.FeedEventListener {
 
-    private static final String TAG = "EventGenerator";
+    private static final String TAG = "GeneratorEvent";
 
     public interface EventGeneratorListener{
         void returnEventList(ArrayList<FeedEvent> eventList);
@@ -41,7 +41,7 @@ public class EventGenerator implements FirestoreDatabaseFeedEvent.FeedEventListe
 
     private ArrayList<FeedEvent> mListEvents = new ArrayList<>();
 
-    public EventGenerator(Context context, EventGeneratorListener listener){
+    public GeneratorEvent(Context context, EventGeneratorListener listener){
         this.mContext = context;
         this.mActivity = (Activity) context;
 

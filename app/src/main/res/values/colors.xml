@@ -16,7 +16,6 @@
 
     <color name="navViewSelectorColor">@color/grey_400</color>
 
-
     <color name="colorTransparent">#00000000</color>
     <color name="colorTransparent125">#7d000000</color>
 
@@ -32,6 +31,8 @@
 
     <color name="app_BottomBar_background">@color/colorPrimaryNormal</color>
     <color name="app_BottomNav_background">@color/colorPrimaryNormal</color>
+
+    <color name="app_BottomSheet_background">#ffffff</color>
 
     <color name="app_Icon_dark_color">#000000</color>
     <color name="app_Icon_light_color">#ffffff</color>
@@ -59,5 +60,10 @@
 
     <color name="settings_header_blue_500">#2196F3</color>
     <color name="settings_profile_contact_icons">@color/colorTextSecondary</color>
+
+    <color name="feed_actions_item_color_announcement">#2196F3</color>
+    <color name="feed_actions_item_color_event">#3F51B5</color>
+    <color name="feed_actions_item_color_item_message">#9C27B0</color>
+    <color name="feed_actions_item_color_item_update">#E91E63</color>
 
 </resources>

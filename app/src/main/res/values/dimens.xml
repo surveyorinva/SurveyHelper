@@ -14,6 +14,9 @@
     <dimen name="app_bottom_bar_commands_margin_start">16dp</dimen>
     <dimen name="app_bottom_bar_commands_margin_between">24dp</dimen>
 
+    <dimen name="app_bottom_sheet_corner_radius">16dp</dimen>
+    <dimen name="app_bottom_sheet_top_padding">8dp</dimen>
+
     <dimen name="app_navigation_bar_height_layout">68dp</dimen>
     <dimen name="app_navigation_bar_height_portrait">56dp</dimen>
     <dimen name="navigation_ic_button_size">25dp</dimen>

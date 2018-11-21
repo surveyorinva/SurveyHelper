@@ -11,11 +11,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class FeedItemGenerator implements FirestoreDatabaseFeedItem.FeedItemListener {
-    private static final String TAG = "FeedItemGenerator";
+public class GeneratorFeedItem implements FirestoreDatabaseFeedItem.FeedItemListener {
+    private static final String TAG = "GeneratorFeedItem";
 
     public interface FeedItemGeneratorListener{
         void returnFeedItemList(ArrayList<FeedItem> itemList);
+        void returnFeedItemNoList();
         void returnFeedItemError(boolean isErrorState);
     }
 
@@ -30,6 +31,11 @@ public class FeedItemGenerator implements FirestoreDatabaseFeedItem.FeedItemList
     }
 
     @Override
+    public void fetchFeedItemsNoneFound() {
+        mWorkerListener.returnFeedItemNoList();
+    }
+
+    @Override
     public void fetchFeedItemsGetError(boolean isError) {
         mWorkerListener.returnFeedItemError(isError);
     }
@@ -40,7 +46,7 @@ public class FeedItemGenerator implements FirestoreDatabaseFeedItem.FeedItemList
 
     private ArrayList<FeedItem> mListItems = new ArrayList<>();
 
-    public FeedItemGenerator(Context context, FeedItemGeneratorListener listener) {
+    public GeneratorFeedItem(Context context, FeedItemGeneratorListener listener) {
         this.mContext = context;
         this.mActivity = (Activity) context;
 
@@ -50,6 +56,12 @@ public class FeedItemGenerator implements FirestoreDatabaseFeedItem.FeedItemList
     public void onStart(Date queryDate, String room_id){
         FirestoreDatabaseFeedItem db = new FirestoreDatabaseFeedItem(mContext,this);
         db.getFeedItemListFromFirestore(queryDate, room_id);
+
+    }
+
+    public void onStart(String room_id){
+        FirestoreDatabaseFeedItem db = new FirestoreDatabaseFeedItem(mContext,this);
+        db.getFeedItemListFromFirestore(room_id);
 
     }
 

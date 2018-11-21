@@ -25,6 +25,7 @@ public class FirestoreDatabaseFeedItem {
 
     public interface FeedItemListener{
         void fetchFeedItemsAll(ArrayList<FeedItem> itemList);
+        void fetchFeedItemsNoneFound();
         void fetchFeedItemsGetError(boolean isError);
 
     }
@@ -140,6 +141,57 @@ public class FirestoreDatabaseFeedItem {
                             if(diff >= 0){
                                 mListItemsToReturn.add(item);
                             }
+
+                        }
+
+                        mListenerEventItem.fetchFeedItemsAll(mListItemsToReturn);
+                    }else{
+                        mListenerEventItem.fetchFeedItemsNoneFound();
+                    }
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                mListenerEventItem.fetchFeedItemsGetError(true);
+            }
+        });
+
+    }
+
+    public void getFeedItemListFromFirestore(String room_id){
+        final ArrayList<FeedItem> mListItemsFetched = new ArrayList<>();
+        final ArrayList<FeedItem> mListItemsToReturn = new ArrayList<>();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference ref = db.collection("feed_items");
+
+        Query query = null;
+
+        if(mLastQueriedEventItemList !=null){
+            query = ref
+                    .whereEqualTo("room_id",room_id)
+                    .orderBy("postedOn", Query.Direction.ASCENDING)
+                    .startAfter(mLastQueriedEventItemList);
+        }else{
+            query = ref
+                    .whereEqualTo("room_id",room_id)
+                    .orderBy("postedOn", Query.Direction.DESCENDING);
+        }
+
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(QueryDocumentSnapshot document:task.getResult()){
+                        FeedItem feedItem = document.toObject(FeedItem.class);
+                        mListItemsFetched.add(feedItem);
+                    }
+
+                    if(task.getResult().size() !=0){
+                        for(int i = 0;i <mListItemsFetched.size();i++){
+                            FeedItem item = new FeedItem((mListItemsFetched.get(i)));
+                            mListItemsToReturn.add(item);
 
                         }
 

@@ -300,6 +300,11 @@
     <string name="staff_feed_card_feed_post_time_hours_fmt">%1$s hours ago</string>
     <string name="staff_feed_card_feed_post_time_days_fmt">%1$s days ago</string>
 
+    <string name="staff_feed_bottom_sheet_header">Add New Feed</string>
+    <string name="staff_feed_bottom_sheet_action_type_announcement">Add an Announcement</string>
+    <string name="staff_feed_bottom_sheet_action_type_event">Add an Event</string>
+    <string name="staff_feed_bottom_sheet_action_type_update">Add an Update</string>
+    <string name="staff_feed_bottom_sheet_action_type_message">Send a Message</string>
 
     <!--Staff_Company-->
     <string name="staff_company_fragment_header">Company Pages</string>

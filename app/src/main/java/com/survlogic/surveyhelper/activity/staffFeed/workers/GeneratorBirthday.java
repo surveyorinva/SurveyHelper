@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class BirthdayGenerator implements FirestoreDatabaseFeedBirthday.FeedBirthdayListener{
+public class GeneratorBirthday implements FirestoreDatabaseFeedBirthday.FeedBirthdayListener{
 
-    private static final String TAG = "BirthdayGenerator";
+    private static final String TAG = "GeneratorBirthday";
 
     public interface BirthdayGeneratorListener{
         void returnBirthdayList(ArrayList<FeedBirthday> birthdayListToday, ArrayList<FeedBirthday> birthdayListAhead );
@@ -43,7 +43,7 @@ public class BirthdayGenerator implements FirestoreDatabaseFeedBirthday.FeedBirt
     private ArrayList<FeedBirthday> mListBirthdaysToday = new ArrayList<>();
     private ArrayList<FeedBirthday> mListBirthdaysFuture = new ArrayList<>();
 
-    public BirthdayGenerator(Context context, BirthdayGeneratorListener listener) {
+    public GeneratorBirthday(Context context, BirthdayGeneratorListener listener) {
         this.mContext = context;
         this.mActivity = (Activity) context;
 

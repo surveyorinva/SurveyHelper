@@ -52,9 +52,6 @@ public class FirestoreDatabaseFeedBirthday {
         compareToDateTomorrow.add(Calendar.DAY_OF_YEAR, 1);
         compareToDateDayAfterNext.add(Calendar.DAY_OF_YEAR,2);
 
-
-        DocumentSnapshot mLastQueriedUserst;
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference ref = db.collection("users");
 

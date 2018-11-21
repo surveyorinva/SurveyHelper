@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +20,7 @@ import com.survlogic.surveyhelper.R;
 import com.survlogic.surveyhelper.activity.staffFeed.controller.StaffFeedController;
 import com.survlogic.surveyhelper.activity.staff.inter.StaffActivityListener;
 import com.survlogic.surveyhelper.inter.NavigationIconClickListener;
+import com.survlogic.surveyhelper.model.FirestoreUser;
 import com.survlogic.surveyhelper.utils.PreferenceLoader;
 
 import java.util.Calendar;
@@ -39,7 +39,7 @@ public class StaffFeedFragment extends Fragment implements StaffFeedController.S
     }
 
     @Override
-    public void sendFeedCategory(String feedCategory) {
+    public void sendFeedCategoryNameToAppBar(String feedCategory) {
         tvFragmentName.setText(feedCategory);
     }
 
@@ -55,6 +55,8 @@ public class StaffFeedFragment extends Fragment implements StaffFeedController.S
     private StaffActivityListener mActivityListener;
     private StaffFeedController mFeedController;
 
+    private StaffFeedFragment mThisFragment;
+    private FirestoreUser mFirestoreUser;
 
     @Override
     public void onAttach(Context context) {
@@ -62,7 +64,7 @@ public class StaffFeedFragment extends Fragment implements StaffFeedController.S
         mContext = getActivity();
 
         mActivityListener = (StaffActivityListener) getActivity();
-        mFeedController = new StaffFeedController(mContext,this);
+        mFeedController = new StaffFeedController(mContext,this,this);
 
     }
 
@@ -85,6 +87,7 @@ public class StaffFeedFragment extends Fragment implements StaffFeedController.S
     @Override
     public void onStart() {
         super.onStart();
+
         Date today = Calendar.getInstance().getTime();
 
         PreferenceLoader preferenceLoader = new PreferenceLoader(mContext);
@@ -92,7 +95,8 @@ public class StaffFeedFragment extends Fragment implements StaffFeedController.S
 
         mFeedController.setFeedQueryDateToShow(today);
         mFeedController.setFeedRoomToShow(feed_room);
-        mFeedController.fetchAllFeeds();
+        mFeedController.setFeedRoomPublic(feed_room);
+        mFeedController.fetchPublicRoomFeeds();
 
         showAnnouncementAtStart();
 
@@ -131,7 +135,7 @@ public class StaffFeedFragment extends Fragment implements StaffFeedController.S
         ibFeedNavigator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mFeedController.createPopUpFeedNavigator(ibFeedNavigator);
+                mFeedController.createPopUpFeedRoomNavigator(ibFeedNavigator);
             }
         });
 
@@ -139,11 +143,11 @@ public class StaffFeedFragment extends Fragment implements StaffFeedController.S
         mFeedController.setSwipeRefreshLayout(swipeRefreshLayout);
 
         RecyclerView recyclerView = v.findViewById(R.id.feed_recycler_view);
-        mFeedController.setRecyclerView(recyclerView);
+        //mFeedController.setRecyclerView(recyclerView);
+        mFeedController.setRecyclerController(recyclerView);
 
 
     }
-
 
     private void showAnnouncementAtStart(){
         Handler handler = new Handler();
@@ -152,6 +156,13 @@ public class StaffFeedFragment extends Fragment implements StaffFeedController.S
                 mFeedController.getPopUpFeedAnnouncement();
             }
         }, 2000);
+    }
+
+    public void setFirestoreUser(FirestoreUser user) {
+        this.mFirestoreUser = user;
+        mFeedController.setFirestoreUser(user);
+        mFeedController.buildUserProfile();
+
     }
 
 }

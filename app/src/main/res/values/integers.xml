@@ -21,4 +21,9 @@
     <integer name="FEED_ITEM_GEOTAG_PRJ">1001</integer>
     <integer name="FEED_CHECK_IN_PRJ">1002</integer>
 
+    <integer name="FEED_ACTIONS_ANNOUNCEMENT">101</integer>
+    <integer name="FEED_ACTIONS_EVENT">201</integer>
+    <integer name="FEED_ACTIONS_ITEM_UPDATE">401</integer>
+    <integer name="FEED_ACTIONS_ITEM_MESSAGE">402</integer>
+
 </resources>

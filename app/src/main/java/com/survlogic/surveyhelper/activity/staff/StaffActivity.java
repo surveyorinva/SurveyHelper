@@ -23,7 +23,7 @@ import com.survlogic.surveyhelper.utils.BottomNavigationViewLoader;
 
 public class StaffActivity extends BaseActivity implements  NavigationHost,
                                                             StaffController.StaffControllerListener,
-        StaffActivityListener {
+                                                            StaffActivityListener {
 
     private static final String TAG = "StaffActivity";
 
@@ -47,7 +47,7 @@ public class StaffActivity extends BaseActivity implements  NavigationHost,
 
 
     /**
-     * StaffActivity
+     * StaffController
      */
 
     @Override
@@ -57,6 +57,11 @@ public class StaffActivity extends BaseActivity implements  NavigationHost,
 
     @Override
     public void returnCurrentUser(FirestoreUser currentUser) {
+        this.mFirestoreUser = currentUser;
+
+        if(mStaffFeedFragment !=null){
+            mStaffFeedFragment.setFirestoreUser(mFirestoreUser);
+        }
 
     }
 
@@ -77,12 +82,14 @@ public class StaffActivity extends BaseActivity implements  NavigationHost,
     private Context mContext;
 
     private StaffController mController;
-    private StaffFeedFragment staffFeedFragment;
+    private StaffFeedFragment mStaffFeedFragment;
 
     private DrawerLayout dlSlidingLeftDrawer;
     private BottomNavigationViewEx bnvNavigationBar;
     private FloatingActionButton fabActionAnnouncement;
     private ImageButton ibAppBarCommandDrawer;
+
+    private FirestoreUser mFirestoreUser;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -110,7 +117,7 @@ public class StaffActivity extends BaseActivity implements  NavigationHost,
 
     private void initFragmentViews(@Nullable Bundle savedInstanceState){
         if (savedInstanceState == null) {
-            staffFeedFragment = new StaffFeedFragment();
+            mStaffFeedFragment = new StaffFeedFragment();
 
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager
@@ -119,7 +126,7 @@ public class StaffActivity extends BaseActivity implements  NavigationHost,
             fragmentTransaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
 
             fragmentTransaction.replace(R.id.container,
-                    staffFeedFragment).addToBackStack(null)
+                    mStaffFeedFragment).addToBackStack(null)
                     .commit();
         }
     }
