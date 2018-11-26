@@ -8,6 +8,7 @@ import com.google.firebase.firestore.IgnoreExtraProperties;
 import com.google.firebase.firestore.ServerTimestamp;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @IgnoreExtraProperties
@@ -25,6 +26,7 @@ public class FirestoreUser implements Parcelable {
     private Date profile_birthday;
     private long profile_birthday_long;
     private List<String> private_room_member;
+    private HashMap<String,Boolean> feed_reflections;
     private int feed_posts, rewards_total, rewards_current;
 
     public FirestoreUser() {
@@ -45,6 +47,7 @@ public class FirestoreUser implements Parcelable {
         this.rewards_total = user.rewards_total;
         this.rewards_current = user.rewards_current;
         this.private_room_member = user.private_room_member;
+        this.feed_reflections = user.feed_reflections;
     }
 
 
@@ -160,6 +163,13 @@ public class FirestoreUser implements Parcelable {
         this.private_room_member = private_room_member;
     }
 
+    public HashMap<String, Boolean> getFeed_reflections() {
+        return feed_reflections;
+    }
+
+    public void setFeed_reflections(HashMap<String, Boolean> feed_reflections) {
+        this.feed_reflections = feed_reflections;
+    }
 
     @Override
     public int describeContents() {
@@ -172,14 +182,15 @@ public class FirestoreUser implements Parcelable {
         dest.writeString(this.display_name);
         dest.writeString(this.email);
         dest.writeLong(this.telephone_office);
+        dest.writeLong(this.telephone_mobile);
         dest.writeString(this.access_level);
         dest.writeString(this.access_key_secure);
-        dest.writeLong(this.telephone_mobile);
         dest.writeParcelable(this.timestamp, flags);
         dest.writeString(this.profile_pic_url);
         dest.writeLong(this.profile_birthday != null ? this.profile_birthday.getTime() : -1);
         dest.writeLong(this.profile_birthday_long);
         dest.writeStringList(this.private_room_member);
+        dest.writeSerializable(this.feed_reflections);
         dest.writeInt(this.feed_posts);
         dest.writeInt(this.rewards_total);
         dest.writeInt(this.rewards_current);
@@ -190,15 +201,16 @@ public class FirestoreUser implements Parcelable {
         this.display_name = in.readString();
         this.email = in.readString();
         this.telephone_office = in.readLong();
+        this.telephone_mobile = in.readLong();
         this.access_level = in.readString();
         this.access_key_secure = in.readString();
-        this.telephone_mobile = in.readLong();
         this.timestamp = in.readParcelable(Timestamp.class.getClassLoader());
         this.profile_pic_url = in.readString();
         long tmpProfile_birthday = in.readLong();
         this.profile_birthday = tmpProfile_birthday == -1 ? null : new Date(tmpProfile_birthday);
         this.profile_birthday_long = in.readLong();
         this.private_room_member = in.createStringArrayList();
+        this.feed_reflections = (HashMap<String, Boolean>) in.readSerializable();
         this.feed_posts = in.readInt();
         this.rewards_total = in.readInt();
         this.rewards_current = in.readInt();

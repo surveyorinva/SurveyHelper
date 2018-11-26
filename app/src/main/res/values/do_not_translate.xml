@@ -37,6 +37,27 @@
 
     <string name="pref_feed_default_public_room">pref_feed_default_public_room</string>
 
+    <string name="pref_feed_reflection_daily_morning">pref_feed_reflection_daily_morning</string>
+    <string name="pref_feed_reflection_daily_morning_start">pref_feed_reflection_daily_morning_start</string>
+    <string name="pref_feed_reflection_daily_morning_end">pref_feed_reflection_daily_morning_end</string>
+
+    <string name="pref_feed_reflection_daily_morning_completed">pref_feed_reflection_daily_morning_completed</string>
+    <string name="pref_feed_reflection_daily_morning_completed_on">pref_feed_reflection_daily_morning_completed_on</string>
+    <string name="pref_feed_reflection_daily_morning_completed_value">pref_feed_reflection_daily_morning_completed_value</string>
+
+    <string name="pref_feed_reflection_daily_evening">pref_feed_reflection_daily_evening</string>
+    <string name="pref_feed_reflection_daily_evening_start">pref_feed_reflection_daily_evening_start</string>
+    <string name="pref_feed_reflection_daily_evening_end">pref_feed_reflection_daily_evening_end</string>
+
+    <string name="pref_feed_reflection_daily_evening_completed">pref_feed_reflection_daily_evening_completed</string>
+    <string name="pref_feed_reflection_daily_evening_completed_on">pref_feed_reflection_daily_evening_completed_on</string>
+    <string name="pref_feed_reflection_daily_evening_completed_value">pref_feed_reflection_daily_evening_completed_value</string>
+
+    <string name="pref_feed_reflection_weekly_a">pref_feed_reflection_weekly_a</string>
+    <string name="pref_feed_reflection_weekly_a_completed">pref_feed_reflection_weekly_a_completed</string>
+    <string name="pref_feed_reflection_weekly_a_completed_on">pref_feed_reflection_weekly_a_completed_on</string>
+    <string name="pref_feed_reflection_weekly_a_completed_value">pref_feed_reflection_weekly_a_completed_value</string>
+
     <string name="theme_staff_company_top_page_0">theme_staff_company_top_page_0</string>
     <string name="theme_staff_company_top_page_1">theme_staff_company_top_page_1</string>
     <string name="theme_staff_company_top_page_2">theme_staff_company_top_page_2</string>
@@ -78,6 +99,15 @@
     <string name="CONFIG_KEY_FEED_STYLE_EVENT_STYLE_LIGHT">feed_event_text_is_light</string>
     <string name="CONFIG_KEY_FEED_DEFAULT_PUBLIC_ROOM">feed_default_public_room</string>
 
+    <string name="CONFIG_KEY_FEED_REFLECTIONS_DAILY_MORNING">feed_reflections_daily_morning</string>
+    <string name="CONFIG_KEY_FEED_REFLECTIONS_DAILY_MORNING_START">feed_reflections_daily_morning</string>
+    <string name="CONFIG_KEY_FEED_REFLECTIONS_DAILY_MORNING_END">feed_reflections_daily_morning</string>
+
+    <string name="CONFIG_KEY_FEED_REFLECTIONS_DAILY_EVENING">feed_reflections_daily_evening</string>
+    <string name="CONFIG_KEY_FEED_REFLECTIONS_DAILY_EVENING_START">feed_reflections_daily_evening_start</string>
+    <string name="CONFIG_KEY_FEED_REFLECTIONS_DAILY_EVENING_END">feed_reflections_daily_evening_end</string>
+
+    <string name="CONFIG_KEY_FEED_REFLECTIONS_WEEKLY_A">feed_reflections_weekly_a</string>
 
     <string name="CONFIG_THEME_STAFF_COMPANY_TOP_PAGE_0">theme_staff_company_top_page_0</string>
     <string name="CONFIG_THEME_STAFF_COMPANY_BOTTOM_PAGE_0">theme_staff_company_bottom_page_0</string>

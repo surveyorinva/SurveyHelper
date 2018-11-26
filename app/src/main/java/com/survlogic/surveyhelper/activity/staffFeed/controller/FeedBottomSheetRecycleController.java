@@ -57,7 +57,6 @@ public class FeedBottomSheetRecycleController {
     }
 
     private void initAdapter(){
-        Log.d(TAG, "to_delete: Calling Init Adapter ");
         adapter = new StaffFeedBottomSheetAdapter(mContext, mFeedActionsCompiledList);
 
         int columns = 2;

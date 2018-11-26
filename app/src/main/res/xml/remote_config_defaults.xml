@@ -81,5 +81,40 @@
         <value>null</value>
     </entry>
 
+    <entry>
+        <key>feed_reflections_daily_morning</key>
+        <value>null</value>
+    </entry>
+
+    <entry>
+        <key>feed_reflections_daily_evening</key>
+        <value>null</value>
+    </entry>
+
+    <entry>
+        <key>feed_reflections_weekly_a</key>
+        <value>null</value>
+    </entry>
+
+    <entry>
+        <key>feed_reflections_daily_morning_start</key>
+        <value>05:00</value>
+    </entry>
+
+    <entry>
+        <key>feed_reflections_daily_morning_end</key>
+        <value>17:00</value>
+    </entry>
+
+    <entry>
+        <key>feed_reflections_daily_evening_start</key>
+        <value>14:00</value>
+    </entry>
+
+    <entry>
+        <key>feed_reflections_daily_evening_end</key>
+        <value>23:59</value>
+    </entry>
+
 </defaultsMap>
     <!-- END xml_defaults -->

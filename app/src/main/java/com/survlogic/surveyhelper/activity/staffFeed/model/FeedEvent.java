@@ -20,6 +20,7 @@ public class FeedEvent implements Parcelable {
     private long date_expire;
     private long date_expire_day_of_year;
     private ArrayList<String> whos_going;
+    private ArrayList<String> whos_not_going;
 
     public FeedEvent() {
     }
@@ -38,6 +39,7 @@ public class FeedEvent implements Parcelable {
         this.date_expire_day_of_year = event.date_expire_day_of_year;
 
         this.whos_going = event.whos_going;
+        this.whos_not_going = event.whos_not_going;
 
     }
 
@@ -105,6 +107,13 @@ public class FeedEvent implements Parcelable {
         this.whos_going = whos_going;
     }
 
+    public ArrayList<String> getWhos_not_going() {
+        return whos_not_going;
+    }
+
+    public void setWhos_not_going(ArrayList<String> whos_not_going) {
+        this.whos_not_going = whos_not_going;
+    }
 
     @Override
     public int describeContents() {
@@ -114,24 +123,26 @@ public class FeedEvent implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.event_header);
+        dest.writeString(this.background_url);
         dest.writeString(this.event_body);
         dest.writeLong(this.date_event);
-        dest.writeString(this.background_url);
         dest.writeString(this.details_url);
         dest.writeLong(this.date_expire);
         dest.writeLong(this.date_expire_day_of_year);
         dest.writeStringList(this.whos_going);
+        dest.writeStringList(this.whos_not_going);
     }
 
     protected FeedEvent(Parcel in) {
         this.event_header = in.readString();
+        this.background_url = in.readString();
         this.event_body = in.readString();
         this.date_event = in.readLong();
-        this.background_url = in.readString();
         this.details_url = in.readString();
         this.date_expire = in.readLong();
         this.date_expire_day_of_year = in.readLong();
         this.whos_going = in.createStringArrayList();
+        this.whos_not_going = in.createStringArrayList();
     }
 
     public static final Parcelable.Creator<FeedEvent> CREATOR = new Parcelable.Creator<FeedEvent>() {

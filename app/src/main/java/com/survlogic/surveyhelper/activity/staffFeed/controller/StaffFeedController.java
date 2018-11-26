@@ -30,12 +30,12 @@ import com.survlogic.surveyhelper.activity.staffFeed.model.FeedBirthday;
 import com.survlogic.surveyhelper.activity.staffFeed.model.FeedEvent;
 import com.survlogic.surveyhelper.activity.staffFeed.model.FeedItem;
 import com.survlogic.surveyhelper.activity.staffFeed.model.FeedRooms;
+import com.survlogic.surveyhelper.activity.staffFeed.workers.BottomSheetCompiler;
 import com.survlogic.surveyhelper.activity.staffFeed.workers.GeneratorAnnouncement;
 import com.survlogic.surveyhelper.activity.staffFeed.workers.GeneratorBirthday;
 import com.survlogic.surveyhelper.activity.staffFeed.workers.GeneratorEvent;
 import com.survlogic.surveyhelper.activity.staffFeed.workers.FeedCompiler;
 import com.survlogic.surveyhelper.activity.staffFeed.workers.GeneratorFeedItem;
-import com.survlogic.surveyhelper.activity.staffFeed.workers.GeneratorRoomActions;
 import com.survlogic.surveyhelper.database.Feed_Rooms.FirestoreDatabaseFeedRooms;
 import com.survlogic.surveyhelper.model.AppSettings;
 import com.survlogic.surveyhelper.model.AppStaticSettings;
@@ -52,7 +52,7 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
                                             GeneratorBirthday.BirthdayGeneratorListener,
                                             GeneratorEvent.EventGeneratorListener,
                                             GeneratorFeedItem.FeedItemGeneratorListener,
-                                            GeneratorRoomActions.RoomActionsListener,
+                                            BottomSheetCompiler.RoomActionsListener,
                                             FirestoreDatabaseFeedRooms.FeedRoomListener,
                                             StaffFeedRecycleController.FeedRecycleListener,
                                             FeedDialogUtils.DialogListener,
@@ -153,8 +153,8 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
         this.mRoomPublicOptions = publicHall;
         isWorkerRoomPublicReturnOk = true;
 
-        generatorRoomActions.setRoomActionsRaw(mRoomPublicOptions.getFeed_actions_common());
-        generatorRoomActions.build();
+        bottomSheetCompiler.setRoomActionsRaw(mRoomPublicOptions.getFeed_actions_common());
+        bottomSheetCompiler.build();
 
     }
 
@@ -232,7 +232,6 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
 
     @Override
     public ArrayList<FeedActions> getFeedActions() {
-        Log.d(TAG, "to_delete: Sending Feed Actions" + mFeedActionsForBottomSheet.size());
         return mFeedActionsForBottomSheet;
     }
 
@@ -281,12 +280,12 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
     private boolean isWorkerFeedItemReturnOk = false;
     private ArrayList<FeedItem> mListFeedItems = new ArrayList<>();
 
-    private GeneratorRoomActions generatorRoomActions;
+    private BottomSheetCompiler bottomSheetCompiler;
     private boolean isWorkerRoomActionsSet = false;
     private boolean isWorkerRoomPublicReturnOk = false;
     private boolean isWorkerRoomPrivateReturnOk = false;
     private boolean isAllRoomsReadyToGo = false;
-    private ArrayList<GeneratorRoomActions.RoomActions> roomActions = new ArrayList<>();
+    private ArrayList<BottomSheetCompiler.RoomActions> roomActions = new ArrayList<>();
 
     private Date mFeedQueryDateToShow;
 
@@ -357,7 +356,7 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
         }
 
         if(!isWorkerRoomActionsSet){
-            generatorRoomActions = new GeneratorRoomActions(mContext,this);
+            bottomSheetCompiler = new BottomSheetCompiler(mContext,this);
             isWorkerRoomActionsSet = true;
         }
 
@@ -569,8 +568,8 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
                         setFeedRoomToShow(mRoomPublic);
                         reFetchNewPublicRoomFeeds(500);
 
-                        generatorRoomActions.setRoomActionsRaw(mRoomPublicOptions.getFeed_actions_common());
-                        generatorRoomActions.build();
+                        bottomSheetCompiler.setRoomActionsRaw(mRoomPublicOptions.getFeed_actions_common());
+                        bottomSheetCompiler.build();
                         return true;
 
                 }
@@ -595,8 +594,8 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
                         setFeedRoomToShow(room.getRoom_id());
                         fetchPrivateFeeds(500);
 
-                        generatorRoomActions.setRoomActionsRaw(room.getFeed_actions_common());
-                        generatorRoomActions.build();
+                        bottomSheetCompiler.setRoomActionsRaw(room.getFeed_actions_common());
+                        bottomSheetCompiler.build();
                         return true;
                     }
                 });

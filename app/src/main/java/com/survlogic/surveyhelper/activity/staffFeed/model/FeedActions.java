@@ -1,13 +1,12 @@
 package com.survlogic.surveyhelper.activity.staffFeed.model;
 
-import com.survlogic.surveyhelper.activity.staffFeed.workers.GeneratorRoomActions;
-
-import java.util.ArrayList;
+import com.survlogic.surveyhelper.activity.staffFeed.workers.BottomSheetCompiler;
 
 public class FeedActions {
 
     private int feed_action_type;
-    private GeneratorRoomActions.RoomActions roomActions;
+    private BottomSheetCompiler.RoomActions roomActions;
+    private FeedReflections feedReflections;
 
     public FeedActions() {}
 
@@ -19,11 +18,19 @@ public class FeedActions {
         this.feed_action_type = feed_action_type;
     }
 
-    public GeneratorRoomActions.RoomActions getRoomActions() {
+    public BottomSheetCompiler.RoomActions getRoomActions() {
         return roomActions;
     }
 
-    public void setRoomActions(GeneratorRoomActions.RoomActions roomActions) {
+    public void setRoomActions(BottomSheetCompiler.RoomActions roomActions) {
         this.roomActions = roomActions;
+    }
+
+    public FeedReflections getFeedReflections() {
+        return feedReflections;
+    }
+
+    public void setFeedReflections(FeedReflections feedReflections) {
+        this.feedReflections = feedReflections;
     }
 }

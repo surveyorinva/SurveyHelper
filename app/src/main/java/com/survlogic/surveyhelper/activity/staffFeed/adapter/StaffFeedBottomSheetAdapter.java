@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import com.survlogic.surveyhelper.R;
 import com.survlogic.surveyhelper.activity.staffFeed.model.FeedActions;
 import com.survlogic.surveyhelper.activity.staffFeed.view.CardFeedActions;
+import com.survlogic.surveyhelper.activity.staffFeed.view.CardFeedEmpty;
+import com.survlogic.surveyhelper.activity.staffFeed.view.CardFeedReflections;
+import com.survlogic.surveyhelper.activity.staffFeed.view.CardFeedReflectionsHeader;
 
 import java.util.ArrayList;
 
@@ -20,7 +23,10 @@ public class StaffFeedBottomSheetAdapter extends RecyclerView.Adapter<RecyclerVi
     private Context mContext;
     private ArrayList<FeedActions> mActionList;
 
-    private final static int    FEED_ACTIONS = 1001;
+    private final static int    FEED_SYSTEM_EMPTY = 1,
+                                FEED_ACTIONS = 1001,
+                                FEED_REFLECTIONS_HEADER = 2001,
+                                FEED_REFLECTIONS = 2002;
 
     public StaffFeedBottomSheetAdapter(Context context, ArrayList<FeedActions> actionList) {
         this.mContext = context;
@@ -37,6 +43,21 @@ public class StaffFeedBottomSheetAdapter extends RecyclerView.Adapter<RecyclerVi
             case FEED_ACTIONS:
                 View vAction = mInflater.inflate(R.layout.staff_feed_bottom_sheet_content_card_actions,parent,false);
                 viewHolder = new CardFeedActions(vAction, mContext);
+                break;
+
+            case FEED_REFLECTIONS_HEADER:
+                View vReflectionHeader = mInflater.inflate(R.layout.staff_feed_bottom_sheet_content_card_header_reflections,parent,false);
+                viewHolder = new CardFeedReflectionsHeader(vReflectionHeader);
+                break;
+
+            case FEED_REFLECTIONS:
+                View vReflection = mInflater.inflate(R.layout.staff_feed_bottom_sheet_content_card_reflections,parent,false);
+                viewHolder = new CardFeedReflections(vReflection, mContext);
+                break;
+
+            case FEED_SYSTEM_EMPTY:
+                View vEmpty = mInflater.inflate(R.layout.staff_feed_content_list_empty,parent,false);
+                viewHolder = new CardFeedEmpty(vEmpty);
                 break;
 
             default:
@@ -67,6 +88,12 @@ public class StaffFeedBottomSheetAdapter extends RecyclerView.Adapter<RecyclerVi
                 CardFeedActions vhActions = (CardFeedActions) viewHolder;
                 vhActions.configureViewHolder(mActionList,position);
                 break;
+
+            case FEED_REFLECTIONS:
+                CardFeedReflections vhReflections = (CardFeedReflections) viewHolder;
+                vhReflections.configureViewHolder(mActionList,position);
+                break;
+
         }
     }
 

@@ -306,6 +306,10 @@
     <string name="staff_feed_bottom_sheet_action_type_update">Add an Update</string>
     <string name="staff_feed_bottom_sheet_action_type_message">Send a Message</string>
 
+    <string name="staff_feed_bottom_sheet_reflection_header">Add a Reflection</string>
+
+
+
     <!--Staff_Company-->
     <string name="staff_company_fragment_header">Company Pages</string>
     <string name="staff_company_fragment_tab_item_1">News</string>

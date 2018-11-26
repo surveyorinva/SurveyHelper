@@ -122,6 +122,24 @@ public class RemoteConfigLoader {
         mPreferenceLoader.setRemoteConfigFeedDefaultPublicRoom(mFirebaseRemoteConfig.getString(mActivity.getResources().getString(R.string.CONFIG_KEY_FEED_DEFAULT_PUBLIC_ROOM)),true);
     }
 
+
+    public void fetchRemoteConfigFeedReflections(){
+        mPreferenceLoader.setRemoteConfigFeedReflections(
+                mFirebaseRemoteConfig.getString(mActivity.getResources().getString(R.string.CONFIG_KEY_FEED_REFLECTIONS_DAILY_MORNING)),
+                mFirebaseRemoteConfig.getString(mActivity.getResources().getString(R.string.CONFIG_KEY_FEED_REFLECTIONS_DAILY_MORNING_START)),
+                mFirebaseRemoteConfig.getString(mActivity.getResources().getString(R.string.CONFIG_KEY_FEED_REFLECTIONS_DAILY_MORNING_END)),
+
+                mFirebaseRemoteConfig.getString(mActivity.getResources().getString(R.string.CONFIG_KEY_FEED_REFLECTIONS_DAILY_EVENING)),
+                mFirebaseRemoteConfig.getString(mActivity.getResources().getString(R.string.CONFIG_KEY_FEED_REFLECTIONS_DAILY_EVENING_START)),
+                mFirebaseRemoteConfig.getString(mActivity.getResources().getString(R.string.CONFIG_KEY_FEED_REFLECTIONS_DAILY_EVENING_END)),
+
+                mFirebaseRemoteConfig.getString(mActivity.getResources().getString(R.string.CONFIG_KEY_FEED_REFLECTIONS_WEEKLY_A)),true);
+
+
+
+    }
+
+
     private long getRemoteConfigCacheExpireTime(){
         Log.d(TAG, "Remote Config: Cache Time: " + mPreferenceLoader.getSettings().getAppRemoteConfigCacheExpireTime());
 
