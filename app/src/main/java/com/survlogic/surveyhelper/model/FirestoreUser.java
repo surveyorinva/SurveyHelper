@@ -16,6 +16,7 @@ public class FirestoreUser implements Parcelable {
     private @ServerTimestamp
     Timestamp timestamp;
     private String user_id;
+    private String user_token_id;
     private String display_name;
     private String email;
     private long telephone_office;
@@ -48,6 +49,7 @@ public class FirestoreUser implements Parcelable {
         this.rewards_current = user.rewards_current;
         this.private_room_member = user.private_room_member;
         this.feed_reflections = user.feed_reflections;
+        this.user_token_id = user.user_token_id;
     }
 
 
@@ -171,6 +173,14 @@ public class FirestoreUser implements Parcelable {
         this.feed_reflections = feed_reflections;
     }
 
+    public String getUser_token_id() {
+        return user_token_id;
+    }
+
+    public void setUser_token_id(String user_token_id) {
+        this.user_token_id = user_token_id;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -179,13 +189,14 @@ public class FirestoreUser implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.user_id);
+        dest.writeString(this.user_token_id);
         dest.writeString(this.display_name);
         dest.writeString(this.email);
         dest.writeLong(this.telephone_office);
         dest.writeLong(this.telephone_mobile);
         dest.writeString(this.access_level);
-        dest.writeString(this.access_key_secure);
         dest.writeParcelable(this.timestamp, flags);
+        dest.writeString(this.access_key_secure);
         dest.writeString(this.profile_pic_url);
         dest.writeLong(this.profile_birthday != null ? this.profile_birthday.getTime() : -1);
         dest.writeLong(this.profile_birthday_long);
@@ -198,13 +209,14 @@ public class FirestoreUser implements Parcelable {
 
     protected FirestoreUser(Parcel in) {
         this.user_id = in.readString();
+        this.user_token_id = in.readString();
         this.display_name = in.readString();
         this.email = in.readString();
         this.telephone_office = in.readLong();
         this.telephone_mobile = in.readLong();
         this.access_level = in.readString();
-        this.access_key_secure = in.readString();
         this.timestamp = in.readParcelable(Timestamp.class.getClassLoader());
+        this.access_key_secure = in.readString();
         this.profile_pic_url = in.readString();
         long tmpProfile_birthday = in.readLong();
         this.profile_birthday = tmpProfile_birthday == -1 ? null : new Date(tmpProfile_birthday);

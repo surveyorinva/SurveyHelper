@@ -310,6 +310,7 @@ public class BottomSheetCompiler {
             case PreferenceLoader.REFLECTION_MORNING:
                 startTime = preferenceLoader.getFeedReflectionDailyMorningStartTime();
                 endTime = preferenceLoader.getFeedReflectionDailyMorningEndTime();
+
                 break;
 
             case PreferenceLoader.REFLECTION_EVENING:

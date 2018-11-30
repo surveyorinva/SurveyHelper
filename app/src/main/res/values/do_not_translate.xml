@@ -27,6 +27,7 @@
     <string name="pref_firebase_user_access_key">pref_firebase_user_access_key</string>
     <string name="pref_firebase_user_access_key_secure">pref_firebase_user_access_key_secure</string>
     <string name="pref_firebase_user_access_level">pref_firebase_user_access_level</string>
+    <string name="pref_firebase_user_message_token">pref_firebase_user_message_token</string>
 
     <string name="pref_feed_reward">pref_feed_reward</string>
     <string name="pref_feed_reward_topic">pref_feed_reward_topic</string>
@@ -100,8 +101,8 @@
     <string name="CONFIG_KEY_FEED_DEFAULT_PUBLIC_ROOM">feed_default_public_room</string>
 
     <string name="CONFIG_KEY_FEED_REFLECTIONS_DAILY_MORNING">feed_reflections_daily_morning</string>
-    <string name="CONFIG_KEY_FEED_REFLECTIONS_DAILY_MORNING_START">feed_reflections_daily_morning</string>
-    <string name="CONFIG_KEY_FEED_REFLECTIONS_DAILY_MORNING_END">feed_reflections_daily_morning</string>
+    <string name="CONFIG_KEY_FEED_REFLECTIONS_DAILY_MORNING_START">feed_reflections_daily_morning_start</string>
+    <string name="CONFIG_KEY_FEED_REFLECTIONS_DAILY_MORNING_END">feed_reflections_daily_morning_end</string>
 
     <string name="CONFIG_KEY_FEED_REFLECTIONS_DAILY_EVENING">feed_reflections_daily_evening</string>
     <string name="CONFIG_KEY_FEED_REFLECTIONS_DAILY_EVENING_START">feed_reflections_daily_evening_start</string>
@@ -117,5 +118,10 @@
 
     <string name="CONFIG_THEME_STAFF_COMPANY_TOP_PAGE_2">theme_staff_company_top_page_2</string>
     <string name="CONFIG_THEME_STAFF_COMPANY_BOTTOM_PAGE_2">theme_staff_company_bottom_page_2</string>
+
+
+<!--Messaging Resources-->
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+
 
 </resources>

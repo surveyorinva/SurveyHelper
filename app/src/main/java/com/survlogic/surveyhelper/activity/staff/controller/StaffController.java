@@ -1,9 +1,13 @@
 package com.survlogic.surveyhelper.activity.staff.controller;
 
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -13,6 +17,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -44,6 +53,7 @@ public class StaffController implements CurrentUserFirestoreWorker.CurrentUserWo
         mActivityListener.returnCurrentUser(currentUser);
 
         showCurrentUserInformationInActivity();
+        initMessageService();
 
     }
 
@@ -79,6 +89,7 @@ public class StaffController implements CurrentUserFirestoreWorker.CurrentUserWo
         initController();
         initNavigationView();
         initViewWidgets();
+
     }
 
     private void initController(){
@@ -170,6 +181,83 @@ public class StaffController implements CurrentUserFirestoreWorker.CurrentUserWo
             });
         }
 
+    }
+
+    public void initMessageService(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            String channelId  = mActivity.getResources().getString(R.string.default_notification_channel_id);
+            String channelName = mActivity.getResources().getString(R.string.default_notification_channel_name);
+            NotificationManager notificationManager =
+                    mActivity.getSystemService(NotificationManager.class);
+
+            NotificationChannel notificationChannelAlpha = new NotificationChannel(channelId,
+                    channelName,NotificationManager.IMPORTANCE_HIGH);
+
+            notificationChannelAlpha.setDescription(mActivity.getResources().getString(R.string.default_notification_channel_description));
+            notificationChannelAlpha.enableVibration(true);
+            notificationChannelAlpha.setShowBadge(true);
+
+            notificationManager.createNotificationChannel(notificationChannelAlpha);
+
+        }
+
+        if (mActivity.getIntent().getExtras() != null) {
+            for (String key : mActivity.getIntent().getExtras().keySet()) {
+                Object value = mActivity.getIntent().getExtras().get(key);
+                Log.d(TAG, "Key: " + key + " Value: " + value);
+            }
+        }
+
+        startMessageService();
+    }
+
+
+    private void startMessageService(){
+        FirebaseMessaging.getInstance().subscribeToTopic("christopher")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(!task.isSuccessful()){
+                            Log.d(TAG, "to_delete: Message Subscription Failed");
+                            //Todo
+                        }
+                    }
+                });
+
+        detectDeviceTokenId();
+    }
+
+    private void detectDeviceTokenId(){
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if(!task.isSuccessful()){
+                            //Todo
+                        }
+                        String token = task.getResult().getToken();
+
+                        preferenceLoader = new PreferenceLoader(mContext);
+                        String savedToken = preferenceLoader.getUserFirebaseToken();
+
+                        if(savedToken !=null){
+                            if(!savedToken.equals(token)){
+                                //token not the same, resave new token
+                                saveUserToken(token);
+                            }
+                        }else{
+                            //token has not been saved, save now
+                            saveUserToken(token);
+                        }
+
+                    }
+                });
+    }
+
+    private void saveUserToken(String token){
+        currentUserWorker.onMessageTokenChange(token);
+        preferenceLoader.setUserFirebaseToken(token,true);
     }
 
 

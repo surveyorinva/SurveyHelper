@@ -309,7 +309,6 @@
     <string name="staff_feed_bottom_sheet_reflection_header">Add a Reflection</string>
 
 
-
     <!--Staff_Company-->
     <string name="staff_company_fragment_header">Company Pages</string>
     <string name="staff_company_fragment_tab_item_1">News</string>
@@ -337,4 +336,9 @@
         ]]>
     </string>
 
+
+    <!--Messaging-->
+    <string name="fcm_message">FCM Message</string>
+    <string name="default_notification_channel_name" translatable="true">christopher</string>
+    <string name="default_notification_channel_description" translatable="true">Notifications sent from the christopher app server</string>
 </resources>

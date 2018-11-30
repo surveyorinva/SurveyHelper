@@ -1,7 +1,11 @@
 package com.survlogic.surveyhelper.activity.staff;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -9,8 +13,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.widget.ImageButton;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.survlogic.surveyhelper.R;
 import com.survlogic.surveyhelper.activity.staff.controller.StaffController;
@@ -20,6 +30,7 @@ import com.survlogic.surveyhelper.inter.NavigationHost;
 import com.survlogic.surveyhelper.model.FirestoreUser;
 import com.survlogic.surveyhelper.utils.BaseActivity;
 import com.survlogic.surveyhelper.utils.BottomNavigationViewLoader;
+import com.survlogic.surveyhelper.utils.PreferenceLoader;
 
 public class StaffActivity extends BaseActivity implements  NavigationHost,
                                                             StaffController.StaffControllerListener,
@@ -96,13 +107,13 @@ public class StaffActivity extends BaseActivity implements  NavigationHost,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.staff_feed_activity);
 
-
         mContext = StaffActivity.this;
         mController = new StaffController(mContext,this);
 
         initFragmentViews(savedInstanceState);
 
         initView();
+
     }
 
     private void initView(){
@@ -139,4 +150,6 @@ public class StaffActivity extends BaseActivity implements  NavigationHost,
                     dlSlidingLeftDrawer.openDrawer(GravityCompat.START);
                 }
     }
+
+
 }

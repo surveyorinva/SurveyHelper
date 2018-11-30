@@ -161,6 +161,33 @@ public class FirestoreDatabaseUser {
         });
     }
 
+    public void updateUserWithMessageToken(final FirestoreUser user, String token){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        DocumentReference userReference = db.collection("users")
+                .document(user.getUser_id());
+
+        userReference.update(
+                "user_token_id",token
+
+        ).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Log.d(TAG, "updateUserWithMessageToken: Success");
+                    mListener.updateUserProfileSuccess(user);
+
+                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG, "updateUserWithMessageToken: onFailure: ", e );
+                mListener.updateUserProfileGetError(true);
+            }
+        });
+    }
 
 
 }

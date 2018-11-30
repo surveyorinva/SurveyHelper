@@ -497,4 +497,20 @@ public class PreferenceLoader {
         return sharedPreferences.getBoolean(mContext.getString(R.string.pref_feed_show_reward),true);
     }
 
+    public void setUserFirebaseToken(String token, boolean isForceSave){
+        editor = sharedPreferences.edit();
+        editor.putString(mContext.getString(R.string.pref_firebase_user_message_token),token);
+
+        if(isForceSave){
+            editor.commit();
+        }else{
+            editor.apply();
+        }
+    }
+
+    public String getUserFirebaseToken(){
+        return sharedPreferences.getString(mContext.getString(R.string.pref_firebase_user_message_token),null);
+    }
+
+
 }

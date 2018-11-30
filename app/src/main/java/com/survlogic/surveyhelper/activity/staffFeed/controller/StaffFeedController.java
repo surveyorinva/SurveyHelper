@@ -173,7 +173,6 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
 
     @Override
     public void returnActions(ArrayList<FeedActions> feedActions) {
-        Log.d(TAG, "to_delete: Return Actions: " + feedActions.size());
         this.mFeedActionsForBottomSheet = feedActions;
     }
 

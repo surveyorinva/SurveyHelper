@@ -118,4 +118,9 @@ public class CurrentUserFirestoreWorker implements FirestoreDatabaseUserListener
 
     }
 
+    public void onMessageTokenChange(String newToken){
+        FirestoreDatabaseUser dbUser = new FirestoreDatabaseUser(mContext,this);
+        dbUser.updateUserWithMessageToken(mFirestoreUser, newToken);
+    }
+
 }
