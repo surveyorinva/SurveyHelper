@@ -6,20 +6,16 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.survlogic.surveyhelper.R;
 import com.survlogic.surveyhelper.activity.staffFeed.controller.StaffFeedController;
 import com.survlogic.surveyhelper.activity.staff.inter.StaffActivityListener;
-import com.survlogic.surveyhelper.inter.NavigationIconClickListener;
 import com.survlogic.surveyhelper.model.FirestoreUser;
 import com.survlogic.surveyhelper.utils.PreferenceLoader;
 
@@ -66,6 +62,7 @@ public class StaffFeedFragment extends Fragment implements StaffFeedController.S
         mActivityListener = (StaffActivityListener) getActivity();
         mFeedController = new StaffFeedController(mContext,this,this);
 
+
     }
 
     @Nullable
@@ -111,18 +108,6 @@ public class StaffFeedFragment extends Fragment implements StaffFeedController.S
         tvFragmentName.setText(getActivity().getString(R.string.staff_feed_navigation_feed_corporate));
         tvFragmentName.setVisibility(View.VISIBLE);
 
-        ibBackdrop = v.findViewById(R.id.appBar_top_action_nav_backdrop);
-        ibBackdrop.setOnClickListener(new NavigationIconClickListener(
-                getContext(),
-                v.findViewById(R.id.feed_front_view),
-                new AccelerateDecelerateInterpolator(),
-                ContextCompat.getDrawable(getActivity(), R.drawable.ic_action_filter_light_24dp), // Menu open icon
-                ContextCompat.getDrawable(getActivity(), R.drawable.ic_close_light_24dp) // Menu close icon
-
-        ));
-
-        ibBackdrop.setVisibility(View.VISIBLE);
-
         ibNavigator = v.findViewById(R.id.appBar_top_action_nav_menu);
         ibNavigator.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,29 +116,14 @@ public class StaffFeedFragment extends Fragment implements StaffFeedController.S
             }
         });
 
-        ibFeedNavigator = v.findViewById(R.id.btnAppFeedNavigator);
-        ibFeedNavigator.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mFeedController.createPopUpFeedRoomNavigator(ibFeedNavigator);
-            }
-        });
-
-        swipeRefreshLayout = v.findViewById(R.id.feed_swipe_layout);
-        mFeedController.setSwipeRefreshLayout(swipeRefreshLayout);
-
-        RecyclerView recyclerView = v.findViewById(R.id.feed_recycler_view);
-        //mFeedController.setRecyclerView(recyclerView);
-        mFeedController.setRecyclerController(recyclerView);
-
-
+        mFeedController.setFragmentView(v);
     }
 
     private void showAnnouncementAtStart(){
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                mFeedController.getPopUpFeedAnnouncement();
+                mFeedController.getBannerFeedAnnouncement();
             }
         }, 2000);
     }
@@ -164,5 +134,6 @@ public class StaffFeedFragment extends Fragment implements StaffFeedController.S
         mFeedController.buildUserProfile();
 
     }
+
 
 }

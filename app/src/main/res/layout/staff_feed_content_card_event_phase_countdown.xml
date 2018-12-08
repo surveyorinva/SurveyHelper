@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:weightSum="100"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/ll_event_actions_countdown"
+    android:visibility="gone">
+
+        <Button
+            android:id="@+id/event_btn_learn_more"
+            android:text="@string/general_learn_more"
+            style="@style/Buttons.Flat.Link"
+            android:background="@color/colorTransparent"
+            android:layout_width="0dp"
+            android:layout_weight="25"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/event_tv_count_down"
+            android:gravity="center_vertical"
+            style="@style/Labels.Title.Dark"
+            android:layout_weight="40"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+
+        <Button
+            android:id="@+id/event_btn_not_going"
+            android:text="@string/staff_feed_card_event_not_going"
+            style="@style/Buttons.Outline.Dark"
+            android:layout_width="0dp"
+            android:layout_weight="25"
+            android:layout_height="40dp" />
+
+</LinearLayout>

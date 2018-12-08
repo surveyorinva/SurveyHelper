@@ -22,6 +22,9 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.survlogic.surveyhelper.R;
 import com.survlogic.surveyhelper.activity.staff.StaffActivity;
 
+import java.util.Map;
+import java.util.Random;
+
 
 public class AppFirebaseMessagingService extends FirebaseMessagingService {
 
@@ -29,6 +32,7 @@ public class AppFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+
         if (remoteMessage.getData().size() > 0) {
 
             if (true) {
@@ -38,9 +42,16 @@ public class AppFirebaseMessagingService extends FirebaseMessagingService {
             }
         }
 
-        if (remoteMessage.getNotification() != null) {
-            sendNotification(remoteMessage.getNotification().getBody());
+        if(remoteMessage.getData().isEmpty()){
+            if(remoteMessage.getNotification() != null){
+                sendNotification(remoteMessage.getNotification().getBody());
+            }
+
+        }else{
+            sendNotification(remoteMessage.getData());
         }
+
+
 
     }
 
@@ -70,33 +81,72 @@ public class AppFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void sendNotification(String messageBody) {
-        Intent intent = new Intent(this, StaffActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         String channelId = getString(R.string.default_notification_channel_id);
+
+        Intent intent = new Intent(this, StaffActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
+                PendingIntent.FLAG_ONE_SHOT);
+
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
+                        .setDefaults(Notification.DEFAULT_ALL)
+                        .setWhen(System.currentTimeMillis())
                         .setSmallIcon(R.drawable.ic_announcement_dark_24dp)
                         .setContentTitle(getString(R.string.fcm_message))
                         .setContentText(messageBody)
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
+                        .setVibrate(new long[]{0,1000,500,1000})
                         .setContentIntent(pendingIntent);
 
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        // Since android Oreo notification channel is needed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = setupChannels(channelId);
             notificationManager.createNotificationChannel(channel);
         }
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(new Random().nextInt(), notificationBuilder.build());
     }
+
+    private void sendNotification(Map<String, String> data) {
+
+        String messageTitle = data.get("title").toString();
+        String messageBody = data.get("body").toString();
+
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        String channelId = getString(R.string.default_notification_channel_id);
+
+        Intent intent = new Intent(this, StaffActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
+                PendingIntent.FLAG_ONE_SHOT);
+
+        NotificationCompat.Builder notificationBuilder =
+                new NotificationCompat.Builder(this, channelId)
+                        .setDefaults(Notification.DEFAULT_ALL)
+                        .setWhen(System.currentTimeMillis())
+                        .setSmallIcon(R.drawable.ic_announcement_dark_24dp)
+                        .setContentTitle(getString(R.string.fcm_message))
+                        .setContentText(messageBody)
+                        .setAutoCancel(true)
+                        .setContentIntent(pendingIntent);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = setupChannels(channelId);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        notificationManager.notify(new Random().nextInt(), notificationBuilder.build());
+    }
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private NotificationChannel setupChannels(String channel_id){
@@ -104,11 +154,11 @@ public class AppFirebaseMessagingService extends FirebaseMessagingService {
         String adminChannelDescription = getString(R.string.default_notification_channel_description);
 
         NotificationChannel adminChannel;
-        adminChannel = new NotificationChannel(channel_id, adminChannelName, NotificationManager.IMPORTANCE_HIGH);
+        adminChannel = new NotificationChannel(channel_id, adminChannelName, NotificationManager.IMPORTANCE_DEFAULT);
         adminChannel.setDescription(adminChannelDescription);
         adminChannel.enableLights(true);
         adminChannel.setLightColor(Color.RED);
-        adminChannel.enableVibration(true);
+        adminChannel.setVibrationPattern(new long[]{0,1000,500,1000});
         adminChannel.setShowBadge(true);
 
         return adminChannel;

@@ -15,12 +15,14 @@ public class FeedEvent implements Parcelable {
     private String background_url;
     private String event_header;
     private String event_body;
-    private long date_event;
+    private long date_event_start;
+    private long date_event_end;
     private String details_url;
     private long date_expire;
     private long date_expire_day_of_year;
     private ArrayList<String> whos_going;
     private ArrayList<String> whos_not_going;
+    private ArrayList<String> whos_checked_in;
 
     public FeedEvent() {
     }
@@ -30,7 +32,8 @@ public class FeedEvent implements Parcelable {
         this.event_header = event.event_header;
         this.event_body = event.event_body;
 
-        this.date_event = event.date_event;
+        this.date_event_start = event.date_event_start;
+        this.date_event_end = event.date_event_end;
 
         this.details_url = event.details_url;
         this.background_url = event.background_url;
@@ -40,7 +43,7 @@ public class FeedEvent implements Parcelable {
 
         this.whos_going = event.whos_going;
         this.whos_not_going = event.whos_not_going;
-
+        this.whos_checked_in = event.whos_checked_in;
     }
 
     public String getBackground_url() {
@@ -67,12 +70,20 @@ public class FeedEvent implements Parcelable {
         this.event_body = event_body;
     }
 
-    public long getEvent_start_date() {
-        return date_event;
+    public long getDate_event_start() {
+        return date_event_start;
     }
 
     public void setEvent_start_date(long event_start_date) {
-        this.date_event = event_start_date;
+        this.date_event_start = event_start_date;
+    }
+
+    public long getDate_event_end() {
+        return date_event_end;
+    }
+
+    public void setDate_event_end(long date_event_end) {
+        this.date_event_end = date_event_end;
     }
 
     public String getDetails_url() {
@@ -115,6 +126,14 @@ public class FeedEvent implements Parcelable {
         this.whos_not_going = whos_not_going;
     }
 
+    public ArrayList<String> getWhos_checked_in() {
+        return whos_checked_in;
+    }
+
+    public void setWhos_checked_in(ArrayList<String> whos_checked_in) {
+        this.whos_checked_in = whos_checked_in;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -122,27 +141,31 @@ public class FeedEvent implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.event_header);
         dest.writeString(this.background_url);
+        dest.writeString(this.event_header);
         dest.writeString(this.event_body);
-        dest.writeLong(this.date_event);
+        dest.writeLong(this.date_event_start);
+        dest.writeLong(this.date_event_end);
         dest.writeString(this.details_url);
         dest.writeLong(this.date_expire);
         dest.writeLong(this.date_expire_day_of_year);
         dest.writeStringList(this.whos_going);
         dest.writeStringList(this.whos_not_going);
+        dest.writeStringList(this.whos_checked_in);
     }
 
     protected FeedEvent(Parcel in) {
-        this.event_header = in.readString();
         this.background_url = in.readString();
+        this.event_header = in.readString();
         this.event_body = in.readString();
-        this.date_event = in.readLong();
+        this.date_event_start = in.readLong();
+        this.date_event_end = in.readLong();
         this.details_url = in.readString();
         this.date_expire = in.readLong();
         this.date_expire_day_of_year = in.readLong();
         this.whos_going = in.createStringArrayList();
         this.whos_not_going = in.createStringArrayList();
+        this.whos_checked_in = in.createStringArrayList();
     }
 
     public static final Parcelable.Creator<FeedEvent> CREATOR = new Parcelable.Creator<FeedEvent>() {

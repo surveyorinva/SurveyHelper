@@ -16,6 +16,7 @@ public class GeneratorAnnouncement implements FirestoreDatabaseFeedAnnouncement.
 
     public interface AnnouncementGeneratorListener{
         void returnAnnouncementList(ArrayList<FeedAnnouncement> announcementList);
+        void returnAnnouncementFilterOff();
         void returnAnnouncementsError(boolean isErrorState);
     }
 
@@ -36,6 +37,7 @@ public class GeneratorAnnouncement implements FirestoreDatabaseFeedAnnouncement.
     private AnnouncementGeneratorListener mWorkerListener;
 
     private ArrayList<FeedAnnouncement> mListAnnouncements = new ArrayList<>();
+    private boolean isFilteredShow = true;
 
     public GeneratorAnnouncement(Context context, AnnouncementGeneratorListener listener) {
         this.mContext = context;
@@ -46,11 +48,20 @@ public class GeneratorAnnouncement implements FirestoreDatabaseFeedAnnouncement.
 
 
     public void onStart(){
-        Date today = Calendar.getInstance().getTime();
+        if(isFilteredShow){
+            Date today = Calendar.getInstance().getTime();
 
-        FirestoreDatabaseFeedAnnouncement db = new FirestoreDatabaseFeedAnnouncement(mContext,this);
-        db.getFeedAnnouncementListFromFirestore(today);
+            FirestoreDatabaseFeedAnnouncement db = new FirestoreDatabaseFeedAnnouncement(mContext,this);
+            db.getFeedAnnouncementListFromFirestore(today);
+        }else{
+            mWorkerListener.returnAnnouncementFilterOff();
+        }
 
+
+    }
+
+    public void setIsFiltered(boolean isShown){
+        isFilteredShow = isShown;
     }
 
     /**

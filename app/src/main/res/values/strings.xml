@@ -44,6 +44,8 @@
     <string name="general_map">Map</string>
     <string name="general_list">List</string>
     <string name="general_filter">Filter</string>
+    <string name="general_filter_selection">Filter Selection</string>
+    <string name="general_filter_selection_feed">Filter Feeds</string>
     <string name="general_learn_more">Learn More</string>
 
     <string name="menu_nav_command_action_1">Survey</string>
@@ -287,6 +289,11 @@
 
     <string name="staff_feed_card_event_going">Going</string>
     <string name="staff_feed_card_event_not_going">Not Going</string>
+    <string name="staff_feed_card_event_check_in">Check In!</string>
+    <string name="staff_feed_card_event_whos_here">Check Event Roster</string>
+    <string name="staff_feed_card_event_time_of_event_fmt">Starts at: %1$s \nEnds at: %2$s</string>
+
+
 
     <string name="staff_feed_popup_feed_announcement_game_dont_show_again">Don\'t Show this Again Today</string>
 
@@ -308,6 +315,11 @@
 
     <string name="staff_feed_bottom_sheet_reflection_header">Add a Reflection</string>
 
+    <string name="staff_feed_filter_show_all">Show All</string>
+    <string name="staff_feed_filter_announcement">Show Announcements</string>
+    <string name="staff_feed_filter_events">Show Events</string>
+    <string name="staff_feed_filter_birthdays">Show Birthdays</string>
+    <string name="staff_feed_filter_items">Show Feed Items</string>
 
     <!--Staff_Company-->
     <string name="staff_company_fragment_header">Company Pages</string>

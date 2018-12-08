@@ -56,7 +56,7 @@ public class StaffFeedBottomSheetAdapter extends RecyclerView.Adapter<RecyclerVi
                 break;
 
             case FEED_SYSTEM_EMPTY:
-                View vEmpty = mInflater.inflate(R.layout.staff_feed_content_list_empty,parent,false);
+                View vEmpty = mInflater.inflate(R.layout.staff_feed_bottom_sheet_content_card_empty,parent,false);
                 viewHolder = new CardFeedEmpty(vEmpty);
                 break;
 

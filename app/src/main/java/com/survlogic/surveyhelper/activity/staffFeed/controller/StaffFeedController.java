@@ -5,14 +5,18 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
@@ -37,6 +41,7 @@ import com.survlogic.surveyhelper.activity.staffFeed.workers.GeneratorEvent;
 import com.survlogic.surveyhelper.activity.staffFeed.workers.FeedCompiler;
 import com.survlogic.surveyhelper.activity.staffFeed.workers.GeneratorFeedItem;
 import com.survlogic.surveyhelper.database.Feed_Rooms.FirestoreDatabaseFeedRooms;
+import com.survlogic.surveyhelper.inter.NavigationIconClickListener;
 import com.survlogic.surveyhelper.model.AppSettings;
 import com.survlogic.surveyhelper.model.AppStaticSettings;
 import com.survlogic.surveyhelper.model.FirestoreUser;
@@ -56,6 +61,7 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
                                             FirestoreDatabaseFeedRooms.FeedRoomListener,
                                             StaffFeedRecycleController.FeedRecycleListener,
                                             FeedDialogUtils.DialogListener,
+                                            NavigationIconClickListener.OnReturn,
                                             FeedBottomSheet.FeedItemBottomSheetListener{
 
     private static final String TAG = "StaffFeedController";
@@ -77,6 +83,11 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
     }
 
     @Override
+    public void returnAnnouncementFilterOff() {
+        isWorkerFeedAnnouncementReturnOk = true;
+    }
+
+    @Override
     public void returnAnnouncementsError(boolean isErrorState) {
         //Todo Handle Error Message
 
@@ -94,6 +105,11 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
     }
 
     @Override
+    public void returnBirthdayFilterOff() {
+        isWorkerFeedBirthdayReturnOk = true;
+    }
+
+    @Override
     public void returnNoBirthdays(boolean isErrorState) {
         //Todo Handle Error Message
     }
@@ -105,6 +121,11 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
     @Override
     public void returnEventList(ArrayList<FeedEvent> eventList) {
         this.mListEvents = eventList;
+        isWorkerFeedEventReturnOk = true;
+    }
+
+    @Override
+    public void returnEventFilterOff() {
         isWorkerFeedEventReturnOk = true;
     }
 
@@ -125,6 +146,12 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
 
     @Override
     public void returnFeedItemNoList() {
+        isWorkerFeedItemReturnOk = true;
+    }
+
+
+    @Override
+    public void returnFeedItemFilterOff() {
         isWorkerFeedItemReturnOk = true;
     }
 
@@ -229,12 +256,23 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
 
     }
 
+
+    /**
+     * NavigationIconClickListener.OnReturn
+     */
+
+    @Override
+    public void drawerClose() {
+        if(isFilterItemsDirty){
+            reFetchNewPublicRoomFeeds(500);
+        }
+
+    }
+
     @Override
     public ArrayList<FeedActions> getFeedActions() {
         return mFeedActionsForBottomSheet;
     }
-
-
 
     private Context mContext;
     private Activity mActivity;
@@ -244,6 +282,8 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
     private PreferenceLoader preferenceLoader;
     private AppSettings settings;
     private AppStaticSettings mStaticSettings;
+
+    private View v;
 
     private FloatingActionButton fabActionAnnouncement;
     private boolean isPopupWindowShown = false;
@@ -291,17 +331,27 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
     private boolean isCompilerFeedSet = false;
     private ArrayList<Feed> mFeedCompiledList = new ArrayList<>();
 
-    private boolean isFeedAdapterSet = false;
     private StaffFeedRecycleController feedRecycleController;
 
-    private RecyclerView mRecyclerView;
-    private StaffFeedAdapter feedAdapter;
-    private RecyclerView.LayoutManager layoutManager;
-    private GridLayoutManager mGridLayoutManager;
+    private ImageButton ibFeedNavigator;
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private boolean isAllFeedsReadyToGo = false;
 
+    private CheckBox ckShowAll, ckShowAnnouncements, ckShowEvents, ckShowBirthdays, ckShowItems;
+
+    private boolean isFilterItemsDirty = false;
+    private boolean isFeedFilterShowAnnouncements = true;
+    private boolean isFeedFilterShowEvents = true;
+    private boolean isFeedFilterShowBirthdays = true;
+    private boolean isFeedFilterShowItems = true;
+
+    private static final int FEED_SYSTEM = 0,
+                            FEED_ALL = 1,
+                            FEED_ANNOUNCEMENT = 100,
+                            FEED_EVENT = 200,
+                            FEED_BIRTHDAY = 300,
+                            FEED_ITEM = 400;
 
     private StaffFeedFragment mStaffFeedFragment;
 
@@ -313,7 +363,7 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
         this.mStaffFeedControllerListener = listener;
 
         initController();
-        initViewWidgets();
+        initViewWidgetsFromActivity();
 
     }
 
@@ -362,7 +412,7 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
 
     }
 
-    private void initViewWidgets(){
+    private void initViewWidgetsFromActivity(){
         fabActionAnnouncement = mActivity.findViewById(R.id.appBar_bottom_fab);
         fabActionAnnouncement.hide();
 
@@ -377,22 +427,85 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
             }
         });
 
-
         RelativeLayout rlSpecialActionButton = mActivity.findViewById(R.id.rl_special_launcher_forms);
         rlSpecialActionButton.setVisibility(View.GONE);
 
     }
 
-    private void callBottomSheetView(){
-        FeedBottomSheet dialog = FeedBottomSheet.newInstance(mContext,this);
-        dialog.show(mStaffFeedFragment.getFragmentManager(),"bottom_Sheet");
+    private void initViewWidgetsFromFragment(){
+        ImageButton ibBackdrop = v.findViewById(R.id.appBar_top_action_nav_backdrop);
+
+        NavigationIconClickListener navigationIconClickListener = new NavigationIconClickListener(
+                mContext,
+                v.findViewById(R.id.feed_front_view),
+                new AccelerateDecelerateInterpolator(),
+                ContextCompat.getDrawable(mActivity, R.drawable.ic_action_filter_light_24dp), // Menu open icon
+                ContextCompat.getDrawable(mActivity, R.drawable.ic_close_light_24dp) // Menu close icon
+        );
+
+        navigationIconClickListener.setOnReturnListener(this);
+
+        ibBackdrop.setOnClickListener(navigationIconClickListener);
+        ibBackdrop.setVisibility(View.VISIBLE);
+
+        ibFeedNavigator = v.findViewById(R.id.btnAppFeedNavigator);
+        ibFeedNavigator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createPopUpFeedRoomNavigator(ibFeedNavigator);
+            }
+        });
+
+        swipeRefreshLayout = v.findViewById(R.id.feed_swipe_layout);
+        setSwipeRefreshLayout();
+
+        RecyclerView recyclerView = v.findViewById(R.id.feed_recycler_view);
+        setRecyclerController(recyclerView);
+
+        ckShowAll =  v.findViewById(R.id.staff_feed_filter_show_all);
+
+        ckShowAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                filterFeeds(FEED_ALL, isChecked);
+            }
+        });
+
+        ckShowAnnouncements = v.findViewById(R.id.staff_feed_filter_announcement);
+        ckShowAnnouncements.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                filterFeeds(FEED_ANNOUNCEMENT, isChecked);
+            }
+        });
+
+        ckShowEvents = v.findViewById(R.id.staff_feed_filter_events);
+        ckShowEvents.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                filterFeeds(FEED_EVENT, isChecked);
+            }
+        });
+        ckShowBirthdays = v.findViewById(R.id.staff_feed_filter_birthdays);
+        ckShowBirthdays.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                filterFeeds(FEED_BIRTHDAY, isChecked);
+            }
+        });
+
+        ckShowItems = v.findViewById(R.id.staff_feed_filter_items);
+        ckShowItems.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                filterFeeds(FEED_ITEM, isChecked);
+            }
+        });
     }
 
     //----------------------------------------------------------------------------------------------
 
-    public void setSwipeRefreshLayout (SwipeRefreshLayout layout){
-        this.swipeRefreshLayout = layout;
-
+    private void setSwipeRefreshLayout (){
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -406,7 +519,6 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
         this.mFeedQueryDateToShow = queryDate;
     }
 
-
     public void setFeedRoomToShow(String queryRoom) {
         this.mRoomToShow = queryRoom;
     }
@@ -418,6 +530,13 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
     public void setFirestoreUser(FirestoreUser user) {
         this.mFirestoreUser = user;
     }
+
+    public void setFragmentView(View v){
+        this.v = v;
+
+        initViewWidgetsFromFragment();
+    }
+
 
     //----------------------------------------------------------------------------------------------
     public void buildUserProfile(){
@@ -468,10 +587,7 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
             public void run() {
                 callPublicFeedCompilerOnRefresh(0);
 
-                generatorAnnouncement.onStart();
-                generatorBirthday.onStart();
-                generatorEvent.onStart();
-                generatorFeedItem.onStart(mFeedQueryDateToShow, mRoomToShow);
+                generateFeeds();
 
             }
         }, 0);
@@ -485,10 +601,7 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
                 public void run() {
                     callPublicFeedCompilerOnRefresh(timeToWait);
 
-                    generatorAnnouncement.onStart();
-                    generatorBirthday.onStart();
-                    generatorEvent.onStart();
-                    generatorFeedItem.onStart(mFeedQueryDateToShow, mRoomToShow);
+                    generateFeeds();
 
                 }
             }, 0);
@@ -550,6 +663,64 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
 
     }
 
+    private void generateFeeds(){
+        generatorAnnouncement.onStart();
+        generatorBirthday.onStart();
+        generatorEvent.onStart();
+        generatorFeedItem.onStart(mFeedQueryDateToShow, mRoomToShow);
+
+        isFilterItemsDirty = false;
+
+    }
+
+    //----------------------------------------------------------------------------------------------
+    private void filterFeeds(int filterBy, boolean isChecked){
+
+        switch (filterBy){
+            case FEED_ALL:
+                ckShowAnnouncements.setChecked(isChecked);
+                ckShowAnnouncements.setEnabled(true);
+
+                ckShowEvents.setChecked(isChecked);
+                ckShowEvents.setEnabled(true);
+
+                ckShowBirthdays.setChecked(isChecked);
+                ckShowBirthdays.setEnabled(true);
+
+                ckShowItems.setChecked(isChecked);
+                ckShowItems.setEnabled(true);
+
+                generatorAnnouncement.setIsFiltered(isChecked);
+                generatorEvent.setIsFiltered(isChecked);
+                generatorBirthday.setIsFiltered(isChecked);
+                generatorFeedItem.setIsFiltered(isChecked);
+
+                break;
+
+            case FEED_ANNOUNCEMENT:
+                generatorAnnouncement.setIsFiltered(isChecked);
+
+                break;
+
+            case FEED_EVENT:
+                generatorEvent.setIsFiltered(isChecked);
+
+                break;
+
+            case FEED_BIRTHDAY:
+                generatorBirthday.setIsFiltered(isChecked);
+
+                break;
+
+            case FEED_ITEM:
+                generatorFeedItem.setIsFiltered(isChecked);
+
+                break;
+        }
+
+        isFilterItemsDirty = true;
+    }
+
     //----------------------------------------------------------------------------------------------
 
     public void createPopUpFeedRoomNavigator(View anchorView){
@@ -608,21 +779,21 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
 
     }
 
-    public void getPopUpFeedAnnouncement(){
+    public void getBannerFeedAnnouncement(){
         mStaticSettings = new AppStaticSettings(preferenceLoader.getStaticSettings());
 
         if(mStaticSettings.isPromo()){
             if(preferenceLoader.getAnnouncementShowReward()){
-                createPopUpFeedActionAnnouncement();
+                createBannerFeedActionAnnouncement();
             }
         }
     }
 
 
-    private void createPopUpFeedActionAnnouncement(){
+    private void createBannerFeedActionAnnouncement(){
         FeedDialogUtils dialogUtils = new FeedDialogUtils(mContext,this);
 
-        PopupWindow popuWindow = dialogUtils.createPopUpFeedActionAnnouncementGame(mStaticSettings.getPromoUrl());
+        PopupWindow popuWindow = dialogUtils.createBannerFeedActionAnnouncementGame(mStaticSettings.getPromoUrl());
 
         LinearLayout llContainer = mActivity.findViewById(R.id.ll_feed_fragment_container);
 
@@ -633,7 +804,12 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
 
     }
 
+    private void callBottomSheetView(){
+        FeedBottomSheet dialog = FeedBottomSheet.newInstance(mContext,this);
+        dialog.show(mStaffFeedFragment.getFragmentManager(),"bottom_Sheet");
+    }
 
+    //-----------------------------------------------------------------------------------------------
     private class LoadPublicFeedsAsyncTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -688,7 +864,6 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
                 mFeedCompiledList = feedCompiler.compileFeeds();
 
                 if(mFeedCompiledList.size() !=0){
-
                     feedRecycleController.setFeedCompiledList(mFeedCompiledList);
                     feedRecycleController.updateFeedRecycler();
 

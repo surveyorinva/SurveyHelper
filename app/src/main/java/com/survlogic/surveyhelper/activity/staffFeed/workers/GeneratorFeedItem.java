@@ -17,6 +17,7 @@ public class GeneratorFeedItem implements FirestoreDatabaseFeedItem.FeedItemList
     public interface FeedItemGeneratorListener{
         void returnFeedItemList(ArrayList<FeedItem> itemList);
         void returnFeedItemNoList();
+        void returnFeedItemFilterOff();
         void returnFeedItemError(boolean isErrorState);
     }
 
@@ -45,6 +46,7 @@ public class GeneratorFeedItem implements FirestoreDatabaseFeedItem.FeedItemList
     private FeedItemGeneratorListener mWorkerListener;
 
     private ArrayList<FeedItem> mListItems = new ArrayList<>();
+    private boolean isFilteredShow = true;
 
     public GeneratorFeedItem(Context context, FeedItemGeneratorListener listener) {
         this.mContext = context;
@@ -54,16 +56,30 @@ public class GeneratorFeedItem implements FirestoreDatabaseFeedItem.FeedItemList
     }
 
     public void onStart(Date queryDate, String room_id){
-        FirestoreDatabaseFeedItem db = new FirestoreDatabaseFeedItem(mContext,this);
-        db.getFeedItemListFromFirestore(queryDate, room_id);
+
+        if(isFilteredShow){
+            FirestoreDatabaseFeedItem db = new FirestoreDatabaseFeedItem(mContext,this);
+            db.getFeedItemListFromFirestore(queryDate, room_id);
+        }else{
+            mWorkerListener.returnFeedItemFilterOff();
+        }
 
     }
 
     public void onStart(String room_id){
-        FirestoreDatabaseFeedItem db = new FirestoreDatabaseFeedItem(mContext,this);
-        db.getFeedItemListFromFirestore(room_id);
+        if(isFilteredShow){
+            FirestoreDatabaseFeedItem db = new FirestoreDatabaseFeedItem(mContext,this);
+            db.getFeedItemListFromFirestore(room_id);
+        }else{
+            mWorkerListener.returnFeedItemFilterOff();
+        }
 
     }
+
+    public void setIsFiltered(boolean isShown){
+        isFilteredShow = isShown;
+    }
+
 
     private void callFilterList(){
         mWorkerListener.returnFeedItemList(mListItems);

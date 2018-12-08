@@ -17,6 +17,7 @@ public class GeneratorEvent implements FirestoreDatabaseFeedEvent.FeedEventListe
 
     public interface EventGeneratorListener{
         void returnEventList(ArrayList<FeedEvent> eventList);
+        void returnEventFilterOff();
         void returnEventsError(boolean isErrorState);
     }
 
@@ -40,6 +41,7 @@ public class GeneratorEvent implements FirestoreDatabaseFeedEvent.FeedEventListe
     private EventGeneratorListener mWorkerListener;
 
     private ArrayList<FeedEvent> mListEvents = new ArrayList<>();
+    private boolean isFilteredShow = true;
 
     public GeneratorEvent(Context context, EventGeneratorListener listener){
         this.mContext = context;
@@ -49,12 +51,20 @@ public class GeneratorEvent implements FirestoreDatabaseFeedEvent.FeedEventListe
     }
 
     public void onStart(){
-        Date today = Calendar.getInstance().getTime();
+        if(isFilteredShow){
+            Date today = Calendar.getInstance().getTime();
 
-        FirestoreDatabaseFeedEvent db = new FirestoreDatabaseFeedEvent(mContext,this);
-        db.getFeedEventListFromFirestore(today);
-
+            FirestoreDatabaseFeedEvent db = new FirestoreDatabaseFeedEvent(mContext,this);
+            db.getFeedEventListFromFirestore(today);
+        }else{
+            mWorkerListener.returnEventFilterOff();
+        }
     }
+
+    public void setIsFiltered(boolean isShown){
+        isFilteredShow = isShown;
+    }
+
 
     private void callFilterList(){
         mWorkerListener.returnEventList(mListEvents);

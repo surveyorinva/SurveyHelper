@@ -15,6 +15,15 @@ import com.survlogic.surveyhelper.R;
 
 public class NavigationIconClickListener implements View.OnClickListener {
 
+
+    public interface OnReturn{
+
+        void drawerClose();
+
+    }
+
+
+
     private final AnimatorSet animatorSet = new AnimatorSet();
     private Context context;
     private View sheet;
@@ -23,6 +32,7 @@ public class NavigationIconClickListener implements View.OnClickListener {
     private boolean backdropShown = false;
     private Drawable openIcon;
     private Drawable closeIcon;
+    private OnReturn onReturnListener;
 
     public NavigationIconClickListener(Context context, View sheet) {
         this(context, sheet, null);
@@ -78,7 +88,14 @@ public class NavigationIconClickListener implements View.OnClickListener {
                 ((ImageView) view).setImageDrawable(closeIcon);
             } else {
                 ((ImageView) view).setImageDrawable(openIcon);
+                onReturnListener.drawerClose();
             }
         }
     }
+
+    public void setOnReturnListener(OnReturn listener){
+        this.onReturnListener = listener;
+    }
+
+
 }

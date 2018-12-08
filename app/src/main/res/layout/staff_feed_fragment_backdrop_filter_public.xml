@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="@string/general_filter_selection_feed"
+        android:layout_marginStart="50dp"
+        style="@style/Labels.Title.Light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <CheckBox
+        android:id="@+id/staff_feed_filter_show_all"
+        android:theme="@style/Checkbox.Light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTextPrimary"
+        android:text="@string/staff_feed_filter_show_all"
+        android:checked="true"/>
+
+    <View
+        android:background="@color/grey_400"
+        android:layout_width="match_parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="25dp"
+        android:layout_height="2dp"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="5dp" />
+
+    <CheckBox
+        android:id="@+id/staff_feed_filter_announcement"
+        android:theme="@style/Checkbox.Light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTextPrimary"
+        android:text="@string/staff_feed_filter_announcement"
+        android:checked="true"
+        android:enabled="false"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="5dp" />
+
+    <CheckBox
+        android:id="@+id/staff_feed_filter_events"
+        android:theme="@style/Checkbox.Light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTextPrimary"
+        android:text="@string/staff_feed_filter_events"
+        android:checked="true"
+        android:enabled="false"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="5dp" />
+
+    <CheckBox
+        android:id="@+id/staff_feed_filter_birthdays"
+        android:theme="@style/Checkbox.Light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTextPrimary"
+        android:text="@string/staff_feed_filter_birthdays"
+        android:checked="true"
+        android:enabled="false"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="5dp" />
+
+    <CheckBox
+        android:id="@+id/staff_feed_filter_items"
+        android:theme="@style/Checkbox.Light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTextPrimary"
+        android:text="@string/staff_feed_filter_items"
+        android:checked="true"
+        android:enabled="false"/>
+
+</LinearLayout>

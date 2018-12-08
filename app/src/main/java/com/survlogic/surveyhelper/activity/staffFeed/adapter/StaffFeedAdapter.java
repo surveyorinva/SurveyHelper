@@ -13,7 +13,7 @@ import com.survlogic.surveyhelper.activity.staffFeed.view.CardFeedAnnouncement;
 import com.survlogic.surveyhelper.activity.staffFeed.view.CardFeedBirthday;
 import com.survlogic.surveyhelper.activity.staffFeed.view.CardFeedBirthdayHeader;
 import com.survlogic.surveyhelper.activity.staffFeed.view.CardFeedEmpty;
-import com.survlogic.surveyhelper.activity.staffFeed.view.CardFeedEvent;
+import com.survlogic.surveyhelper.activity.staffFeed.view.Event.CardFeedEvent;
 import com.survlogic.surveyhelper.activity.staffFeed.view.CardFeedItem;
 import java.util.ArrayList;
 

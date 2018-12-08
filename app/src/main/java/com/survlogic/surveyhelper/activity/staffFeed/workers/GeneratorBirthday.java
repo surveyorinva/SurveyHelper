@@ -16,6 +16,7 @@ public class GeneratorBirthday implements FirestoreDatabaseFeedBirthday.FeedBirt
 
     public interface BirthdayGeneratorListener{
         void returnBirthdayList(ArrayList<FeedBirthday> birthdayListToday, ArrayList<FeedBirthday> birthdayListAhead );
+        void returnBirthdayFilterOff();
         void returnNoBirthdays(boolean isErrorState);
     }
 
@@ -42,6 +43,7 @@ public class GeneratorBirthday implements FirestoreDatabaseFeedBirthday.FeedBirt
 
     private ArrayList<FeedBirthday> mListBirthdaysToday = new ArrayList<>();
     private ArrayList<FeedBirthday> mListBirthdaysFuture = new ArrayList<>();
+    private boolean isFilteredShow = true;
 
     public GeneratorBirthday(Context context, BirthdayGeneratorListener listener) {
         this.mContext = context;
@@ -51,11 +53,22 @@ public class GeneratorBirthday implements FirestoreDatabaseFeedBirthday.FeedBirt
     }
 
     public void onStart(){
-        Date today = Calendar.getInstance().getTime();
 
-        FirestoreDatabaseFeedBirthday db = new FirestoreDatabaseFeedBirthday(mContext,this);
-        db.getFeedBirthdayFromFirestore(today);
+        if(isFilteredShow){
+            Date today = Calendar.getInstance().getTime();
+
+            FirestoreDatabaseFeedBirthday db = new FirestoreDatabaseFeedBirthday(mContext,this);
+            db.getFeedBirthdayFromFirestore(today);
+        }else{
+            mWorkerListener.returnBirthdayFilterOff();
+        }
+
     }
+
+    public void setIsFiltered(boolean isShown){
+        isFilteredShow = isShown;
+    }
+
 
     /**
      * Potentially filter arraylist after returning from Firestore in the future

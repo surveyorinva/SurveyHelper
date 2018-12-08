@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -41,18 +40,18 @@ public class FeedDialogUtils {
 
 
     /**
-     * Creates a dialog popup window that slides down from the top of the screen
+     * Creates a dialog Banner window that slides down from the top of the screen
      * @param backgroundImageUrl
      * @return
      */
 
-    public PopupWindow createPopUpFeedActionAnnouncementGame(String backgroundImageUrl){
+    public PopupWindow createBannerFeedActionAnnouncementGame(String backgroundImageUrl){
 
         listener.isPopupOpen(true);
 
         final PreferenceLoader preferenceLoader = new PreferenceLoader(mContext);
 
-        View popupView = mActivity.getLayoutInflater().inflate(R.layout.staff_feed_popup_feed_announcement, null);
+        View popupView = mActivity.getLayoutInflater().inflate(R.layout.staff_feed_banner_feed_announcement, null);
         ImageView ivImage = popupView.findViewById(R.id.announcement_image_background);
         final ProgressBar progress = popupView.findViewById(R.id.announcement_image_background_progress);
 

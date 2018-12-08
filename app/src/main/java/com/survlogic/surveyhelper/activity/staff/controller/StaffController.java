@@ -194,8 +194,9 @@ public class StaffController implements CurrentUserFirestoreWorker.CurrentUserWo
             NotificationChannel notificationChannelAlpha = new NotificationChannel(channelId,
                     channelName,NotificationManager.IMPORTANCE_HIGH);
 
+
             notificationChannelAlpha.setDescription(mActivity.getResources().getString(R.string.default_notification_channel_description));
-            notificationChannelAlpha.enableVibration(true);
+            notificationChannelAlpha.setVibrationPattern(new long[]{0,1000,500,1000});
             notificationChannelAlpha.setShowBadge(true);
 
             notificationManager.createNotificationChannel(notificationChannelAlpha);

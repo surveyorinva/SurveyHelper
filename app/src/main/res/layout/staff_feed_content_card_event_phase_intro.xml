@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:weightSum="100"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/ll_event_actions_invitation"
+    android:visibility="gone">
+
+        <Button
+            android:id="@+id/event_btn_learn_more"
+            android:text="@string/general_learn_more"
+            style="@style/Buttons.Flat.Link"
+            android:background="@color/colorTransparent"
+            android:layout_width="0dp"
+            android:layout_weight="25"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="20"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/event_btn_not_going"
+            android:text="@string/staff_feed_card_event_not_going"
+            style="@style/Buttons.Outline.Dark"
+            android:layout_width="0dp"
+            android:layout_weight="25"
+            android:layout_height="40dp" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/btn_event_check_in"
+            android:text="@string/staff_feed_card_event_going"
+            style="@style/Buttons.Raised.Light"
+            android:layout_width="0dp"
+            android:layout_weight="25"
+            android:layout_height="40dp" />
+
+</LinearLayout>
