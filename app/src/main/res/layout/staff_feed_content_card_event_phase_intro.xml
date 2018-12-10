@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/ll_event_actions_invitation"
-    android:visibility="gone">
+    android:visibility="visible">
 
         <Button
             android:id="@+id/event_btn_learn_more"

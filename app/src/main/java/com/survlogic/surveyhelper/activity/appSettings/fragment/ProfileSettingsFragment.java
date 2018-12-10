@@ -44,7 +44,8 @@ import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ProfileSettingsFragment extends Fragment implements ProfileControllerListener, SelectPhotoDialog.OnPhotoSelectedListener {
+public class ProfileSettingsFragment extends Fragment implements    ProfileControllerListener,
+                                                                    SelectPhotoDialog.OnPhotoSelectedListener {
 
     private static final String TAG = "ProfileSettingsFragment";
     private View v;

@@ -3,16 +3,20 @@ package com.survlogic.surveyhelper.activity.staffFeed.view.Event;
 import android.animation.LayoutTransition;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -22,18 +26,26 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.survlogic.surveyhelper.R;
+import com.survlogic.surveyhelper.activity.appCamera.CaptureImageActivity;
+import com.survlogic.surveyhelper.activity.appSettings.fragment.ProfileSettingsFragment;
 import com.survlogic.surveyhelper.activity.staffFeed.adapter.StaffFeedAdapter;
 import com.survlogic.surveyhelper.activity.staffFeed.model.Feed;
 import com.survlogic.surveyhelper.activity.staffFeed.model.FeedEvent;
+import com.survlogic.surveyhelper.dialog.SelectPhotoDialog;
+import com.survlogic.surveyhelper.utils.HapticFeedbackUtils;
 import com.survlogic.surveyhelper.utils.PreferenceLoader;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class CardFeedEvent extends RecyclerView.ViewHolder implements CardFeedEventWorker.CardFeedEventWorkerListener {
+public class CardFeedEvent extends RecyclerView.ViewHolder implements CardFeedEventWorker.CardFeedEventWorkerListener{
 
     private static final String TAG = "CardFeedAnnouncement";
+
+    /**
+     * CardFeedEventWorkerListener
+     */
 
     @Override
     public void returnSuccessful() {
@@ -46,6 +58,7 @@ public class CardFeedEvent extends RecyclerView.ViewHolder implements CardFeedEv
     }
 
     private Context mContext;
+    private Activity mActivity;
     private StaffFeedAdapter.AdapterListener mListner;
 
     private ImageView ivBackground;
@@ -58,6 +71,9 @@ public class CardFeedEvent extends RecyclerView.ViewHolder implements CardFeedEv
     private int currentPhaseShown = 0;
     private CardFeedEventWorker mEventWorker;
 
+    private ArrayList<Feed> mFeedList;
+    private int position;
+
     public static final int EVENT_SYSTEM_ERROR = 0,
                             EVENT_PHASE_INTRO = 1,
                             EVENT_PHASE_COUNTDOWN_DAYS = 2,
@@ -67,10 +83,15 @@ public class CardFeedEvent extends RecyclerView.ViewHolder implements CardFeedEv
                             EVENT_PHASE_OVER = 6,
                             EVENT_PHASE_HIDE = 7;
 
+    private Uri singleImageUri;
+    private Bitmap singleImageBitmap;
+
+
     public CardFeedEvent(@NonNull View itemView, Context context, StaffFeedAdapter.AdapterListener listener) {
         super(itemView);
 
         this.mContext = context;
+        this.mActivity = (Activity) context;
         this.mListner = listener;
 
         initViewWidgets();
@@ -110,8 +131,11 @@ public class CardFeedEvent extends RecyclerView.ViewHolder implements CardFeedEv
         }
     }
 
-    public void configureViewHolder(ArrayList<Feed> mFeedList, int position){
-        Feed feed = mFeedList.get(position);
+    public void configureViewHolder(ArrayList<Feed> feedList, int position){
+        this.position = position;
+        this.mFeedList = feedList;
+
+        Feed feed = feedList.get(position);
         FeedEvent event = feed.getEvent();
         mEventWorker.setEvent(event);
 
@@ -228,6 +252,8 @@ public class CardFeedEvent extends RecyclerView.ViewHolder implements CardFeedEv
                 case EVENT_PHASE_REMINISCE:
                     clPhaseV_After_Event.setVisibility(View.VISIBLE);
                     currentPhaseShown = EVENT_PHASE_REMINISCE;
+
+                    initViewReminisce();
                     break;
 
                 case EVENT_PHASE_OVER:
@@ -241,4 +267,33 @@ public class CardFeedEvent extends RecyclerView.ViewHolder implements CardFeedEv
 
     }
 
+
+    private void initViewReminisce(){
+        ImageButton ibNavigateToOpenCamera = mActivity.findViewById(R.id.fab_after_event_add_from_gallery);
+        ibNavigateToOpenCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HapticFeedbackUtils.init(mActivity);
+                HapticFeedbackUtils.once(50);
+
+                mListner.openImageGetterDialog(StaffFeedAdapter.FEED_EVENT, position);
+
+            }
+        });
+
+    }
+
+    public void setSingleImageUri(int position, Uri singleImageUri) {
+        Log.d(TAG, "to_delete: Updated uri in feed event item: " + position);
+
+        Feed feed = mFeedList.get(position);
+        FeedEvent event = feed.getEvent();
+
+        this.singleImageUri = singleImageUri;
+    }
+
+    public void setSingleImageBitmap(int position, Bitmap singleImageBitmap) {
+        Log.d(TAG, "to_delete: Updated uri in feed event item: " + position);
+        this.singleImageBitmap = singleImageBitmap;
+    }
 }

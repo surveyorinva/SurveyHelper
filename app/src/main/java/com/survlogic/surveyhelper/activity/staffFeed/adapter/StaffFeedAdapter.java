@@ -1,6 +1,8 @@
 package com.survlogic.surveyhelper.activity.staffFeed.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,14 +25,17 @@ public class StaffFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public interface AdapterListener{
         void refreshView();
-    }
+        void openImageGetterDialog(int returnFeedTo, int atPosition);
+        void returnToRecyclerURI(Uri uri);
+        void returnToRecyclerBitmap(Bitmap bitmap);
 
+    }
 
     private Context mContext;
     private AdapterListener mAdapterListener;
     private ArrayList<Feed> mFeedList;
 
-    private final static int FEED_SYSTEM_DEFAULT = 0,
+    public final static int FEED_SYSTEM_DEFAULT = 0,
                             FEED_SYSTEM_EMPTY = 1,
                             FEED_ANNOUNCEMENT = 101,
                             FEED_EVENT = 201,
@@ -39,6 +44,8 @@ public class StaffFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                             FEED_BIRTHDAY_HEADER_FUTURE = 303,
                             FEED_BIRTHDAY_FUTURE = 304,
                             FEED_FEED_ITEM = 401;
+
+    private CardFeedEvent vhEvent;
 
     public StaffFeedAdapter(Context context, AdapterListener listener, ArrayList<Feed> feedList) {
         this.mContext = context;
@@ -129,7 +136,7 @@ public class StaffFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 break;
 
             case FEED_EVENT:
-                CardFeedEvent vhEvent = (CardFeedEvent) viewHolder;
+                vhEvent = (CardFeedEvent) viewHolder;
                 vhEvent.configureViewHolder(mFeedList,position);
                 break;
 
@@ -177,6 +184,26 @@ public class StaffFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         notifyDataSetChanged();
     }
 
+
+    public void setImageUriForItem(int item, int position, Uri uri){
+        switch (item){
+            case FEED_EVENT:
+                vhEvent.setSingleImageUri(position, uri);
+                break;
+
+        }
+
+
+    }
+
+    public void setImageBitmapForItem(int item, int position, Bitmap bitmap){
+        switch (item){
+            case FEED_EVENT:
+                vhEvent.setSingleImageBitmap(position, bitmap);
+                break;
+
+        }
+    }
 
 
 

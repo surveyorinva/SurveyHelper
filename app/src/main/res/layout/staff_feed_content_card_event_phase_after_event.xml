@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/cl_event_actions_after_event"
-    android:visibility="gone">
+    android:visibility="visible">
 
     <Button
         android:id="@+id/btn_after_event_check_roster"
@@ -37,12 +37,12 @@
         app:elevation="@dimen/fab_elevation"
         app:fabCustomSize="@dimen/fab_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/recycler_after_event_photo_gallery"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_after_event_check_roster" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_after_event_photo_gallery"
+        android:visibility="gone"
         android:layout_width="308dp"
         android:layout_height="80dp"
         android:layout_marginStart="8dp"
@@ -51,7 +51,21 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fab_in_event_take_photo"
+        app:layout_constraintStart_toEndOf="@+id/fab_after_event_add_from_gallery"
+        app:layout_constraintTop_toBottomOf="@+id/btn_after_event_check_roster" />
+
+    <TextView
+        android:id="@+id/recycler_in_event_photo_gallery_empty_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/staff_feed_card_event_no_pictures_in_gallery"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fab_after_event_add_from_gallery"
         app:layout_constraintTop_toBottomOf="@+id/btn_after_event_check_roster" />
 
 </android.support.constraint.ConstraintLayout>

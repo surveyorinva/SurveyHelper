@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/cl_event_actions_check_in"
-    android:visibility="gone">
+    android:visibility="visible">
 
 
     <Button

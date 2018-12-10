@@ -1,12 +1,15 @@
 package com.survlogic.surveyhelper.activity.staffFeed;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +19,16 @@ import android.widget.TextView;
 import com.survlogic.surveyhelper.R;
 import com.survlogic.surveyhelper.activity.staffFeed.controller.StaffFeedController;
 import com.survlogic.surveyhelper.activity.staff.inter.StaffActivityListener;
+import com.survlogic.surveyhelper.dialog.SelectPhotoDialog;
 import com.survlogic.surveyhelper.model.FirestoreUser;
 import com.survlogic.surveyhelper.utils.PreferenceLoader;
 
 import java.util.Calendar;
 import java.util.Date;
 
-public class StaffFeedFragment extends Fragment implements StaffFeedController.StaffFeedControllerListener {
+public class StaffFeedFragment extends Fragment implements  StaffFeedController.StaffFeedControllerListener,
+                                                            SelectPhotoDialog.OnPhotoSelectedListener{
+
     private static final String TAG = "StaffFeedFragment";
 
     /**
@@ -37,6 +43,28 @@ public class StaffFeedFragment extends Fragment implements StaffFeedController.S
     @Override
     public void sendFeedCategoryNameToAppBar(String feedCategory) {
         tvFragmentName.setText(feedCategory);
+    }
+
+    @Override
+    public void requestImageDialogBox() {
+        Log.d(TAG, "to_delete: in Fragment ");
+        SelectPhotoDialog selectPhotoDialog = new SelectPhotoDialog();
+        selectPhotoDialog.show(getFragmentManager(),getString(R.string.app_dialog_name_select_photo));
+        selectPhotoDialog.setTargetFragment(StaffFeedFragment.this,1);
+    }
+
+    /**
+     * SelectPhotoDialog.OnPhotoSelectedListener
+     */
+
+    @Override
+    public void returnImagePath(Uri imagePath) {
+        mFeedController.returnToRecyclerURI(imagePath);
+    }
+
+    @Override
+    public void returnImageBitmap(Bitmap bitmap) {
+        mFeedController.returnToRecyclerBitmap(bitmap);
     }
 
     private Context mContext;

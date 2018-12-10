@@ -112,6 +112,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeView"/>
 
+        <activity android:name=".activity.appCamera.CaptureImageActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeView"/>
+
+        <activity android:name=".activity.appCamera.CameraActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeView"/>
+
         <service android:name=".messaging.AppFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

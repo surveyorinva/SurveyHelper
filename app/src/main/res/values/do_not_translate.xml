@@ -83,6 +83,9 @@
     <string name="CLASS_SETTINGS_LEGAL_PRIVACY">CLASS_SETTINGS_LEGAL_PRIVACY</string>
     <string name="CLASS_SETTINGS_ABOUT">CLASS_SETTINGS_ABOUT</string>
 
+<!--Fragment Names-->
+    <string name="FRAGMENT_CAMERA">Camera2</string>
+
 <!--Remote Config Keys-->
     <string name="CONFIG_KEY_APP_ACCESS">application_enabled</string>
     <string name="CONFIG_KEY_APP_ACCESS_REASON">application_enabled_reason</string>

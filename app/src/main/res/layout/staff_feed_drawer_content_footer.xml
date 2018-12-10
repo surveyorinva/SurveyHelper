@@ -18,13 +18,13 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/ic_mail_outline_light_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton4"
+            app:layout_constraintEnd_toStartOf="@+id/btn_feed_navigate_to_add_feed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/btn_feed_navigate_to_add_feed"
             android:layout_width="@dimen/navigation_ic_button_size"
             android:layout_height="@dimen/navigation_ic_button_size"
             android:layout_gravity="center_vertical"
@@ -32,14 +32,14 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/ic_add_circle_outline_light_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_feed_navigation_settings"
+            app:layout_constraintEnd_toStartOf="@+id/btn_feed_navigate_to_settings"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/imageButton"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <ImageButton
-            android:id="@+id/btn_feed_navigation_settings"
+            android:id="@+id/btn_feed_navigate_to_settings"
             android:layout_width="@dimen/navigation_ic_button_size"
             android:layout_height="@dimen/navigation_ic_button_size"
             android:layout_gravity="center_vertical"
@@ -49,7 +49,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageButton2"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageButton4"
+            app:layout_constraintStart_toEndOf="@+id/btn_feed_navigate_to_add_feed"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -64,7 +64,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btn_feed_navigation_settings"
+            app:layout_constraintStart_toEndOf="@+id/btn_feed_navigate_to_settings"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -84,9 +84,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/staff_feed_navigation_footer_command_addGroup"
-            app:layout_constraintEnd_toEndOf="@+id/imageButton4"
-            app:layout_constraintStart_toStartOf="@+id/imageButton4"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton4" />
+            app:layout_constraintEnd_toEndOf="@+id/btn_feed_navigate_to_add_feed"
+            app:layout_constraintStart_toStartOf="@+id/btn_feed_navigate_to_add_feed"
+            app:layout_constraintTop_toBottomOf="@+id/btn_feed_navigate_to_add_feed" />
 
         <TextView
             android:id="@+id/textView3"
@@ -94,9 +94,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/staff_feed_navigation_footer_command_settings"
-            app:layout_constraintEnd_toEndOf="@+id/btn_feed_navigation_settings"
-            app:layout_constraintStart_toStartOf="@+id/btn_feed_navigation_settings"
-            app:layout_constraintTop_toBottomOf="@+id/btn_feed_navigation_settings" />
+            app:layout_constraintEnd_toEndOf="@+id/btn_feed_navigate_to_settings"
+            app:layout_constraintStart_toStartOf="@+id/btn_feed_navigate_to_settings"
+            app:layout_constraintTop_toBottomOf="@+id/btn_feed_navigate_to_settings" />
 
         <TextView
             android:id="@+id/textView4"

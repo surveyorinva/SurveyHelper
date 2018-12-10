@@ -292,8 +292,7 @@
     <string name="staff_feed_card_event_check_in">Check In!</string>
     <string name="staff_feed_card_event_whos_here">Check Event Roster</string>
     <string name="staff_feed_card_event_time_of_event_fmt">Starts at: %1$s \nEnds at: %2$s</string>
-
-
+    <string name="staff_feed_card_event_no_pictures_in_gallery">No pictures added yet!</string>
 
     <string name="staff_feed_popup_feed_announcement_game_dont_show_again">Don\'t Show this Again Today</string>
 
@@ -353,4 +352,14 @@
     <string name="fcm_message">FCM Message</string>
     <string name="default_notification_channel_name" translatable="true">christopher</string>
     <string name="default_notification_channel_description" translatable="true">Notifications sent from the christopher app server</string>
+
+    <!--Camera App-->
+    <string name="camera_picture">Picture</string>
+    <string name="camera_description_info">Info</string>
+    <string name="camera_request_permission">The christopher App needs camera permission.</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+    <string name="camera_error_configuration">Configuration Error.  Could not start Camera API</string>
+    <string name="camera_intro_message">intro message</string>
+
+
 </resources>

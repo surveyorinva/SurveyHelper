@@ -2,6 +2,8 @@ package com.survlogic.surveyhelper.activity.staffFeed.controller;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -81,6 +83,14 @@ public class StaffFeedRecycleController {
             initFeedAdapter();
 
         }
+    }
+
+    public void updateFeedItemWithImageUri(int returnDataTo, int returnToPosition, Uri uri){
+        feedAdapter.setImageUriForItem(returnDataTo,returnToPosition, uri);
+    }
+
+    public void updateFeedItemWithImagBitmap(int returnDataTo, int returnToPosition, Bitmap bitmap){
+        feedAdapter.setImageBitmapForItem(returnDataTo, returnToPosition, bitmap);
     }
 
     private void initFeedAdapter(){

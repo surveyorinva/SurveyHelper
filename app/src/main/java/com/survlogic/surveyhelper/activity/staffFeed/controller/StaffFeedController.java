@@ -2,6 +2,8 @@ package com.survlogic.surveyhelper.activity.staffFeed.controller;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -70,7 +72,7 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
 
         void refreshFragmentUI();
         void sendFeedCategoryNameToAppBar(String feedCategory);
-
+        void requestImageDialogBox();
     }
 
     /**
@@ -170,6 +172,26 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
 
     }
 
+    @Override
+    public void openImageGetterDialog(int returnFeedTo, int atPosition) {
+        temporaryFeedReturnTo = returnFeedTo;
+        temporaryFeedReturnPosition = atPosition;
+        mStaffFeedControllerListener.requestImageDialogBox();
+    }
+
+    @Override
+    public void returnToRecyclerURI(Uri uri) {
+        feedRecycleController.updateFeedItemWithImageUri(temporaryFeedReturnTo, temporaryFeedReturnPosition, uri);
+        temporaryFeedReturnTo = 0;
+        temporaryFeedReturnPosition = 0;
+    }
+
+    @Override
+    public void returnToRecyclerBitmap(Bitmap bitmap) {
+        feedRecycleController.updateFeedItemWithImagBitmap(temporaryFeedReturnTo, temporaryFeedReturnPosition, bitmap);
+        temporaryFeedReturnTo = 0;
+        temporaryFeedReturnPosition = 0;
+    }
 
     /**
      * FeedRoomListener
@@ -353,6 +375,8 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
                             FEED_BIRTHDAY = 300,
                             FEED_ITEM = 400;
 
+    private int temporaryFeedReturnTo = 0, temporaryFeedReturnPosition = 0;
+
     private StaffFeedFragment mStaffFeedFragment;
 
     public StaffFeedController(Context context, StaffFeedControllerListener listener, StaffFeedFragment parentFragment) {
@@ -413,19 +437,23 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
     }
 
     private void initViewWidgetsFromActivity(){
+
         fabActionAnnouncement = mActivity.findViewById(R.id.appBar_bottom_fab);
-        fabActionAnnouncement.hide();
 
-        fabActionAnnouncement.setImageDrawable(mActivity.getDrawable(R.drawable.ic_action_announcement_brand));
-        fabActionAnnouncement.show();
+        if(fabActionAnnouncement !=null){
+            fabActionAnnouncement.hide();
 
-        fabActionAnnouncement.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callBottomSheetView();
+            fabActionAnnouncement.setImageDrawable(mActivity.getDrawable(R.drawable.ic_action_announcement_brand));
+            fabActionAnnouncement.show();
 
-            }
-        });
+            fabActionAnnouncement.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callBottomSheetView();
+
+                }
+            });
+        }
 
         RelativeLayout rlSpecialActionButton = mActivity.findViewById(R.id.rl_special_launcher_forms);
         rlSpecialActionButton.setVisibility(View.GONE);

@@ -45,7 +45,6 @@ public class CardFeedEventWorker {
         this.mUserID = setUserID();
 
         int result = determineEventPhase();
-        Log.d(TAG, "to_delete: Result: " + result);
     }
 
     private String setUserID(){
@@ -63,7 +62,6 @@ public class CardFeedEventWorker {
 
         //determine if event has expired
         boolean isEventExpired = isEventExpired();
-        Log.d(TAG, "to_delete: Event Expired: " + isEventExpired);
 
         if(isEventExpired){
             DialogUtils.showToast(mContext, "EVENT_PHASE_OVER");
@@ -74,7 +72,6 @@ public class CardFeedEventWorker {
         // determine if user is in the event to go list  or the no-go list
         boolean isUserGoing = isUserInList(LIST_GOING);
         boolean isUserNotGoing = isUserInList(LIST_NOT_GOING);
-        Log.d(TAG, "to_delete: Going/Not Going: " + isUserGoing + ", "  + isUserNotGoing);
 
         if(isUserGoing){
             long howLongUntilEventDays = convertMillisecondsToReadableTime(TIME_DAYS, numberOfMillisecondsBetweenNowAndEvent());
@@ -87,9 +84,6 @@ public class CardFeedEventWorker {
 
             long howLongUntilEventStartHours = convertMillisecondsToReadableTime(TIME_HOURS, numberOfMillisecondsBetweenNowAndEvent());
             long howLongUntilEventStartsMinutes = convertMillisecondsToReadableTime(TIME_MINUTES, numberOfMillisecondsBetweenNowAndEvent());
-
-            Log.d(TAG, "to_delete: Hours: " + howLongUntilEventStartHours);
-            Log.d(TAG, "to_delete: Minutes: " + howLongUntilEventStartsMinutes);
 
             if(howLongUntilEventStartHours > 1 && howLongUntilEventStartHours <= 24){
                 DialogUtils.showToast(mContext, "EVENT_PHASE_DAY_OF_EVENT");

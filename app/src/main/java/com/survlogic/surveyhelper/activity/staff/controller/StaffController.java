@@ -26,6 +26,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.survlogic.surveyhelper.R;
+import com.survlogic.surveyhelper.activity.appCamera.CameraActivity;
+import com.survlogic.surveyhelper.activity.appCamera.CaptureImageActivity;
 import com.survlogic.surveyhelper.activity.appSettings.SettingsActivity;
 import com.survlogic.surveyhelper.activity.staff.workers.CurrentUserFirestoreWorker;
 import com.survlogic.surveyhelper.model.AppSettings;
@@ -99,11 +101,22 @@ public class StaffController implements CurrentUserFirestoreWorker.CurrentUserWo
 
 
     private void initNavigationView(){
-        ImageButton ibNavigateToSettings = mActivity.findViewById(R.id.btn_feed_navigation_settings);
+        ImageButton ibNavigateToSettings = mActivity.findViewById(R.id.btn_feed_navigate_to_settings);
         ibNavigateToSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(mActivity, SettingsActivity.class);
+                i.putExtra(mActivity.getResources().getString(R.string.KEY_PARENT_ACTIVITY),mActivity.getString(R.string.CLASS_STAFF_FEED));
+                mActivity.startActivity(i);
+                mActivity.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            }
+        });
+
+        ImageButton ibNavigateToAddFeed = mActivity.findViewById(R.id.btn_feed_navigate_to_add_feed);
+        ibNavigateToAddFeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(mActivity, CaptureImageActivity.class);
                 i.putExtra(mActivity.getResources().getString(R.string.KEY_PARENT_ACTIVITY),mActivity.getString(R.string.CLASS_STAFF_FEED));
                 mActivity.startActivity(i);
                 mActivity.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
