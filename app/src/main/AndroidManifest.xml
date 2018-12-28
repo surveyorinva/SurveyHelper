@@ -18,12 +18,42 @@
 
 
     <application
+        android:name=".model.AppUserClient"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <service android:name=".messaging.AppFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".messaging.MyJobService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".services.gnss.GnssService"
+            android:enabled="true"
+            android:exported="false">
+
+        </service>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_api_key"/>
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -38,6 +68,17 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+
 
         <activity
             android:name=".activity.appSplash.SplashActivity"
@@ -112,6 +153,21 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeView"/>
 
+        <activity android:name=".activity.staffFeed.view.event.activity.CardFeedEventRosterActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeView"/>
+
+        <activity android:name=".activity.staffFeed.view.message.activity.FeedMessageNewActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeView"/>
+
+        <activity android:name=".activity.staffFeed.activity.FeedWebActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeView"/>
+
         <activity android:name=".activity.appCamera.CaptureImageActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -122,18 +178,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeView"/>
 
-        <service android:name=".messaging.AppFirebaseMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-        <service
-            android:name=".messaging.MyJobService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
-            </intent-filter>
-        </service>
+        <activity android:name=".activity.photoGallery.PhotoGalleryActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeView"/>
 
     </application>
 

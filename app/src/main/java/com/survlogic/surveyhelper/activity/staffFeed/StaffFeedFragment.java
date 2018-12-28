@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.survlogic.surveyhelper.R;
+import com.survlogic.surveyhelper.activity.photoGallery.dialog.ZoomablePhotoDialog;
 import com.survlogic.surveyhelper.activity.staffFeed.controller.StaffFeedController;
 import com.survlogic.surveyhelper.activity.staff.inter.StaffActivityListener;
 import com.survlogic.surveyhelper.dialog.SelectPhotoDialog;
@@ -27,7 +29,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class StaffFeedFragment extends Fragment implements  StaffFeedController.StaffFeedControllerListener,
-                                                            SelectPhotoDialog.OnPhotoSelectedListener{
+                                                            SelectPhotoDialog.OnPhotoSelectedListener,
+                                                            ZoomablePhotoDialog.DialogListener{
 
     private static final String TAG = "StaffFeedFragment";
 
@@ -47,10 +50,15 @@ public class StaffFeedFragment extends Fragment implements  StaffFeedController.
 
     @Override
     public void requestImageDialogBox() {
-        Log.d(TAG, "to_delete: in Fragment ");
         SelectPhotoDialog selectPhotoDialog = new SelectPhotoDialog();
         selectPhotoDialog.show(getFragmentManager(),getString(R.string.app_dialog_name_select_photo));
         selectPhotoDialog.setTargetFragment(StaffFeedFragment.this,1);
+    }
+
+    @Override
+    public void requestPhotoViewDialogBox(String photoURL) {
+        Log.d(TAG, "to_delete: In Fragment!");
+        createDialogPhotoView(photoURL);
     }
 
     /**
@@ -63,8 +71,34 @@ public class StaffFeedFragment extends Fragment implements  StaffFeedController.
     }
 
     @Override
-    public void returnImageBitmap(Bitmap bitmap) {
+    public void returnImageThumbnail(Bitmap bitmap) {
+
+    }
+
+    @Override
+    public void returnImageFull(Bitmap bitmap) {
+        Log.d(TAG, "to_delete: Returned to fragment a bitmap! ");
         mFeedController.returnToRecyclerBitmap(bitmap);
+    }
+
+    @Override
+    public void returnImageFullError(boolean isError) {
+
+    }
+
+    @Override
+    public Context getContextFromParent() {
+        return mContext;
+    }
+
+
+    /**
+     * ZoomablePhotoDialog.DialogListener
+     */
+
+    @Override
+    public void isPopupOpen(boolean isOpen) {
+
     }
 
     private Context mContext;
@@ -160,6 +194,13 @@ public class StaffFeedFragment extends Fragment implements  StaffFeedController.
         this.mFirestoreUser = user;
         mFeedController.setFirestoreUser(user);
         mFeedController.buildUserProfile();
+
+    }
+
+    private void createDialogPhotoView(String photo){
+        ZoomablePhotoDialog photoDialog = new ZoomablePhotoDialog().newInstance(this,photo);
+        FragmentManager fm = getChildFragmentManager();
+        photoDialog.show(fm, getResources().getString(R.string.FRAGMENT_DIALOG_PHOTO_VIEW));
 
     }
 

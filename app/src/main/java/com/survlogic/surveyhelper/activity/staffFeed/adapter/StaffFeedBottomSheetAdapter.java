@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 
 import com.survlogic.surveyhelper.R;
 import com.survlogic.surveyhelper.activity.staffFeed.model.FeedActions;
-import com.survlogic.surveyhelper.activity.staffFeed.view.CardFeedActions;
+import com.survlogic.surveyhelper.activity.staffFeed.view.actions.CardFeedActions;
 import com.survlogic.surveyhelper.activity.staffFeed.view.CardFeedEmpty;
-import com.survlogic.surveyhelper.activity.staffFeed.view.CardFeedReflections;
-import com.survlogic.surveyhelper.activity.staffFeed.view.CardFeedReflectionsHeader;
+import com.survlogic.surveyhelper.activity.staffFeed.view.reflection.CardFeedReflections;
+import com.survlogic.surveyhelper.activity.staffFeed.view.reflection.CardFeedReflectionsHeader;
 
 import java.util.ArrayList;
 

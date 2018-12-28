@@ -13,8 +13,7 @@ import java.util.List;
 
 @IgnoreExtraProperties
 public class FirestoreUser implements Parcelable {
-    private @ServerTimestamp
-    Timestamp timestamp;
+    private @ServerTimestamp Timestamp timestamp=null;
     private String user_id;
     private String user_token_id;
     private String display_name;

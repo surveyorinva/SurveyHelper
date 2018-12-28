@@ -290,9 +290,15 @@
     <string name="staff_feed_card_event_going">Going</string>
     <string name="staff_feed_card_event_not_going">Not Going</string>
     <string name="staff_feed_card_event_check_in">Check In!</string>
+    <string name="staff_feed_card_event_checked_in">Checked In!  Waiting for Event to Start…</string>
     <string name="staff_feed_card_event_whos_here">Check Event Roster</string>
     <string name="staff_feed_card_event_time_of_event_fmt">Starts at: %1$s \nEnds at: %2$s</string>
+    <string name="staff_feed_card_event_location_of_event_fmt">%1$s \n%2$s</string>
+
     <string name="staff_feed_card_event_no_pictures_in_gallery">No pictures added yet!</string>
+    <string name="staff_feed_card_event_image_upload_complete">Uploaded Image to christopher</string>
+
+    <string name="staff_feed_card_item_location_not_added">A Location has not been provided.</string>
 
     <string name="staff_feed_popup_feed_announcement_game_dont_show_again">Don\'t Show this Again Today</string>
 
@@ -319,6 +325,30 @@
     <string name="staff_feed_filter_events">Show Events</string>
     <string name="staff_feed_filter_birthdays">Show Birthdays</string>
     <string name="staff_feed_filter_items">Show Feed Items</string>
+
+    <string name="staff_feed_menu_card_event_reminisce_item1">Hide Card</string>
+
+    <string name="staff_feed_menu_card_event_hide_item1">Change Mind, Going Now</string>
+    <string name="staff_feed_menu_card_event_hide_item2">Don\'t Show Again Today</string>
+
+    <string name="staff_feed_event_todo_message_delete_photo_title">Deleting Photo</string>
+    <string name="staff_feed_event_todo_message_delete_photo_summary">Long Pressing will delete this photo from the event. \n This feature will be available soon</string>
+
+    <string name="staff_feed_event_web_view_event_all_about_event">All About Event!</string>
+    <string name="staff_feed_event_web_view_announcement_all_about">In the News!</string>
+
+    <string name="staff_feed_event_check_in_complete_waiting_title">Check in Complete!</string>
+    <string name="staff_feed_event_check_in_complete_waiting_summary">Waiting for event to start.  Get ready to have fun!</string>
+
+    <string name="staff_feed_event_roster_title_active">Who\'s Here at the Event</string>
+    <string name="staff_feed_event_roster_title_closed">Who was at the Event</string>
+    <string name="staff_feed_event_roster_no_check_in_items">No one has checked into the event! \n Check in and start having fun!</string>
+
+    <string name="staff_feed_message_add_new_reflection_title">Reflection</string>
+    <string name="staff_feed_message_add_new_message_title">Message</string>
+
+    <string name="staff_feed_message_add_new_message_hint">Summarize your thoughts here.</string>
+    <string name="staff_feed_add_new_message_todo_message_delete_photo_summary">Long Pressing will delete this photo from the Item. \n This feature will be available soon</string>
 
     <!--Staff_Company-->
     <string name="staff_company_fragment_header">Company Pages</string>
@@ -361,5 +391,7 @@
     <string name="camera_error_configuration">Configuration Error.  Could not start Camera API</string>
     <string name="camera_intro_message">intro message</string>
 
+    <!--Photo Gallery API-->
+    <string name="gallery_name">Photo Gallery</string>
 
 </resources>

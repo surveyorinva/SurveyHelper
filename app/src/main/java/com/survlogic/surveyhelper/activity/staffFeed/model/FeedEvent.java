@@ -12,9 +12,12 @@ import java.util.Map;
 @IgnoreExtraProperties
 public class FeedEvent implements Parcelable {
 
+    private String event_id;
     private String background_url;
     private String event_header;
     private String event_body;
+    private String event_location;
+    private String event_address;
     private long date_event_start;
     private long date_event_end;
     private String details_url;
@@ -23,14 +26,20 @@ public class FeedEvent implements Parcelable {
     private ArrayList<String> whos_going;
     private ArrayList<String> whos_not_going;
     private ArrayList<String> whos_checked_in;
+    private ArrayList<String> pictures_url;
 
     public FeedEvent() {
     }
 
 
     public FeedEvent(FeedEvent event){
+        this.event_id = event.event_id;
+
         this.event_header = event.event_header;
         this.event_body = event.event_body;
+
+        this.event_location = event.event_location;
+        this.event_address = event.event_address;
 
         this.date_event_start = event.date_event_start;
         this.date_event_end = event.date_event_end;
@@ -44,6 +53,17 @@ public class FeedEvent implements Parcelable {
         this.whos_going = event.whos_going;
         this.whos_not_going = event.whos_not_going;
         this.whos_checked_in = event.whos_checked_in;
+
+        this.pictures_url = event.pictures_url;
+    }
+
+
+    public String getEvent_id() {
+        return event_id;
+    }
+
+    public void setEvent_id(String event_id) {
+        this.event_id = event_id;
     }
 
     public String getBackground_url() {
@@ -134,6 +154,30 @@ public class FeedEvent implements Parcelable {
         this.whos_checked_in = whos_checked_in;
     }
 
+    public ArrayList<String> getPictures_url() {
+        return pictures_url;
+    }
+
+    public void setPictures_url(ArrayList<String> pictures_url) {
+        this.pictures_url = pictures_url;
+    }
+
+    public String getEvent_location() {
+        return event_location;
+    }
+
+    public void setEvent_location(String event_location) {
+        this.event_location = event_location;
+    }
+
+    public String getEvent_address() {
+        return event_address;
+    }
+
+    public void setEvent_address(String event_address) {
+        this.event_address = event_address;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -141,9 +185,12 @@ public class FeedEvent implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.event_id);
         dest.writeString(this.background_url);
         dest.writeString(this.event_header);
         dest.writeString(this.event_body);
+        dest.writeString(this.event_location);
+        dest.writeString(this.event_address);
         dest.writeLong(this.date_event_start);
         dest.writeLong(this.date_event_end);
         dest.writeString(this.details_url);
@@ -152,12 +199,16 @@ public class FeedEvent implements Parcelable {
         dest.writeStringList(this.whos_going);
         dest.writeStringList(this.whos_not_going);
         dest.writeStringList(this.whos_checked_in);
+        dest.writeStringList(this.pictures_url);
     }
 
     protected FeedEvent(Parcel in) {
+        this.event_id = in.readString();
         this.background_url = in.readString();
         this.event_header = in.readString();
         this.event_body = in.readString();
+        this.event_location = in.readString();
+        this.event_address = in.readString();
         this.date_event_start = in.readLong();
         this.date_event_end = in.readLong();
         this.details_url = in.readString();
@@ -166,6 +217,7 @@ public class FeedEvent implements Parcelable {
         this.whos_going = in.createStringArrayList();
         this.whos_not_going = in.createStringArrayList();
         this.whos_checked_in = in.createStringArrayList();
+        this.pictures_url = in.createStringArrayList();
     }
 
     public static final Parcelable.Creator<FeedEvent> CREATOR = new Parcelable.Creator<FeedEvent>() {

@@ -1,5 +1,6 @@
 package com.survlogic.surveyhelper.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +20,11 @@ public class GraphicRotationUtils {
     /*
     ----------------------------- Image Rotation --------------------------------------------------
      */
+
+    public void setContext(Context context){
+        this.mContext = context;
+    }
+
 
     private static Bitmap rotateImage(Bitmap img, int degree) {
         Matrix matrix = new Matrix();
@@ -42,7 +48,7 @@ public class GraphicRotationUtils {
         int MAX_HEIGHT = 1024;
         int MAX_WIDTH = 1024;
 
-        // First decode with inJustDecodeBounds=true to check dimensions
+        // First decode with inJustDecod                                                            eBounds=true to check dimensions
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         InputStream imageStream = context.getContentResolver().openInputStream(selectedImage);
@@ -104,8 +110,9 @@ public class GraphicRotationUtils {
      * @param selectedImage Image URI
      * @return The resulted Bitmap after manipulation
      */
-    private Bitmap rotateImageIfRequired(Bitmap img, Uri selectedImage) throws IOException {
+    public Bitmap rotateImageIfRequired(Bitmap img, Uri selectedImage) throws IOException {
 
+        Log.d(TAG, "to_delete: In rotateImageIfRequired ");
         InputStream input = mContext.getContentResolver().openInputStream(selectedImage);
         ExifInterface ei;
         try {
@@ -116,6 +123,7 @@ public class GraphicRotationUtils {
 
             int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
 
+            Log.d(TAG, "to_delete: orientation: " + orientation);
             switch (orientation) {
                 case ExifInterface.ORIENTATION_ROTATE_90:
                     return rotateImage(img, 90);
@@ -131,6 +139,43 @@ public class GraphicRotationUtils {
             return img;
         }
 
+    }
+
+    public Bitmap decodeUri(Uri selectedImage, int REQUIRED_SIZE) {
+
+        try {
+            // Decode image size
+            BitmapFactory.Options o = new BitmapFactory.Options();
+            o.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(mContext.getContentResolver().openInputStream(selectedImage), null, o);
+
+            // The new size we want to scale to
+            // final int REQUIRED_SIZE =  size;
+
+            // Find the correct scale value. It should be the power of 2.
+            int width_tmp = o.outWidth, height_tmp = o.outHeight;
+            int scale = 1;
+            while (true) {
+                if (width_tmp / 2 < REQUIRED_SIZE
+                        || height_tmp / 2 < REQUIRED_SIZE) {
+                    break;
+                }
+                width_tmp /= 2;
+                height_tmp /= 2;
+                scale *= 2;
+            }
+
+            // Decode with inSampleSize
+            BitmapFactory.Options o2 = new BitmapFactory.Options();
+            o2.inSampleSize = scale;
+
+            Activity mActivity = (Activity) mContext;
+            return BitmapFactory.decodeStream(mActivity.getContentResolver().openInputStream(selectedImage), null, o2);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }
 

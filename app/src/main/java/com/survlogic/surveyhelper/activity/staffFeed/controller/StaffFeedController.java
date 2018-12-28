@@ -73,6 +73,7 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
         void refreshFragmentUI();
         void sendFeedCategoryNameToAppBar(String feedCategory);
         void requestImageDialogBox();
+        void requestPhotoViewDialogBox(String photoURL);
     }
 
     /**
@@ -191,6 +192,11 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
         feedRecycleController.updateFeedItemWithImagBitmap(temporaryFeedReturnTo, temporaryFeedReturnPosition, bitmap);
         temporaryFeedReturnTo = 0;
         temporaryFeedReturnPosition = 0;
+    }
+
+    @Override
+    public void openPhotoViewDialog(String photoURL) {
+        mStaffFeedControllerListener.requestPhotoViewDialogBox(photoURL);
     }
 
     /**
@@ -650,6 +656,18 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
         }
     }
 
+    public void fetchAdminFeeds(final long timeToWait){
+        if(invalidateFeeds()){
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    callAdminFeedCompilerOnRefresh(timeToWait);
+                    generateAdminFeeds();
+                }
+            },0);
+        }
+    }
 
     private void callPublicFeedCompilerOnRefresh(long timeToWait){
         new Handler().postDelayed(new Runnable() {
@@ -667,6 +685,16 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
             @Override
             public void run() {
                 LoadPrivateFeedsAsyncTask mLoadFeeds = new LoadPrivateFeedsAsyncTask();
+                mLoadFeeds.execute();
+            }
+        },timeToWait);
+    }
+
+    private void callAdminFeedCompilerOnRefresh(long timeToWait){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                LoadAdminFeedsAsyncTask mLoadFeeds = new LoadAdminFeedsAsyncTask();
                 mLoadFeeds.execute();
             }
         },timeToWait);
@@ -699,6 +727,12 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
 
         isFilterItemsDirty = false;
 
+    }
+
+    private void generateAdminFeeds(){
+        Log.d(TAG, "to_delete: generating admin feeds ");
+        generatorAnnouncement.onStart();
+        generatorEvent.onStart();
     }
 
     //----------------------------------------------------------------------------------------------
@@ -790,7 +824,12 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
                         mStaffFeedControllerListener.sendFeedCategoryNameToAppBar(title1);
 
                         setFeedRoomToShow(room.getRoom_id());
-                        fetchPrivateFeeds(500);
+
+                        if(!room.isRoom_admin()){
+                            fetchPrivateFeeds(500);
+                        }else{
+                            fetchAdminFeeds(500);
+                        }
 
                         bottomSheetCompiler.setRoomActionsRaw(room.getFeed_actions_common());
                         bottomSheetCompiler.build();
@@ -955,6 +994,75 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
 
                 FeedCompiler feedCompiler = new FeedCompiler(mContext);
                 feedCompiler.setListFeedItems(mListFeedItems);
+
+                mFeedCompiledList = feedCompiler.compileFeeds();
+
+                if(mFeedCompiledList.size() !=0){
+                    feedRecycleController.setFeedCompiledList(mFeedCompiledList);
+                    feedRecycleController.updateFeedRecycler();
+
+                }else{
+                    //Todo Show Error Message Here
+                    Log.d(TAG, "to_delete: No Feeds found ");
+                }
+
+            }else{
+                //Todo Show Error Message Here
+                Log.d(TAG, "to_delete: Timed Out! ");
+
+            }
+
+            swipeRefreshLayout.setRefreshing(false);
+
+        }
+
+    }
+
+    private class LoadAdminFeedsAsyncTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            if(!swipeRefreshLayout.isRefreshing()){
+                swipeRefreshLayout.setRefreshing(true);
+            }
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            Long t = Calendar.getInstance().getTimeInMillis();
+
+            while(!isAllFeedsReadyToGo && Calendar.getInstance().getTimeInMillis()-t < 10000){
+                try {
+                    Thread.sleep(1000);
+
+                    if(isWorkerFeedAnnouncementReturnOk &&
+                            isWorkerFeedEventReturnOk ){
+
+                        isAllFeedsReadyToGo = true;
+                    }
+
+                    publishProgress();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if(isAllFeedsReadyToGo){
+
+                FeedCompiler feedCompiler = new FeedCompiler(mContext);
+                feedCompiler.setListAnnouncements(mListAnnouncements);
+                feedCompiler.setListEvents(mListEvents);
 
                 mFeedCompiledList = feedCompiler.compileFeeds();
 

@@ -106,11 +106,15 @@ public class FeedBottomSheet extends BottomSheetDialogFragment {
         Log.d(TAG, "to_delete: Started ");
         recyclerView = view.findViewById(R.id.dialog_recycler_view);
         mRecyclerController = new FeedBottomSheetRecycleController(mContext);
-        mRecyclerController.setFeedCompiledList(mDialogListener.getFeedActions());
-        mRecyclerController.setRecyclerView(recyclerView);
 
-        if(mRecyclerController.getFeedActionsCompiledList().size() >0){
-            mRecyclerController.updateRecycler();
+        ArrayList<FeedActions> list = mDialogListener.getFeedActions();
+        if(list !=null){
+            mRecyclerController.setFeedCompiledList(list);
+            mRecyclerController.setRecyclerView(recyclerView);
+
+            if(mRecyclerController.getFeedActionsCompiledList().size() > 0){
+                mRecyclerController.updateRecycler();
+            }
         }
 
     }

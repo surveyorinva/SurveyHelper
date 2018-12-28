@@ -18,6 +18,7 @@ public class FeedRooms implements Parcelable {
     private String room_key;
     private String room_name;
     private boolean room_private;
+    private boolean room_admin;
     private boolean room_public_hall;
     private HashMap<String,Boolean> feed_actions_common;
 
@@ -29,6 +30,7 @@ public class FeedRooms implements Parcelable {
         this.room_available = room.room_available;
         this.room_key = room.room_key;
         this.room_name = room.room_name;
+        this.room_admin = room.room_admin;
         this.room_private = room.room_private;
         this.room_public_hall = room.room_public_hall;
         this.feed_actions_common = room.feed_actions_common;
@@ -83,6 +85,14 @@ public class FeedRooms implements Parcelable {
         this.room_private = room_private;
     }
 
+    public boolean isRoom_admin() {
+        return room_admin;
+    }
+
+    public void setRoom_admin(boolean room_admin) {
+        this.room_admin = room_admin;
+    }
+
     public boolean isRoom_public_hall() {
         return room_public_hall;
     }
@@ -106,25 +116,27 @@ public class FeedRooms implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.room_id);
-        dest.writeString(this.room_name);
+        dest.writeParcelable(this.created_on, flags);
         dest.writeByte(this.room_available ? (byte) 1 : (byte) 0);
+        dest.writeString(this.room_id);
         dest.writeString(this.room_key);
+        dest.writeString(this.room_name);
         dest.writeByte(this.room_private ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.room_admin ? (byte) 1 : (byte) 0);
         dest.writeByte(this.room_public_hall ? (byte) 1 : (byte) 0);
         dest.writeSerializable(this.feed_actions_common);
-        dest.writeParcelable(this.created_on, flags);
     }
 
     protected FeedRooms(Parcel in) {
-        this.room_id = in.readString();
-        this.room_name = in.readString();
+        this.created_on = in.readParcelable(Timestamp.class.getClassLoader());
         this.room_available = in.readByte() != 0;
+        this.room_id = in.readString();
         this.room_key = in.readString();
+        this.room_name = in.readString();
         this.room_private = in.readByte() != 0;
+        this.room_admin = in.readByte() != 0;
         this.room_public_hall = in.readByte() != 0;
         this.feed_actions_common = (HashMap<String, Boolean>) in.readSerializable();
-        this.created_on = in.readParcelable(Timestamp.class.getClassLoader());
     }
 
     public static final Parcelable.Creator<FeedRooms> CREATOR = new Parcelable.Creator<FeedRooms>() {

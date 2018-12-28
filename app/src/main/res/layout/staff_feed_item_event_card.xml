@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.MaterialComponents.CardView"
+    app:cardElevation="@dimen/app_card_elevation"
+    android:layout_marginStart="@dimen/app_card_margins"
+    android:layout_marginEnd="@dimen/app_card_margins"
+    android:layout_marginTop="@dimen/app_card_margin_top"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="150dp"
+    tools:ignore="ContentDescription">
+
+    <ImageView
+        android:id="@+id/event_image"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_alignParentEnd="true"
+                android:layout_width="25dp"
+                android:layout_height="25dp">
+
+                <ImageButton
+                    android:id="@+id/btn_menu_options"
+                    android:src="@drawable/ic_more_vert_dark_24dp"
+                    android:background="@color/colorTransparent"
+                    android:tint="@color/colorPrimaryDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"/>
+
+                <ImageButton
+                    android:id="@+id/btn_menu_expand"
+                    android:src="@drawable/ic_open_in_new_dark_24dp"
+                    android:tint="@color/colorPrimaryDark"
+                    android:background="@color/colorTransparent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ProgressBar
+                    android:id="@+id/event_image_progress"
+                    android:layout_centerInParent="true"
+                    android:indeterminate="true"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+
+                <TextView
+                    android:id="@+id/event_text_header"
+                    android:gravity="center"
+                    android:layout_centerHorizontal="true"
+                    style="@style/Labels.Title.Dark"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/background_rectangle_filled_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"/>
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/rl_body_description"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_header"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_info_outline_light_24dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/background_rectangle_filled_dark_no_border"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:id="@+id/event_body"
+                        style="@style/Labels.Body.Normal.Dark"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:minLines="3"
+                        android:layout_marginStart="5dp"
+                        android:paddingStart="4dp"
+                        android:paddingEnd="4dp"
+                        android:layout_weight="100"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/rl_body_time"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_body_description"
+                android:layout_marginTop="3dp">
+
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_access_time_light_24dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/background_rectangle_filled_dark_no_border"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:id="@+id/event_date_start"
+                        style="@style/Labels.Title.Light"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="60"/>
+
+                    <TextView
+                        android:id="@+id/event_date_time"
+                        style="@style/Labels.Body.Normal.Light"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="40"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/rl_body_location"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_body_time"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_add_location_light_24dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/background_rectangle_filled_dark_no_border"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:id="@+id/event_location"
+                        style="@style/Labels.Body.Normal.Light"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="100"
+                        android:autoLink="map"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_event_card_root_phase"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical"
+                android:layout_below="@id/rl_body_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include
+                    layout="@layout/staff_feed_item_event_card_phase_intro"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"/>
+
+                <include
+                    layout="@layout/staff_feed_item_event_card_phase_countdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"/>
+
+                <include
+                    layout="@layout/staff_feed_item_event_card_phase_check_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"/>
+
+                <include
+                    layout="@layout/staff_feed_item_event_card_phase_in_event"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"/>
+
+                <include
+                    layout="@layout/staff_feed_item_event_card_phase_after_event"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+</android.support.design.card.MaterialCardView>

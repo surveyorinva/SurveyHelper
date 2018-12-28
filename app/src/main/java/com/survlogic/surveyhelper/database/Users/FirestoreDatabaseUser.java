@@ -1,9 +1,13 @@
 package com.survlogic.surveyhelper.database.Users;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.View;
 
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -17,6 +21,10 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageSize;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import com.survlogic.surveyhelper.model.AppUserClient;
 import com.survlogic.surveyhelper.model.FirestoreUser;
 import com.survlogic.surveyhelper.utils.DialogUtils;
 
@@ -28,11 +36,16 @@ public class FirestoreDatabaseUser {
 
     private static final String TAG = "FirestoreDatabaseUser";
     private Context mContext;
+    private Activity mActivity;
+    private Bitmap mProfileBitmap;
+
     private FirestoreDatabaseUserListener mListener;
 
 
     public FirestoreDatabaseUser(Context context, FirestoreDatabaseUserListener listener) {
         this.mContext = context;
+        this.mActivity = (Activity) context;
+
         this.mListener = listener;
 
     }
@@ -49,6 +62,43 @@ public class FirestoreDatabaseUser {
 
         Query userQuery = usersRef
                 .whereEqualTo("user_id", currentUser.getUid());
+
+        userQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(QueryDocumentSnapshot document: task.getResult()) {
+                        FirestoreUser user = document.toObject(FirestoreUser.class);
+                        mListUsers.add(user);
+                    }
+
+                    if(task.getResult().size() !=0){
+                        Log.d(TAG, "getUser-Success");
+                        userData.setFirestoreUser(mListUsers.get(0));
+                        mListener.returnFirestoreUser(userData);
+
+                    }
+
+                }else{
+                    Log.d(TAG, "getUser-Failure");
+                    mListener.returnFirestoreUserGetError(true);
+                }
+            }
+        });
+
+    }
+
+    public void getUserDataFromFirestore(String user_id){
+        final ArrayList<FirestoreUser> mListUsers = new ArrayList<>();
+        DocumentSnapshot mLastQueriedUser;
+        final FirestoreUser userData = new FirestoreUser();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        CollectionReference usersRef = db.collection("users");
+
+        Query userQuery = usersRef
+                .whereEqualTo("user_id", user_id);
 
 
         userQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -94,6 +144,24 @@ public class FirestoreDatabaseUser {
 
                     FirestoreUser user = documentSnapshot.toObject(FirestoreUser.class);
                     mListener.updateUserProfileSuccess(user);
+                    ((AppUserClient) (mActivity.getApplicationContext())).setUser(user);
+
+                    try{
+                        if(user.getProfile_pic_url() !=null){
+                            ImageLoader imageLoader = ImageLoader.getInstance();
+                            ImageSize targetSize = new ImageSize(60,100);
+                            imageLoader.loadImage(user.getProfile_pic_url(),targetSize, new SimpleImageLoadingListener(){
+                                @Override
+                                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                                    Log.d(TAG, "to_delete: updateUserProfileFromFirebaseRealTime: onLoadingComplete: Loading Completed");
+                                    mProfileBitmap = loadedImage;
+                                    ((AppUserClient) (mActivity.getApplicationContext())).setUserBitmap(mProfileBitmap);
+                                }
+                            });
+                        }
+                    }catch (NullPointerException ex){
+                        Log.e(TAG, "to_delete: updateUserProfileFromFirebaseRealTime: Null Pointer Exception" );
+                    }
                 }
             }
         });

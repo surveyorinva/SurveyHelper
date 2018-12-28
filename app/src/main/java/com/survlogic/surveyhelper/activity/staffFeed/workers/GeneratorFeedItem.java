@@ -41,6 +41,46 @@ public class GeneratorFeedItem implements FirestoreDatabaseFeedItem.FeedItemList
         mWorkerListener.returnFeedItemError(isError);
     }
 
+    @Override
+    public void addNewFeedItemSuccess(String feedItem_id) {
+
+    }
+
+    @Override
+    public void addNewFeedItemFailure(boolean isError) {
+
+    }
+
+    @Override
+    public void updateNewFeedItemSuccess() {
+
+    }
+
+    @Override
+    public void updateNewFeedItemFailure(boolean isError) {
+
+    }
+
+    @Override
+    public void fetchFeedItemLive(FeedItem feedItem) {
+
+    }
+
+    @Override
+    public void fetchFeedItemLiveGetError(boolean isError) {
+
+    }
+
+    @Override
+    public void itemPhotoAddedSuccessfully() {
+
+    }
+
+    @Override
+    public void itemPhotoAddedGetError(boolean isError) {
+
+    }
+
     private Context mContext;
     private Activity mActivity;
     private FeedItemGeneratorListener mWorkerListener;

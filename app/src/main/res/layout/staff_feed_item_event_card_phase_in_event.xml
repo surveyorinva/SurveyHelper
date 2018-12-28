@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/cl_event_actions_in_event"
+    android:visibility="visible">
+
+    <Button
+        android:id="@+id/btn_in_event_check_roster"
+        style="@style/Buttons.Raised.Light"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/staff_feed_card_event_whos_here"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.github.jorgecastilloprz.FABProgressCircle
+        android:id="@+id/fabProgressCircle_in_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_in_event_check_roster"
+        app:arcColor="@color/colorPrimaryNormal"
+        app:arcWidth="3dp"
+        app:finalIcon="@drawable/ic_photo_camera_light_24dp"
+        app:reusable="true">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_in_event_take_photo"
+            android:layout_width="@dimen/fab_size"
+            android:layout_height="@dimen/fab_size"
+            android:src="@drawable/ic_photo_camera_light_24dp"
+            android:tint="@color/colorPrimaryNormal"
+            app:backgroundTint="@android:color/white"
+            app:borderWidth="0dp"
+            app:elevation="@dimen/fab_elevation"
+            app:fabCustomSize="@dimen/fab_size"/>
+
+    </com.github.jorgecastilloprz.FABProgressCircle>
+
+
+
+    <GridView
+        android:id="@+id/gridView_in_event_photo_gallery"
+        android:numColumns="4"
+        android:verticalSpacing="1dp"
+        android:horizontalSpacing="1dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
+        android:drawSelectorOnTop="true"
+        android:listSelector="@drawable/app_grid_view_highlight_transparent"
+        android:visibility="gone"
+        android:layout_width="308dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fabProgressCircle_in_event"
+        app:layout_constraintTop_toBottomOf="@+id/btn_in_event_check_roster" />
+
+    <TextView
+        android:id="@+id/recycler_in_event_photo_gallery_empty_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/staff_feed_card_event_no_pictures_in_gallery"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fabProgressCircle_in_event"
+        app:layout_constraintTop_toBottomOf="@+id/btn_in_event_check_roster" />
+
+</android.support.constraint.ConstraintLayout>

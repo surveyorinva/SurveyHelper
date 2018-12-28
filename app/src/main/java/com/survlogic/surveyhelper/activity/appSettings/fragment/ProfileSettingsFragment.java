@@ -1,5 +1,6 @@
 package com.survlogic.surveyhelper.activity.appSettings.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -49,7 +50,6 @@ public class ProfileSettingsFragment extends Fragment implements    ProfileContr
 
     private static final String TAG = "ProfileSettingsFragment";
     private View v;
-
     private String parentClass;
 
     private FirebaseAuth mAuth;
@@ -307,7 +307,18 @@ public class ProfileSettingsFragment extends Fragment implements    ProfileContr
     }
 
     @Override
-    public void returnImageBitmap(Bitmap bitmap) {
+    public void returnImageThumbnail(Bitmap bitmap) {
+
+
+    }
+
+    @Override
+    public Context getContextFromParent() {
+        return getActivity();
+    }
+
+    @Override
+    public void returnImageFull(Bitmap bitmap) {
         pbUserProfilePictureProgress.setVisibility(View.VISIBLE);
 
         ivUserProfilePicture.setImageBitmap(bitmap);
@@ -316,6 +327,10 @@ public class ProfileSettingsFragment extends Fragment implements    ProfileContr
         mControllerListener.setUserProfilePictureBitmap(bitmap);
 
         mControllerListener.startProfilePictureUploadToCloud();
+    }
+
+    @Override
+    public void returnImageFullError(boolean isError) {
 
     }
 }

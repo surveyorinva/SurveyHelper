@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.telephony.PhoneNumberUtils;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -25,8 +24,6 @@ import com.survlogic.surveyhelper.R;
 import com.survlogic.surveyhelper.activity.appSettings.controller.EditProfileController;
 import com.survlogic.surveyhelper.activity.appSettings.inter.EditProfileListener;
 import com.survlogic.surveyhelper.model.FirestoreUser;
-
-import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.ParseException;

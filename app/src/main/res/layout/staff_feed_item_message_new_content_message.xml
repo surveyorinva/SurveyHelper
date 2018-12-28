@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/login_content_margin_start"
+        android:layout_marginTop="@dimen/login_content_margin_top"
+        android:layout_marginEnd="@dimen/login_content_margin_end"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
+
+        <TextView
+            android:id="@+id/message_type_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/Labels.Toolbar.Dark"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
+
+        <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+            android:id="@+id/message_entry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:iconSignifier="@drawable/ic_speaker_notes_dark_24dp"
+            app:hasFocus="true"
+            app:helperText=" "
+            app:isResponsiveIconColor="true"
+            app:hasClearButton="true"
+            app:labelText="@string/staff_feed_message_add_new_message_title"
+            app:useDenseSpacing="false">
+
+            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                android:id="@+id/message_entry_value"
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:imeOptions="actionNext"
+                android:hint="@string/staff_feed_message_add_new_message_hint"
+                android:inputType="textMultiLine|textCapWords|textAutoComplete"
+                android:gravity="top|start"
+                android:lines="5"
+                android:maxLines="5"
+                android:minLines="1"
+                android:nextFocusDown="@id/signIn_user_name_last_value"
+                android:popupElevation="5dp"/>
+
+        </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+        <include
+            layout="@layout/staff_feed_item_message_new_content_snippet_picture"/>
+
+        <include
+            layout="@layout/staff_feed_item_message_new_content_snippet_map"/>
+
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

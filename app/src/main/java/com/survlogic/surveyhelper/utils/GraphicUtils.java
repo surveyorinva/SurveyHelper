@@ -6,7 +6,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.MediaStore;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -169,7 +171,7 @@ public class GraphicUtils {
      * Provide the height to which the sourceImage is to be resized. This method will calculate the
      * resultant height. Use scaleDownBitmap from {@link DialogUtils} wherever possible
      */
-    public Bitmap resizeImageByHeight(int height, Bitmap sourceImage) {
+    public static Bitmap resizeImageByHeight(int height, Bitmap sourceImage) {
         // TODO: move this method to ImageUtils
         int widthO = 0; // original width
         int heightO = 0; // original height
@@ -187,5 +189,12 @@ public class GraphicUtils {
         return Bitmap.createScaledBitmap(sourceImage, widthNew, heightNew, true);
     }
 
+
+    public static Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
 
 }

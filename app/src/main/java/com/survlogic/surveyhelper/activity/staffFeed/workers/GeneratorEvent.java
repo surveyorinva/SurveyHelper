@@ -36,6 +36,36 @@ public class GeneratorEvent implements FirestoreDatabaseFeedEvent.FeedEventListe
         mWorkerListener.returnEventsError(isError);
     }
 
+    @Override
+    public void eventPhotoAddedSuccessfully(FeedEvent event) {
+
+    }
+
+    @Override
+    public void eventPhotoAddedGetError(boolean isError) {
+
+    }
+
+    @Override
+    public void eventUserAddedToListSuccessful(int listAdded) {
+
+    }
+
+    @Override
+    public void eventUserAddedToListGetError(boolean isError) {
+
+    }
+
+    @Override
+    public void fetchEventLive(FeedEvent event) {
+
+    }
+
+    @Override
+    public void fetchEventLiveGetError(boolean isError) {
+
+    }
+
     private Context mContext;
     private Activity mActivity;
     private EventGeneratorListener mWorkerListener;

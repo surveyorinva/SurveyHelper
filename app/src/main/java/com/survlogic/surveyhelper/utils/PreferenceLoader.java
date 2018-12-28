@@ -150,6 +150,7 @@ public class PreferenceLoader {
         FeedReflections reflection = new FeedReflections();
 
         reflection.setSummary(sharedPreferences.getString(mContext.getString(R.string.pref_feed_reflection_daily_morning),""));
+        reflection.setType(mActivity.getResources().getInteger(R.integer.FEED_MESSAGE_TYPE_REFLECTION_MORNING));
 
         boolean isComplete = sharedPreferences.getBoolean(mContext.getString(R.string.pref_feed_reflection_daily_morning_completed),false);
         reflection.setComplete(isComplete);
@@ -171,6 +172,7 @@ public class PreferenceLoader {
         FeedReflections reflection = new FeedReflections();
 
         reflection.setSummary(sharedPreferences.getString(mContext.getString(R.string.pref_feed_reflection_daily_evening),""));
+        reflection.setType(mActivity.getResources().getInteger(R.integer.FEED_MESSAGE_TYPE_REFLECTION_EVENING));
 
         boolean isComplete = sharedPreferences.getBoolean(mContext.getString(R.string.pref_feed_reflection_daily_evening_completed),false);
         reflection.setComplete(isComplete);
@@ -192,6 +194,7 @@ public class PreferenceLoader {
         FeedReflections reflection = new FeedReflections();
 
         reflection.setSummary(sharedPreferences.getString(mContext.getString(R.string.pref_feed_reflection_weekly_a),""));
+        reflection.setType(mActivity.getResources().getInteger(R.integer.FEED_MESSAGE_TYPE_REFLECTION_WEEKLY));
 
         boolean isComplete = sharedPreferences.getBoolean(mContext.getString(R.string.pref_feed_reflection_weekly_a_completed),false);
         reflection.setComplete(isComplete);

@@ -11,24 +11,38 @@ import android.view.ViewGroup;
 
 import com.survlogic.surveyhelper.R;
 import com.survlogic.surveyhelper.activity.staffFeed.model.Feed;
-import com.survlogic.surveyhelper.activity.staffFeed.view.CardFeedAnnouncement;
-import com.survlogic.surveyhelper.activity.staffFeed.view.CardFeedBirthday;
-import com.survlogic.surveyhelper.activity.staffFeed.view.CardFeedBirthdayHeader;
+import com.survlogic.surveyhelper.activity.staffFeed.model.FeedEvent;
+import com.survlogic.surveyhelper.activity.staffFeed.view.announcement.CardFeedAnnouncement;
+import com.survlogic.surveyhelper.activity.staffFeed.view.birthday.CardFeedBirthday;
+import com.survlogic.surveyhelper.activity.staffFeed.view.birthday.CardFeedBirthdayHeader;
 import com.survlogic.surveyhelper.activity.staffFeed.view.CardFeedEmpty;
-import com.survlogic.surveyhelper.activity.staffFeed.view.Event.CardFeedEvent;
-import com.survlogic.surveyhelper.activity.staffFeed.view.CardFeedItem;
+import com.survlogic.surveyhelper.activity.staffFeed.view.event.CardFeedEvent;
+import com.survlogic.surveyhelper.activity.staffFeed.view.message.CardViewFeedMessage;
+
 import java.util.ArrayList;
 
-public class StaffFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class StaffFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements CardFeedEvent.CardFeedEventListener {
 
     private static final String TAG = "StaffFeedAdapter";
 
     public interface AdapterListener{
         void refreshView();
         void openImageGetterDialog(int returnFeedTo, int atPosition);
+        void openPhotoViewDialog(String photoURL);
         void returnToRecyclerURI(Uri uri);
         void returnToRecyclerBitmap(Bitmap bitmap);
+    }
 
+    /**
+     *CardFeedEvent.CardFeedEventListener
+     * */
+
+    @Override
+    public void replaceEvent(int position, FeedEvent event) {
+        Feed feed = mFeedList.get(position);
+        feed.setEvent(event);
+        mFeedList.set(position,feed);
+        notifyDataSetChanged();
     }
 
     private Context mContext;
@@ -62,13 +76,13 @@ public class StaffFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         switch (viewType){
             case FEED_ANNOUNCEMENT:
-                View vAnnouncement = mInflater.inflate(R.layout.staff_feed_content_card_announcement,parent,false);
+                View vAnnouncement = mInflater.inflate(R.layout.staff_feed_item_announcement_card,parent,false);
                 viewHolder = new CardFeedAnnouncement(vAnnouncement,mContext,mAdapterListener);
                 break;
 
             case FEED_EVENT:
-                View vEvent = mInflater.inflate(R.layout.staff_feed_content_card_event,parent,false);
-                viewHolder = new CardFeedEvent(vEvent,mContext,mAdapterListener);
+                View vEvent = mInflater.inflate(R.layout.staff_feed_item_event_card,parent,false);
+                viewHolder = new CardFeedEvent(vEvent,mContext,mAdapterListener,this);
                 break;
 
             case FEED_BIRTHDAY_HEADER_TODAY:
@@ -77,7 +91,7 @@ public class StaffFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 break;
 
             case FEED_BIRTHDAY_TODAY:
-                View vBirthdayToday = mInflater.inflate(R.layout.staff_feed_content_card_birthday,parent,false);
+                View vBirthdayToday = mInflater.inflate(R.layout.staff_feed_item_birthday_card,parent,false);
                 viewHolder = new CardFeedBirthday(vBirthdayToday,mContext,mAdapterListener,CardFeedBirthday.TYPE_TODAY);
                 break;
 
@@ -87,13 +101,13 @@ public class StaffFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 break;
 
             case FEED_BIRTHDAY_FUTURE:
-                View vBirthdayFuture = mInflater.inflate(R.layout.staff_feed_content_card_birthday_future,parent,false);
+                View vBirthdayFuture = mInflater.inflate(R.layout.staff_feed_item_birthday_future_card,parent,false);
                 viewHolder = new CardFeedBirthday(vBirthdayFuture,mContext,mAdapterListener,CardFeedBirthday.TYPE_FUTURE);
                 break;
 
             case FEED_FEED_ITEM:
-                View vFeedItem = mInflater.inflate(R.layout.staff_feed_content_card_feed,parent,false);
-                viewHolder = new CardFeedItem(vFeedItem,mContext,mAdapterListener);
+                View vFeedItem = mInflater.inflate(R.layout.staff_feed_item_message_card,parent,false);
+                viewHolder = new CardViewFeedMessage(vFeedItem,mContext,mAdapterListener);
                 break;
 
             case FEED_SYSTEM_EMPTY:
@@ -102,8 +116,8 @@ public class StaffFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 break;
 
             default:
-                View v = mInflater.inflate(R.layout.staff_feed_content_card_feed,parent,false);
-                viewHolder = new CardFeedItem(v,mContext,mAdapterListener);
+                View v = mInflater.inflate(R.layout.staff_feed_item_message_card,parent,false);
+                viewHolder = new CardViewFeedMessage(v,mContext,mAdapterListener);
                 break;
         }
 
@@ -161,7 +175,7 @@ public class StaffFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 break;
 
             case FEED_FEED_ITEM:
-                CardFeedItem vhFeedItem = (CardFeedItem) viewHolder;
+                CardViewFeedMessage vhFeedItem = (CardViewFeedMessage) viewHolder;
                 vhFeedItem.configureViewHolder(mFeedList,position);
 
                 break;

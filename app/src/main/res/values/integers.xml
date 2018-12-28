@@ -26,4 +26,8 @@
     <integer name="FEED_ACTIONS_ITEM_UPDATE">401</integer>
     <integer name="FEED_ACTIONS_ITEM_MESSAGE">402</integer>
 
+    <integer name="FEED_MESSAGE_TYPE_REFLECTION">200</integer>
+    <integer name="FEED_MESSAGE_TYPE_REFLECTION_MORNING">201</integer>
+    <integer name="FEED_MESSAGE_TYPE_REFLECTION_EVENING">202</integer>
+    <integer name="FEED_MESSAGE_TYPE_REFLECTION_WEEKLY">303</integer>
 </resources>

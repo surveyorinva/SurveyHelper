@@ -5,13 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.survlogic.surveyhelper.R;
 import com.survlogic.surveyhelper.activity.appLogin.LoginActivity;
 import com.survlogic.surveyhelper.activity.appSettings.SettingsActivity;

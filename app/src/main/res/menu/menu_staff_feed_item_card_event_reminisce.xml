@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/menu_item1_id"
+            android:title="@string/staff_feed_menu_card_event_reminisce_item1">
+
+        </item>
+
+    </group>
+</menu>

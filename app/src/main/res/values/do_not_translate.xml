@@ -3,6 +3,8 @@
 
 <!-- Preferences -->
 
+    <string name="google_maps_api_key">AIzaSyC3TnEaACYl7Wy9WHxsqHR5j6oE_JjsUIg</string>
+
     <!--Dialog Fragments-->
     <string name="app_dialog_name_select_photo">SelectPhotoDialog</string>
 
@@ -72,6 +74,14 @@
     <string name="KEY_PARENT_ACTIVITY">KEY_PARENT_ACTIVITY</string>
     <string name="KEY_FIRESTORE_USER">KEY_FIRESTORE_USER</string>
 
+    <string name="KEY_GALLERY_PHOTO_STRING_ARRAY_URL">KEY_GALLERY_PHOTO_STRING_ARRAY_URL</string>
+
+    <string name="KEY_EVENT_WEB_URL">KEY_EVENT_WEB_URL</string>
+    <string name="KEY_EVENT_HEADER_TITLE">KEY_EVENT_HEADER_TITLE</string>
+
+    <string name="KEY_FEED_PARCEL">KEY_FEED_PARCEL</string>
+    <string name="KEY_MESSAGE_TYPE_ID">KEY_MESSAGE_TYPE_ID</string>
+    <string name="KEY_MESSAGE_ROOM">KEY_MESSAGE_ROOM</string>
 
 <!--Class Names-->
     <string name="CLASS_SETUP">CLASS_SETUP</string>
@@ -85,6 +95,7 @@
 
 <!--Fragment Names-->
     <string name="FRAGMENT_CAMERA">Camera2</string>
+    <string name="FRAGMENT_DIALOG_PHOTO_VIEW">ZoomablePhotoDialog</string>
 
 <!--Remote Config Keys-->
     <string name="CONFIG_KEY_APP_ACCESS">application_enabled</string>
@@ -126,5 +137,8 @@
 <!--Messaging Resources-->
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 
+<!--Hasmap Keys-->
+    <string name="HASH_KEY_LAT">latitude</string>
+    <string name="HASH_KEY_LON">longitude</string>
 
 </resources>
