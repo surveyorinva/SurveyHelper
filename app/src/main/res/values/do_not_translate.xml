@@ -3,7 +3,7 @@
 
 <!-- Preferences -->
 
-    <string name="google_maps_api_key">AIzaSyC3TnEaACYl7Wy9WHxsqHR5j6oE_JjsUIg</string>
+    <string name="google_maps_api_key"></string>
 
     <!--Dialog Fragments-->
     <string name="app_dialog_name_select_photo">SelectPhotoDialog</string>
