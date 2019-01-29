@@ -3,6 +3,7 @@ package com.survlogic.surveyhelper.activity.staffFeed.view.message.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
@@ -11,7 +12,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.text.Editable;
@@ -38,32 +41,57 @@ import com.google.maps.android.clustering.ClusterManager;
 import com.survlogic.surveyhelper.R;
 import com.survlogic.surveyhelper.activity.photoGallery.dialog.ZoomablePhotoDialog;
 import com.survlogic.surveyhelper.activity.staffFeed.model.FeedReflections;
-import com.survlogic.surveyhelper.activity.staffFeed.view.message.controller.FeedMessageController;
+import com.survlogic.surveyhelper.activity.staffFeed.view.message.controller.FeedNewMessageController;
 import com.survlogic.surveyhelper.dialog.SelectPhotoDialogFromActivity;
 import com.survlogic.surveyhelper.model.AppUserClient;
 import com.survlogic.surveyhelper.model.FirestoreUser;
 import com.survlogic.surveyhelper.services.maps.ClusterMarkerItem;
 import com.survlogic.surveyhelper.services.maps.ClusterMarkerRenderer;
 import com.survlogic.surveyhelper.utils.BaseActivity;
+import com.survlogic.surveyhelper.utils.KeyboardUtils;
 
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
-public class FeedMessageNewActivity extends BaseActivity implements FeedMessageController.ControllerListener,
-        SelectPhotoDialogFromActivity.OnPhotoSelectedListener,
-        ZoomablePhotoDialog.DialogListener,
-        OnMapReadyCallback {
+public class FeedMessageNewActivity extends BaseActivity implements FeedNewMessageController.ControllerListener,
+                                                                    SelectPhotoDialogFromActivity.OnPhotoSelectedListener,
+                                                                    ZoomablePhotoDialog.DialogListener,
+                                                                    OnMapReadyCallback {
 
     private static final String TAG = "CardFeedMessageNewActiv";
 
 
     /**
-     * FeedMessageController.GeneralListener
+     * FeedNewMessageController.GeneralListener
      */
 
     @Override
     public void finishActivity() {
-        finish();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
 
+                Intent data = new Intent();
+                String text = "Result to be returned....";
+                //---set the data to pass back---
+                data.setData(Uri.parse(text));
+                setResult(RESULT_OK, data);
+
+                finish();
+            }
+        },delay_before_finish);
+
+    }
+
+    @Override
+    public void showSnackBar(String message) {
+        Snackbar.make(clRoot, message, Snackbar.LENGTH_LONG)
+                .show();
+    }
+
+    @Override
+    public void hideKeyboard() {
+        KeyboardUtils.hideKeyboard(etUserEntry);
     }
 
     @Override
@@ -96,11 +124,8 @@ public class FeedMessageNewActivity extends BaseActivity implements FeedMessageC
 
     @Override
     public void returnBestLocation(Location location) {
-        Log.d(TAG, "to_delete: returnBestLocation: Started");
         this.mLocationBest = location;
         this.isBestPositionAvailable = true;
-
-        Log.d(TAG, "to_delete: returnBestLocation: Is Map Set: " + isMapSet);
 
         if(isMapSet){
             addMapMarkerSelf(true);
@@ -111,7 +136,7 @@ public class FeedMessageNewActivity extends BaseActivity implements FeedMessageC
     public void pingActivityForData() {
 
         String message = etUserEntry.getText().toString();
-        checkAndMessage(message);
+        checkAndSetMessage(message);
 
     }
 
@@ -156,11 +181,16 @@ public class FeedMessageNewActivity extends BaseActivity implements FeedMessageC
     private Context mContext;
     private Activity mActivity;
 
+    private CoordinatorLayout clRoot;
+
     private FeedReflections mFeedRelection;
     private String mActivityTitle;
 
-    private FeedMessageController mWorkController;
+    private FeedNewMessageController mWorkController;
     private boolean isActivityControllerSetup = false;
+
+    private int mMessageClass = 0;
+    private static final int CLASS_REFLECTION = 1, CLASS_ACTION = 2;
 
     private String mMessageString;
     private String mRoomToPostMessage;
@@ -181,7 +211,7 @@ public class FeedMessageNewActivity extends BaseActivity implements FeedMessageC
     private ClusterMarkerRenderer mClusterManagerRenderer;
 
     private  ExtendedEditText etUserEntry;
-    private long delay = 1000; // 1 seconds after user stops typing
+    private long typing_delay = 1000, delay_before_finish = 1000;
     private long last_text_edit = 0;
     private Handler handler = new Handler();
 
@@ -255,15 +285,36 @@ public class FeedMessageNewActivity extends BaseActivity implements FeedMessageC
     }
 
     private void getIntentDelivery(){
-        mActivityTitle = getIntent().getStringExtra(getString(R.string.KEY_EVENT_HEADER_TITLE));
-        mFeedRelection = getIntent().getParcelableExtra(getString(R.string.KEY_FEED_PARCEL));
-        mTypeOfMessage = getIntent().getIntExtra(getString(R.string.KEY_MESSAGE_TYPE_ID),0);
-        mRoomToPostMessage = getIntent().getStringExtra(getString(R.string.KEY_MESSAGE_ROOM));
+
+        mMessageClass = getIntent().getIntExtra(getString(R.string.KEY_MESSAGE_CLASS),0);
+
+        switch (mMessageClass){
+            case CLASS_REFLECTION:
+                mActivityTitle = getIntent().getStringExtra(getString(R.string.KEY_EVENT_HEADER_TITLE));
+                mFeedRelection = getIntent().getParcelableExtra(getString(R.string.KEY_FEED_PARCEL));
+                mTypeOfMessage = getIntent().getIntExtra(getString(R.string.KEY_MESSAGE_TYPE_ID),0);
+                mRoomToPostMessage = getIntent().getStringExtra(getString(R.string.KEY_MESSAGE_ROOM));
+
+                break;
+
+            case CLASS_ACTION:
+                mRoomToPostMessage = getIntent().getStringExtra(getString(R.string.KEY_MESSAGE_ROOM));
+                mTypeOfMessage = getIntent().getIntExtra(getString(R.string.KEY_MESSAGE_TYPE_ID),0);
+                mActivityTitle = null;
+
+                break;
+
+            default:
+                break;
+
+        }
+
+
     }
 
     private void initControllers(){
         if(!isActivityControllerSetup){
-            mWorkController = new FeedMessageController(mContext,this);
+            mWorkController = new FeedNewMessageController(mContext,this);
 
             mWorkController.setTypeOfMessage(mTypeOfMessage);
             mWorkController.setRoomToPostMessage(mRoomToPostMessage);
@@ -272,6 +323,8 @@ public class FeedMessageNewActivity extends BaseActivity implements FeedMessageC
     }
 
     private void initViewWidgets(){
+        clRoot = findViewById(R.id.new_message_root_layout);
+
         Button ibAppBarSave = findViewById(R.id.appBar_top_action_finish);
         mWorkController.setSaveButton(ibAppBarSave);
 
@@ -305,7 +358,7 @@ public class FeedMessageNewActivity extends BaseActivity implements FeedMessageC
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     String value = v.getText().toString();
 
-                    checkAndMessage(value);
+                    checkAndSetMessage(value);
 
                     return true;
                 }
@@ -321,7 +374,7 @@ public class FeedMessageNewActivity extends BaseActivity implements FeedMessageC
                     EditText tv = (EditText) v;
                     String value = tv.getText().toString();
 
-                    checkAndMessage(value);
+                    checkAndSetMessage(value);
                 }
             }
         });
@@ -341,7 +394,7 @@ public class FeedMessageNewActivity extends BaseActivity implements FeedMessageC
            public void afterTextChanged(Editable s) {
                if (s.length() > 0) {
                    last_text_edit = System.currentTimeMillis();
-                   handler.postDelayed(etInputMessageTypingChecker, delay);
+                   handler.postDelayed(etInputMessageTypingChecker, typing_delay);
                }else{
                    mWorkController.showSaveButton(false);
                }
@@ -364,7 +417,15 @@ public class FeedMessageNewActivity extends BaseActivity implements FeedMessageC
 
     }
 
-    private void checkAndMessage(String message){
+    private void grabMessage(){
+        String message = etUserEntry.getText().toString();
+        hideKeyboard();
+
+        checkAndSetMessage(message);
+
+    }
+
+    private void checkAndSetMessage(String message){
         if (!TextUtils.isEmpty(message)) {
             mWorkController.setMessage(message);
             mMessageString = message;
@@ -374,8 +435,9 @@ public class FeedMessageNewActivity extends BaseActivity implements FeedMessageC
 
     private Runnable etInputMessageTypingChecker = new Runnable() {
         public void run() {
-            if (System.currentTimeMillis() > (last_text_edit + delay - 500)) {
+            if (System.currentTimeMillis() > (last_text_edit + typing_delay - 500)) {
                 mWorkController.showSaveButton(true);
+                grabMessage();
             }
         }
     };
@@ -449,7 +511,6 @@ public class FeedMessageNewActivity extends BaseActivity implements FeedMessageC
     }
 
     private void addMapMarkerSelf(boolean isStatic){
-        Log.d(TAG, "to_delete: addMapMarkerSelf: Is Static: " + isStatic);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO
             return;
@@ -486,12 +547,10 @@ public class FeedMessageNewActivity extends BaseActivity implements FeedMessageC
 
         if(mGoogleMap != null){
             if(mClusterManager == null){
-                Log.d(TAG, "to_delete: addMapMarkerSelf: Cluster Manager is Null, Setting it now");
                 mClusterManager = new ClusterManager<>(getApplicationContext(), mGoogleMap);
             }
 
             if(mClusterManagerRenderer == null){
-                Log.d(TAG, "to_delete: addMapMarkerSelf: Cluster Manager Renderer is Null, Setting it now");
                 mClusterManagerRenderer = new ClusterMarkerRenderer(
                         mContext,
                         mGoogleMap,
@@ -501,7 +560,6 @@ public class FeedMessageNewActivity extends BaseActivity implements FeedMessageC
             }
 
             try{
-                Log.d(TAG, "to_delete: addMapMarkerSelf: Trying to add Cluster Item");
                 String snippet = "This is you";
                     ClusterMarkerItem clusterMarker = new ClusterMarkerItem(
                             new LatLng(markerLocation.getLatitude(), markerLocation.getLongitude()),
@@ -518,7 +576,6 @@ public class FeedMessageNewActivity extends BaseActivity implements FeedMessageC
 
         }
 
-        Log.d(TAG, "to_delete: addMapMarkerSelf: Clustering ");
         mClusterManager.cluster();
         mWorkController.callFabMapFinish();
     }

@@ -1,31 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/app_background_light"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/new_message_root_layout">
 
 
     <RelativeLayout
-        android:id="@+id/activity_header"
-        android:layout_alignParentTop="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <include
-            layout="@layout/app_bar_top_a_regular"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_below="@id/activity_header"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            layout="@layout/staff_feed_item_message_new_content_message"/>
+        <RelativeLayout
+            android:id="@+id/activity_header"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                layout="@layout/app_bar_top_a_regular"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@id/activity_header"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                layout="@layout/staff_feed_item_message_new_content_message"/>
+
+        </RelativeLayout>
+
 
     </RelativeLayout>
 
 
-</RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

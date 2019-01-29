@@ -103,7 +103,6 @@ public class FeedBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void createView(View view){
-        Log.d(TAG, "to_delete: Started ");
         recyclerView = view.findViewById(R.id.dialog_recycler_view);
         mRecyclerController = new FeedBottomSheetRecycleController(mContext);
 

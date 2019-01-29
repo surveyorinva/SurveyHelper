@@ -10,24 +10,11 @@
     android:layout_marginTop="@dimen/app_card_margin_top"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="110dp"
+
     tools:ignore="ContentDescription">
 
-
-    <ImageView
-        android:id="@+id/feed_item_background"
-        android:layout_gravity="bottom|end"
-        android:layout_width="100dp"
-        android:layout_height="match_parent" />
-
-    <ImageView
-        android:id="@+id/feed_item_background_type"
-        android:layout_gravity="end|center_vertical"
-        android:layout_marginEnd="25dp"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-
         <LinearLayout
+            android:id="@+id/ll_card_feed_item_root"
             android:weightSum="100"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -96,45 +83,116 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/feed_ll_post_details"
+                android:orientation="horizontal"
                 android:layout_marginBottom="5dp"
                 android:layout_marginStart="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/feed_post_type"
-                    android:layout_marginStart="5dp"
-                    android:layout_width="60dp"
-                    android:layout_height="match_parent"
-                    android:visibility="gone"/>
+                android:layout_height="match_parent"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/feed_post_body"
                     android:text="@string/appSample_summary"
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:layout_marginEnd="50dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
 
             </LinearLayout>
 
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/feed_cl_post_map"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:visibility="gone">
+
+                <com.google.android.gms.maps.MapView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:map="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/map_view_in_item_message"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="5dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="H,16:8"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    map:layout_constraintStart_toStartOf="parent"
+                    map:cameraZoom="13"
+                    map:mapType="normal"
+                    map:liteMode="true"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/feed_cl_post_picture"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/image_view_in_item_message"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="5dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintDimensionRatio="V,16:9"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ProgressBar
+                    android:id="@+id/progress_bar_for_image_in_item_message"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/image_view_in_item_message"
+                    app:layout_constraintEnd_toEndOf="@+id/image_view_in_item_message"
+                    app:layout_constraintStart_toStartOf="@+id/image_view_in_item_message"
+                    app:layout_constraintTop_toTopOf="@+id/image_view_in_item_message" />
+
+            </android.support.constraint.ConstraintLayout>
+
+
             <LinearLayout
                 android:id="@+id/feed_ll_post_pictures"
                 android:layout_width="match_parent"
+                android:layout_marginStart="5dp"
                 android:layout_height="wrap_content"
-                android:visibility="gone">
+                android:visibility="visible">
 
-                <android.support.v7.widget.RecyclerView
+                <GridView
                     android:id="@+id/feed_post_pictures"
-                    android:orientation="horizontal"
+                    android:numColumns="4"
+                    android:verticalSpacing="1dp"
+                    android:horizontalSpacing="1dp"
+                    android:stretchMode="columnWidth"
+                    android:gravity="center"
+                    android:drawSelectorOnTop="true"
+                    android:listSelector="@drawable/app_grid_view_highlight_transparent"
+                    android:visibility="gone"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:visibility="visible"/>
-
+                    android:layout_height="80dp"/>
 
             </LinearLayout>
+
 
         </LinearLayout>
 

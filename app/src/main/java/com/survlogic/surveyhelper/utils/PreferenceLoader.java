@@ -199,8 +199,9 @@ public class PreferenceLoader {
         boolean isComplete = sharedPreferences.getBoolean(mContext.getString(R.string.pref_feed_reflection_weekly_a_completed),false);
         reflection.setComplete(isComplete);
 
+        Log.d(TAG, "to_delete: getFeedReflectionWeeklyLocal: Is Complete: " + isComplete);
+
         if(isComplete){
-            reflection.setAnswer(sharedPreferences.getString(mContext.getString(R.string.pref_feed_reflection_weekly_a_completed_value),""));
             reflection.setCompletedOn(sharedPreferences.getLong(mContext.getString(R.string.pref_feed_reflection_weekly_a_completed_on),0));
         }
 
@@ -228,13 +229,15 @@ public class PreferenceLoader {
                 break;
 
             case REFLECTION_EVENING:
+                Log.d(TAG, "to_delete: setFeedReflection: In Preference Loader");
                 editor.putString(mContext.getString(R.string.pref_feed_reflection_daily_evening),reflection.getSummary());
 
                 isComplete = reflection.isComplete();
                 editor.putBoolean(mContext.getString(R.string.pref_feed_reflection_daily_evening_completed),reflection.isComplete());
 
+                Log.d(TAG, "to_delete: setFeedReflection: Is Complete: " + isComplete);
+
                 if(isComplete){
-                    editor.putString(mContext.getString(R.string.pref_feed_reflection_daily_evening_completed_value),reflection.getAnswer());
                     editor.putLong(mContext.getString(R.string.pref_feed_reflection_daily_evening_completed_on),reflection.getCompletedOn());
                 }
                 break;
@@ -252,11 +255,18 @@ public class PreferenceLoader {
                 break;
         }
 
+        Log.d(TAG, "to_delete: setFeedReflection: Editor Complete, Saving");
+
         if(isForceSave){
             editor.commit();
+            Log.d(TAG, "to_delete: setFeedReflection: Saved Now!");
         }else{
             editor.apply();
         }
+
+        FeedReflections reflectDelete = getFeedReflectionDailyEveningLocal();
+
+        Log.d(TAG, "to_delete: setFeedReflection: reflection is complete: " + reflectDelete.isComplete());
 
     }
 
@@ -513,6 +523,21 @@ public class PreferenceLoader {
 
     public String getUserFirebaseToken(){
         return sharedPreferences.getString(mContext.getString(R.string.pref_firebase_user_message_token),null);
+    }
+
+    public String getFeedCurrentActiveRoom(){
+        return sharedPreferences.getString(mContext.getString(R.string.pref_feed_current_active_room),"");
+    }
+
+    public void setCurrentActiveRoom(String room, boolean isForceSave){
+        editor = sharedPreferences.edit();
+        editor.putString(mContext.getString(R.string.pref_feed_current_active_room),room);
+
+        if(isForceSave){
+            editor.commit();
+        }else{
+            editor.apply();
+        }
     }
 
 

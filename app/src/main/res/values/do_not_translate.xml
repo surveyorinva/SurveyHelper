@@ -39,6 +39,7 @@
     <string name="pref_feed_event_text_is_light">pref_feed_event_text_is_light</string>
 
     <string name="pref_feed_default_public_room">pref_feed_default_public_room</string>
+    <string name="pref_feed_current_active_room">pref_feed_current_active_room</string>
 
     <string name="pref_feed_reflection_daily_morning">pref_feed_reflection_daily_morning</string>
     <string name="pref_feed_reflection_daily_morning_start">pref_feed_reflection_daily_morning_start</string>
@@ -77,11 +78,16 @@
     <string name="KEY_GALLERY_PHOTO_STRING_ARRAY_URL">KEY_GALLERY_PHOTO_STRING_ARRAY_URL</string>
 
     <string name="KEY_EVENT_WEB_URL">KEY_EVENT_WEB_URL</string>
+
+    <string name="KEY_MESSAGE_CLASS">KEY_MESSAGE_CLASS</string>
+
     <string name="KEY_EVENT_HEADER_TITLE">KEY_EVENT_HEADER_TITLE</string>
 
     <string name="KEY_FEED_PARCEL">KEY_FEED_PARCEL</string>
     <string name="KEY_MESSAGE_TYPE_ID">KEY_MESSAGE_TYPE_ID</string>
     <string name="KEY_MESSAGE_ROOM">KEY_MESSAGE_ROOM</string>
+
+    <string name="KEY_COMPANY_CONTACT_PARCEL">KEY_COMPANY_CONTACT_PARCEL</string>
 
 <!--Class Names-->
     <string name="CLASS_SETUP">CLASS_SETUP</string>
@@ -140,5 +146,9 @@
 <!--Hasmap Keys-->
     <string name="HASH_KEY_LAT">latitude</string>
     <string name="HASH_KEY_LON">longitude</string>
+
+    <string name="HASH_KEY_OFFICE">office</string>
+    <string name="HASH_KEY_MOBILE">mobile</string>
+    <string name="HASH_KEY_EXT">extension</string>
 
 </resources>

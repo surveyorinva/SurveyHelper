@@ -30,7 +30,8 @@ import com.google.firebase.storage.UploadTask;
 import com.survlogic.surveyhelper.R;
 import com.survlogic.surveyhelper.activity.photoGallery.PhotoGalleryActivity;
 import com.survlogic.surveyhelper.activity.staffFeed.model.FeedItem;
-import com.survlogic.surveyhelper.activity.staffFeed.view.message.adapter.NewMessagPhotoAdapter;
+import com.survlogic.surveyhelper.activity.staffFeed.model.FeedReflections;
+import com.survlogic.surveyhelper.activity.staffFeed.view.message.adapter.NewMessagePhotoAdapter;
 import com.survlogic.surveyhelper.database.Feed.FirestoreDatabaseFeedItem;
 import com.survlogic.surveyhelper.model.AppUserClient;
 import com.survlogic.surveyhelper.model.FirestoreUser;
@@ -38,15 +39,17 @@ import com.survlogic.surveyhelper.services.gnss.GnssController;
 import com.survlogic.surveyhelper.utils.DialogUtils;
 import com.survlogic.surveyhelper.utils.GraphicRotationUtils;
 import com.survlogic.surveyhelper.utils.HapticFeedbackUtils;
+import com.survlogic.surveyhelper.utils.PreferenceLoader;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
-public class FeedMessageController implements   FirestoreDatabaseFeedItem.FeedItemListener,
+public class FeedNewMessageController implements   FirestoreDatabaseFeedItem.FeedItemListener,
                                                     GnssController.PositionListener,
                                                     FABProgressListener {
 
@@ -54,6 +57,8 @@ public class FeedMessageController implements   FirestoreDatabaseFeedItem.FeedIt
 
     public interface ControllerListener{
         void finishActivity();
+        void showSnackBar(String message);
+        void hideKeyboard();
         void controllerSetup(boolean isSetup);
         void openPhotoSingleView(String photo);
         void openImageSelector();
@@ -97,7 +102,8 @@ public class FeedMessageController implements   FirestoreDatabaseFeedItem.FeedIt
 
         if(isFeedMessageSaved){
             //finish Activity
-            mListenerToActivity.finishActivity();
+            finishMessageAndExit();
+
         }
 
     }
@@ -110,7 +116,8 @@ public class FeedMessageController implements   FirestoreDatabaseFeedItem.FeedIt
 
     @Override
     public void updateNewFeedItemSuccess() {
-        mListenerToActivity.finishActivity();
+        Log.d(TAG, "to_delete: updateNewFeedItemSuccess: ");
+        finishMessageAndExit();
     }
 
     @Override
@@ -183,13 +190,16 @@ public class FeedMessageController implements   FirestoreDatabaseFeedItem.FeedIt
                 break;
         }
 
-        Log.d(TAG, "to_delete: Gnss Count: " + mGnssRawCount);
     }
 
     @Override
     public void returnBestPosition(Location bestPosition) {
         this.mGnssBestLocation = bestPosition;
         mListenerToActivity.returnBestLocation(bestPosition);
+
+        if(btSaveFeedMessage.getVisibility() != View.VISIBLE){
+            btSaveFeedMessage.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -211,7 +221,7 @@ public class FeedMessageController implements   FirestoreDatabaseFeedItem.FeedIt
     private Activity mActivity;
 
 
-    private FeedMessageController.ControllerListener mListenerToActivity;
+    private FeedNewMessageController.ControllerListener mListenerToActivity;
 
     private boolean isAllRequiredControllersReadyToGo = false;
 
@@ -237,7 +247,7 @@ public class FeedMessageController implements   FirestoreDatabaseFeedItem.FeedIt
     private int mPhotoQuality = 90;
 
     private GridView photoGridView;
-    private NewMessagPhotoAdapter photoGridAdapter;
+    private NewMessagePhotoAdapter photoGridAdapter;
     private boolean isGridViewSetup = false, isPhotoGridAdapterSetup = false, isPhotoGalleryNeeded = false;
     private TextView tvWarning;
 
@@ -255,7 +265,7 @@ public class FeedMessageController implements   FirestoreDatabaseFeedItem.FeedIt
     private FABProgressCircle mFabMapProgress, mFabPhotoProgress;
     private FloatingActionButton mFabMap, mFabPhoto;
 
-    public FeedMessageController(Context context, ControllerListener listener) {
+    public FeedNewMessageController(Context context, ControllerListener listener) {
         this.mContext = context;
         this.mActivity = (Activity) context;
 
@@ -343,8 +353,8 @@ public class FeedMessageController implements   FirestoreDatabaseFeedItem.FeedIt
     }
 
     public void setMessage(String message){
-        Log.d(TAG, "to_delete setMessage: Message: " + message);
-        mFeedMessage.setExtra_entry(message);
+        String fullMessage = getExtrasFromMessageType(message);
+        mFeedMessage.setExtra_entry(fullMessage);
     }
 
     public void showSaveButton(boolean showButton){
@@ -401,7 +411,6 @@ public class FeedMessageController implements   FirestoreDatabaseFeedItem.FeedIt
             mFeedMessage.setFeed_post_type(mTypeOfMessage);
             mFeedMessage.setRoom_id(mRoomToPostMessage);
 
-
         if(saveItemPlace){
             isFeedMessageSavedForPlaceHolder = true;
         }else{
@@ -417,8 +426,6 @@ public class FeedMessageController implements   FirestoreDatabaseFeedItem.FeedIt
     }
 
     private void updateFeedItem(){
-        Log.d(TAG, "to_delete: Updating Feed Item...");
-
         isFeedMessageSavedForPlaceHolder = true;
         isFeedMessageSaved = true;
         mFeedMessage.setPublished(true);
@@ -441,6 +448,114 @@ public class FeedMessageController implements   FirestoreDatabaseFeedItem.FeedIt
     private void startLiveFeedListener(){
         FirestoreDatabaseFeedItem dbItem = new FirestoreDatabaseFeedItem(mContext,this);
         dbItem.startUpdatingFeedItemFromFirebaseRealTime(mFeedMessage);
+    }
+
+    //----------------------------------------------------------------------------------------------
+    private String getExtrasFromMessageType(String user_entry_message){
+
+        PreferenceLoader preferenceLoader = new PreferenceLoader(mContext);
+        FeedReflections reflection;
+
+        String reflection_question;
+        String returnValue;
+
+        switch (mTypeOfMessage){
+
+            case 201:  // FEED_MESSAGE_TYPE_REFLECTION_MORNING
+                reflection = preferenceLoader.getFeedReflectionDailyMorningLocal();
+                reflection_question = reflection.getSummary();
+                returnValue = mActivity.getResources().getString(R.string.staff_feed_message_prefix_reflection_morning_fmt,
+                        reflection_question,
+                        user_entry_message);
+                break;
+
+            case 202:   //FEED_MESSAGE_TYPE_REFLECTION_EVENING
+                reflection = preferenceLoader.getFeedReflectionDailyEveningLocal();
+                reflection_question = reflection.getSummary();
+                returnValue = mActivity.getResources().getString(R.string.staff_feed_message_prefix_reflection_evening_fmt,
+                        reflection_question,
+                        user_entry_message);
+                break;
+
+            case 203:   //FEED_MESSAGE_TYPE_REFLECTION_WEEKLY
+                reflection = preferenceLoader.getFeedReflectionWeeklyLocal();
+                reflection_question = reflection.getSummary();
+                returnValue = mActivity.getResources().getString(R.string.staff_feed_message_prefix_reflection_weekly_fmt,
+                        reflection_question,
+                        user_entry_message);
+                break;
+
+            default:
+                returnValue = user_entry_message;
+                break;
+
+        }
+
+        return returnValue;
+
+    }
+
+    private void finishMessageAndExit(){
+        setExtrasFromMessageType();  //This sets the local preferences that user has completed a feed item (if needed)
+        giveUserAReward(); //Gives the current user a reward for adding a feed item
+
+        mListenerToActivity.finishActivity();
+    }
+
+    private void setExtrasFromMessageType(){
+        Log.d(TAG, "to_delete: setExtrasFromMessageType: " + mTypeOfMessage);
+
+        PreferenceLoader preferenceLoader = new PreferenceLoader(mContext);
+        FeedReflections reflection;
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+
+        switch (mTypeOfMessage){
+
+            case 201:  // FEED_MESSAGE_TYPE_REFLECTION_MORNING
+                reflection = preferenceLoader.getFeedReflectionDailyMorningLocal();
+                reflection.setComplete(true);
+
+                reflection.setCompletedOn(calendar.getTimeInMillis());
+
+                preferenceLoader.setFeedReflection(PreferenceLoader.REFLECTION_MORNING,reflection,true);
+                break;
+
+            case 202:   //FEED_MESSAGE_TYPE_REFLECTION_EVENING
+                Log.d(TAG, "to_delete: setExtrasFromMessageType: setting reflection");
+
+                reflection = preferenceLoader.getFeedReflectionDailyEveningLocal();
+                reflection.setComplete(true);
+
+                reflection.setCompletedOn(calendar.getTimeInMillis());
+
+                preferenceLoader.setFeedReflection(PreferenceLoader.REFLECTION_EVENING,reflection,true);
+
+                break;
+
+            case 203:   //FEED_MESSAGE_TYPE_REFLECTION_WEEKLY
+                reflection = preferenceLoader.getFeedReflectionWeeklyLocal();
+                reflection.setComplete(true);
+
+                reflection.setCompletedOn(calendar.getTimeInMillis());
+
+                preferenceLoader.setFeedReflection(PreferenceLoader.REFLECTION_WEEKLY,reflection,true);
+                break;
+
+            default:
+                Log.d(TAG, "to_delete: setExtrasFromMessageType: Error");
+                break;
+
+        }
+    }
+
+    private void giveUserAReward(){
+        String message = mActivity.getResources().getString(R.string.app_reward_user_earned_points_fmt,
+                "5");
+
+        mListenerToActivity.showSnackBar(message);
+
     }
 
     //----------------------------------------------------------------------------------------------//
@@ -653,7 +768,7 @@ public class FeedMessageController implements   FirestoreDatabaseFeedItem.FeedIt
             mPhotoList = mFeedMessage.getPhoto_link();
 
             if(!isPhotoGridAdapterSetup){
-                photoGridAdapter = new NewMessagPhotoAdapter(mContext, R.layout.staff_feed_item_event_card_content_photo,mPhotoList);
+                photoGridAdapter = new NewMessagePhotoAdapter(mContext, R.layout.staff_feed_item_event_card_content_photo,mPhotoList);
                 photoGridView.setAdapter(photoGridAdapter);
                 isPhotoGridAdapterSetup = true;
 
@@ -680,9 +795,6 @@ public class FeedMessageController implements   FirestoreDatabaseFeedItem.FeedIt
     }
 
     public void setUserLocation(Location location){
-        Log.d(TAG, "to_delete: setUserLocation: Setting Location in Controller");
-        Log.d(TAG, "to_delete: setUserLocation: Lat: " + location.getLatitude() + ", Long: " + location.getLongitude() );
-
         this.mLocationUser = location;
 
         HashMap<String,Double> locationForMessage = new HashMap<>();

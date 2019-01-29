@@ -21,6 +21,7 @@ public class ClusterMarkerItem implements ClusterItem {
         this.user = user;
     }
 
+
     @Override
     public LatLng getPosition() {
         return position;

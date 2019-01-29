@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/app_bar_in_new_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include
+            layout="@layout/app_bar_top_a_regular"/>
+
+    </RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/app_bar_in_new_contact"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="-56dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/login_content_margin_start"
+            android:layout_marginTop="@dimen/login_content_margin_top"
+            android:layout_marginEnd="@dimen/login_content_margin_end"
+            android:orientation="vertical">
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/contact_name_first"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hasFocus="true"
+                app:helperText=" "
+                app:iconSignifier="@drawable/ic_person_dark_24dp"
+                app:isResponsiveIconColor="true"
+                app:labelText="@string/appLogin_sign_in_user_name_first"
+                app:useDenseSpacing="false">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/contact_name_first_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/appLogin_sign_in_user_name_first"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapWords|textAutoComplete"
+                    android:maxLines="1"
+                    android:nextFocusDown="@id/contact_name_last_value"
+                    android:popupElevation="5dp"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/contact_name_last"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hasFocus="false"
+                app:helperText=" "
+                app:iconSignifier="@drawable/ic_person_light_24dp"
+                app:isResponsiveIconColor="true"
+                app:labelText="@string/appLogin_sign_in_user_name_last"
+                app:useDenseSpacing="false">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/contact_name_last_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/appLogin_sign_in_user_name_last"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapWords|textAutoComplete"
+                    android:maxLines="1"
+                    android:nextFocusDown="@id/contact_title_value"
+                    android:popupElevation="5dp"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/contact_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hasFocus="false"
+                app:helperText=" "
+                app:iconSignifier="@drawable/ic_key_dark_24dp"
+                app:isResponsiveIconColor="true"
+                app:labelText="@string/contact_title"
+                app:useDenseSpacing="false">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/contact_title_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/contact_title"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapWords"
+                    android:maxLines="1"
+                    android:nextFocusDown="@id/contact_email_value"
+                    android:popupElevation="5dp"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/contact_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hasFocus="false"
+                app:helperText=" "
+                app:iconSignifier="@drawable/ic_email_dark_24dp"
+                app:isResponsiveIconColor="true"
+                app:labelText="@string/appLogin_sign_in_email"
+                app:useDenseSpacing="false">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/contact_email_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/appLogin_sign_in_email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:nextFocusDown="@id/contact_phone_office_value"
+                    android:popupElevation="5dp"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/contact_phone_office"
+                android:layout_width="@dimen/login_content_width_field_access_key"
+                android:layout_height="wrap_content"
+                app:hasFocus="false"
+                app:helperText=" "
+                app:iconSignifier="@drawable/ic_phone_android_dark_24dp"
+                app:isResponsiveIconColor="true"
+                app:labelText="@string/contact_telephone_office"
+                app:useDenseSpacing="false">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/contact_phone_office_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/contact_telephone_office"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:nextFocusDown="@id/contact_phone_mobile_value"
+                    android:popupElevation="5dp"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/contact_phone_mobile"
+                android:layout_width="@dimen/login_content_width_field_access_key"
+                android:layout_height="wrap_content"
+                app:hasFocus="false"
+                app:helperText=" "
+                app:iconSignifier="@drawable/ic_phone_android_dark_24dp"
+                app:isResponsiveIconColor="true"
+                app:labelText="@string/contact_telephone_mobile"
+                app:useDenseSpacing="false">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/contact_phone_mobile_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/contact_telephone_mobile"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:nextFocusDown="@id/contact_phone_extension_value"
+                    android:popupElevation="5dp"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/contact_phone_extension"
+                android:layout_width="@dimen/login_content_width_field_access_key"
+                android:layout_height="wrap_content"
+                app:hasFocus="false"
+                app:helperText=" "
+                app:iconSignifier="@drawable/ic_phone_android_dark_24dp"
+                app:isResponsiveIconColor="true"
+                app:labelText="@string/contact_telephone_extension"
+                app:useDenseSpacing="false">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/contact_phone_extension_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/contact_telephone_extension"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:nextFocusDown="@id/contact_birthday_value"
+                    android:popupElevation="5dp"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:id="@+id/contact_birthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hasFocus="false"
+                    app:helperText=" "
+                    app:iconSignifier="@drawable/ic_cake_dark_24dp"
+                    app:isResponsiveIconColor="true"
+                    app:labelText="@string/contact_birthday"
+                    app:useDenseSpacing="false">
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/contact_birthday_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/contact_birthday"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:focusable="false"
+                        android:enabled="true"
+                        android:nextFocusDown="@id/contact_profile_pic_value"
+                        android:popupElevation="5dp"
+                        android:text="" />
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <Button
+                    android:id="@+id/btn_calendar_picker"
+                    android:background="@color/colorTransparent"
+                    android:layout_alignParentTop="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </RelativeLayout>
+
+            <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                android:id="@+id/contact_profile_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hasFocus="false"
+                app:helperText=" "
+                app:iconSignifier="@drawable/ic_email_dark_24dp"
+                app:isResponsiveIconColor="true"
+                app:labelText="@string/contact_photo_url"
+                app:useDenseSpacing="false">
+
+                <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    android:id="@+id/contact_profile_pic_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/contact_photo_url"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:popupElevation="5dp"
+                    android:text="" />
+
+            </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/login_content_space_between_buttons" />
+
+            <Button
+                android:id="@+id/btn_contact_action_save"
+                style="@style/Buttons.Raised.Light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/login_content_button_login_marginStart"
+                android:layout_marginEnd="@dimen/login_content_button_login_marginEnd"
+                android:text="@string/general_save"
+                android:textSize="@dimen/login_button_text_size_override" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+</RelativeLayout>

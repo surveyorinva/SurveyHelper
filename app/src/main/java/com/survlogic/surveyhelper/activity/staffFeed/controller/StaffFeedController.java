@@ -2,6 +2,7 @@ package com.survlogic.surveyhelper.activity.staffFeed.controller;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -26,6 +27,8 @@ import android.widget.RelativeLayout;
 
 import com.survlogic.surveyhelper.R;
 import com.survlogic.surveyhelper.activity.staffFeed.StaffFeedFragment;
+import com.survlogic.surveyhelper.activity.staffFeed.activity.FeedRoomActivity;
+import com.survlogic.surveyhelper.activity.staffFeed.activity.FeedWebActivity;
 import com.survlogic.surveyhelper.activity.staffFeed.adapter.StaffFeedAdapter;
 import com.survlogic.surveyhelper.activity.staffFeed.dialog.FeedBottomSheet;
 import com.survlogic.surveyhelper.activity.staffFeed.dialog.FeedDialogUtils;
@@ -361,7 +364,7 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
 
     private StaffFeedRecycleController feedRecycleController;
 
-    private ImageButton ibFeedNavigator;
+    private ImageButton ibFeedNavigator, ibFeedNavigatorMenu;
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private boolean isAllFeedsReadyToGo = false;
@@ -490,6 +493,17 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
             }
         });
 
+        ibFeedNavigatorMenu = v.findViewById(R.id.btnAppFeedNavigatorMenu);
+        ibFeedNavigatorMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Activity activity = (Activity) mContext;
+                Intent i = new Intent(activity, FeedRoomActivity.class);
+                activity.startActivity(i);
+                activity.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            }
+        });
+
         swipeRefreshLayout = v.findViewById(R.id.feed_swipe_layout);
         setSwipeRefreshLayout();
 
@@ -559,6 +573,7 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
 
     public void setFeedRoomPublic(String queryRoom){
         this.mRoomPublic = queryRoom;
+        preferenceLoader.setCurrentActiveRoom(mRoomPublic,true);
     }
 
     public void setFirestoreUser(FirestoreUser user) {
@@ -573,12 +588,11 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
 
 
     //----------------------------------------------------------------------------------------------
-    public void buildUserProfile(){
-        buildPrivateFeedRooms();
+    public void buildPrivateFeedRooms(){
+        if(mFirestoreUser == null){
+            return;
+        }
 
-    }
-
-    private void buildPrivateFeedRooms(){
         final FirestoreDatabaseFeedRooms db = new FirestoreDatabaseFeedRooms(mContext,this);
 
         Handler handler = new Handler();
@@ -594,6 +608,7 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
 
                 if(isUserHavePrivateRooms){
                     db.getRoomListFromFirestore(mUserPrivateRoomMembers);
+
                 }else{
                     db.getRoomListFromFirestore();
                 }
@@ -670,6 +685,9 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
     }
 
     private void callPublicFeedCompilerOnRefresh(long timeToWait){
+
+        invalidateFeeds();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -730,7 +748,6 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
     }
 
     private void generateAdminFeeds(){
-        Log.d(TAG, "to_delete: generating admin feeds ");
         generatorAnnouncement.onStart();
         generatorEvent.onStart();
     }
@@ -802,6 +819,8 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
 
                         bottomSheetCompiler.setRoomActionsRaw(mRoomPublicOptions.getFeed_actions_common());
                         bottomSheetCompiler.build();
+
+                        preferenceLoader.setCurrentActiveRoom(mRoomPublic,true);
                         return true;
 
                 }
@@ -833,6 +852,8 @@ public class StaffFeedController implements StaffFeedAdapter.AdapterListener,
 
                         bottomSheetCompiler.setRoomActionsRaw(room.getFeed_actions_common());
                         bottomSheetCompiler.build();
+
+                        preferenceLoader.setCurrentActiveRoom(room.getRoom_id(),true);
                         return true;
                     }
                 });

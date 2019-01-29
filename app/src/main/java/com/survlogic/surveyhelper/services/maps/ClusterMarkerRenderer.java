@@ -52,10 +52,7 @@ public class ClusterMarkerRenderer extends DefaultClusterRenderer<ClusterMarkerI
 
     @Override
     protected void onBeforeClusterItemRendered(final ClusterMarkerItem item, final MarkerOptions markerOptions) {
-        Log.d(TAG, "to_delete: onBeforeClusterItemRendered: Started");
         String profileUrl = item.getUser().getProfile_pic_url();
-
-        Log.d(TAG, "to_delete: onBeforeClusterItemRendered> Bitmap URL: " + profileUrl);
 
         Bitmap loadedImage = ((AppUserClient) (mActivity.getApplicationContext())).getUserBitmap();
         mImageView.setImageBitmap(loadedImage);

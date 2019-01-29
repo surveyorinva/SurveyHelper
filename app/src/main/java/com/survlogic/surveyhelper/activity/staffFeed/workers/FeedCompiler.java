@@ -51,6 +51,7 @@ public class FeedCompiler  {
 
     /**
      * Compile Order
+     * 0.) Feed Action Item
      * 1.) Announcements
      * 2.) Events
      * 3.) Birthday Today Header
@@ -63,8 +64,11 @@ public class FeedCompiler  {
 
 
     public ArrayList<Feed> compileFeeds(){
-
         ArrayList<Feed> feeds = new ArrayList<>();
+
+        Feed actionItemFeed = new Feed();
+        actionItemFeed.setFeed_type(mContext.getResources().getInteger(R.integer.FEED_SYSTEM_ACTION_ITEM));
+        feeds.add(actionItemFeed);
 
         if(mListAnnouncements.size() !=0){
             for(int i=0;i<mListAnnouncements.size();i++){

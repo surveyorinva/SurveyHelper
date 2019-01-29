@@ -1,6 +1,8 @@
 package com.survlogic.surveyhelper.activity.staffFeed;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ import com.survlogic.surveyhelper.activity.photoGallery.dialog.ZoomablePhotoDial
 import com.survlogic.surveyhelper.activity.staffFeed.controller.StaffFeedController;
 import com.survlogic.surveyhelper.activity.staff.inter.StaffActivityListener;
 import com.survlogic.surveyhelper.dialog.SelectPhotoDialog;
+import com.survlogic.surveyhelper.model.AppUserClient;
 import com.survlogic.surveyhelper.model.FirestoreUser;
 import com.survlogic.surveyhelper.utils.PreferenceLoader;
 
@@ -102,6 +105,7 @@ public class StaffFeedFragment extends Fragment implements  StaffFeedController.
     }
 
     private Context mContext;
+    private Activity mActivity;
 
     private View v;
 
@@ -116,10 +120,13 @@ public class StaffFeedFragment extends Fragment implements  StaffFeedController.
     private StaffFeedFragment mThisFragment;
     private FirestoreUser mFirestoreUser;
 
+    private boolean isUserSetInController = false;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = getActivity();
+        mActivity = (Activity) context;
 
         mActivityListener = (StaffActivityListener) getActivity();
         mFeedController = new StaffFeedController(mContext,this,this);
@@ -143,9 +150,10 @@ public class StaffFeedFragment extends Fragment implements  StaffFeedController.
 
     }
 
+
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
 
         Date today = Calendar.getInstance().getTime();
 
@@ -158,6 +166,15 @@ public class StaffFeedFragment extends Fragment implements  StaffFeedController.
         mFeedController.fetchPublicRoomFeeds();
 
         showAnnouncementAtStart();
+
+        if(mFirestoreUser == null){
+            FirestoreUser user = ((AppUserClient) mActivity.getApplicationContext()).getUser();
+            if(user != null){
+                mFeedController.setFirestoreUser(user);
+                mFeedController.buildPrivateFeedRooms();
+
+            }
+        }
 
     }
 
@@ -192,8 +209,13 @@ public class StaffFeedFragment extends Fragment implements  StaffFeedController.
 
     public void setFirestoreUser(FirestoreUser user) {
         this.mFirestoreUser = user;
-        mFeedController.setFirestoreUser(user);
-        mFeedController.buildUserProfile();
+
+        if(!isUserSetInController){
+            mFeedController.setFirestoreUser(user);
+            isUserSetInController = true;
+        }
+
+        mFeedController.buildPrivateFeedRooms();
 
     }
 
@@ -204,5 +226,9 @@ public class StaffFeedFragment extends Fragment implements  StaffFeedController.
 
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "to_delete: onActivityResult: Started");
+    }
 }

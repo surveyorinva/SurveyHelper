@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -27,8 +28,9 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.survlogic.surveyhelper.R;
 import com.survlogic.surveyhelper.activity.staffCompany.controller.StaffCompanyController;
 import com.survlogic.surveyhelper.activity.staff.inter.StaffActivityListener;
-import com.survlogic.surveyhelper.activity.staffFeed.workers.FeedCompiler;
-import com.survlogic.surveyhelper.activity.template.SampleFragment;
+import com.survlogic.surveyhelper.activity.staffCompany.fragments.contacts.CompanyContactsFragment;
+import com.survlogic.surveyhelper.activity.staffCompany.fragments.news.CompanyNewsFragment;
+import com.survlogic.surveyhelper.activity.staffCompany.fragments.services.CompanyServicesFragment;
 import com.survlogic.surveyhelper.adapters.ViewPagerAdapter;
 import com.survlogic.surveyhelper.model.ThemeSettings;
 import com.survlogic.surveyhelper.utils.PreferenceLoader;
@@ -58,6 +60,7 @@ public class StaffCompanyFragment extends Fragment implements StaffCompanyContro
 
     private Toolbar toolbar;
     private ImageView imsHeaderView, imsTabView;
+    private AppBarLayout appBar;
     private CollapsingToolbarLayout collapsingToolbar;
     private ViewPagerAdapter viewPagerAdapter;
     private ViewPager viewPager;
@@ -104,6 +107,8 @@ public class StaffCompanyFragment extends Fragment implements StaffCompanyContro
     }
 
     private void initView(){
+        appBar = v.findViewById(R.id.appbar);
+
         collapsingToolbar= v.findViewById(R.id.collapsing_toolbar);
 
         tabLayout = v.findViewById(R.id.detail_tabs);
@@ -129,14 +134,14 @@ public class StaffCompanyFragment extends Fragment implements StaffCompanyContro
     private void initViewPager(){
         viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
 
-        SampleFragment sampleFragment = new SampleFragment();
-        viewPagerAdapter.addFragments(sampleFragment,getActivity().getResources().getString(R.string.staff_company_fragment_tab_item_1));
+        CompanyNewsFragment newsFragment = new CompanyNewsFragment();
+        viewPagerAdapter.addFragments(newsFragment,getActivity().getResources().getString(R.string.staff_company_fragment_tab_item_1));
 
-        SampleFragment sampleFragment2 = new SampleFragment();
-        viewPagerAdapter.addFragments(sampleFragment2,getActivity().getResources().getString(R.string.staff_company_fragment_tab_item_2));
+        CompanyContactsFragment contactsFragment = new CompanyContactsFragment();
+        viewPagerAdapter.addFragments(contactsFragment,getActivity().getResources().getString(R.string.staff_company_fragment_tab_item_2));
 
-        SampleFragment sampleFragment3 = new SampleFragment();
-        viewPagerAdapter.addFragments(sampleFragment3,getActivity().getResources().getString(R.string.staff_company_fragment_tab_item_3));
+        CompanyServicesFragment policyFragment = new CompanyServicesFragment();
+        viewPagerAdapter.addFragments(policyFragment,getActivity().getResources().getString(R.string.staff_company_fragment_tab_item_3));
 
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -149,6 +154,11 @@ public class StaffCompanyFragment extends Fragment implements StaffCompanyContro
 
             @Override
             public void onPageSelected(int position) {
+                if(position!=0){
+                    appBar.setExpanded(false);
+                }else{
+                    appBar.setExpanded(true);
+                }
                 initImagesPages(position);
 
             }

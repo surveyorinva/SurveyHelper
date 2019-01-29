@@ -21,9 +21,9 @@ import com.survlogic.surveyhelper.views.SquareImageView;
 
 import java.util.ArrayList;
 
-public class NewMessagPhotoAdapter extends ArrayAdapter {
+public class MessagePhotoAdapter extends ArrayAdapter{
 
-    private static final String TAG = "NewMessagPhotoAdapter";
+    private static final String TAG = "NewMessagePhotoAdapter";
     private Context mContext;
     private LayoutInflater mInflater;
     private int layoutResource;
@@ -34,13 +34,14 @@ public class NewMessagPhotoAdapter extends ArrayAdapter {
     private static final int limitCount = 4, limitArrayCount = 3;
     private boolean overLimit = false;
 
-    public NewMessagPhotoAdapter(Context context, int layoutResource, ArrayList<String> images) {
+    public MessagePhotoAdapter(Context context, int layoutResource, ArrayList<String> images) {
         super(context, layoutResource, images);
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mContext = context;
 
         this.layoutResource = layoutResource;
         this.mLocalPhotos = images;
+
     }
 
     private static class ViewHolder {
@@ -51,7 +52,6 @@ public class NewMessagPhotoAdapter extends ArrayAdapter {
 
     @Override
     public int getCount() {
-
         arrayListCount = mLocalPhotos.size(); //counts the total number of elements from the arrayList.
 
         if (arrayListCount <= 4) {
@@ -68,27 +68,25 @@ public class NewMessagPhotoAdapter extends ArrayAdapter {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
-        final ViewHolder holder;
+        final MessagePhotoAdapter.ViewHolder holder;
         View row = convertView;
 
         currentCount = position;
 
         if (row == null) {
             row = mInflater.inflate(layoutResource, parent, false);
-            holder = new ViewHolder();
+            holder = new MessagePhotoAdapter.ViewHolder();
 
             holder.image = row.findViewById(R.id.gridImageView);
             holder.mProgressBar = row.findViewById(R.id.gridImageProgressBar);
 
             row.setTag(holder);
         } else {
-            holder = (ViewHolder) convertView.getTag();
+            holder = (MessagePhotoAdapter.ViewHolder) convertView.getTag();
         }
         ImageLoader imageLoader = ImageLoader.getInstance();
 
         String url = mLocalPhotos.get(position);
-        Log.d(TAG, "Staring Switch: Limit: " + limitArrayCount + " at position " + position);
 
         switch (position) {
             case limitArrayCount:
@@ -107,7 +105,6 @@ public class NewMessagPhotoAdapter extends ArrayAdapter {
                 break;
 
             default:
-
                 imageLoader.displayImage(url, holder.image, new ImageLoadingListener() {
                     @Override
                     public void onLoadingStarted(String imageUri, View view) {

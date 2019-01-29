@@ -168,6 +168,17 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeView"/>
 
+        <activity android:name=".activity.staffFeed.activity.FeedRoomActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeView"/>
+
+
+        <activity android:name=".activity.staffCompany.activity.CompanyWebActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeView"/>
+
         <activity android:name=".activity.appCamera.CaptureImageActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -179,6 +190,16 @@
             android:theme="@style/AppThemeView"/>
 
         <activity android:name=".activity.photoGallery.PhotoGalleryActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeView"/>
+
+        <activity android:name=".activity.staffCompany.fragments.contacts.activity.CompanyContactNew"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeView"/>
+
+        <activity android:name=".activity.staffCompany.fragments.contacts.activity.CompanyContactView"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeView"/>

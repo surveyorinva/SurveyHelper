@@ -64,7 +64,7 @@ public class StaffCompanyController {
         fabActionAnnouncement.hide();
 
         RelativeLayout rlSpecialActionButton = mActivity.findViewById(R.id.rl_special_launcher_forms);
-        rlSpecialActionButton.setVisibility(View.VISIBLE);
+        rlSpecialActionButton.setVisibility(View.GONE);
 
     }
 

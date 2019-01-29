@@ -57,6 +57,7 @@ public class CardFeedReflections extends RecyclerView.ViewHolder  {
         String roomToPostReflection = preferenceLoader.getFeedPublicRoom();
 
         Intent i = new Intent(mActivity, FeedMessageNewActivity.class);
+        i.putExtra(mActivity.getResources().getString(R.string.KEY_MESSAGE_CLASS),1);
         i.putExtra(mActivity.getResources().getString(R.string.KEY_EVENT_HEADER_TITLE),mReflection.getSummary());
         i.putExtra(mActivity.getResources().getString(R.string.KEY_FEED_PARCEL), mReflection);
         i.putExtra(mActivity.getResources().getString(R.string.KEY_MESSAGE_TYPE_ID),mReflection.getType());

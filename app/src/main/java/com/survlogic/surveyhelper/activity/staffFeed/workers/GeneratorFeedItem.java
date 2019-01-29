@@ -122,6 +122,7 @@ public class GeneratorFeedItem implements FirestoreDatabaseFeedItem.FeedItemList
 
 
     private void callFilterList(){
+        Log.d(TAG, "to_delete: callFilterList: Size: " + mListItems.size());
         mWorkerListener.returnFeedItemList(mListItems);
 
     }

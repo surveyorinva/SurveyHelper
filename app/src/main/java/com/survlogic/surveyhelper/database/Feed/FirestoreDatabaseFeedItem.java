@@ -135,12 +135,16 @@ public class FirestoreDatabaseFeedItem {
                     .whereLessThanOrEqualTo("postedOn_day_of_year", queryDayOfYear)
                     .whereEqualTo("room_id",room_id)
                     .whereEqualTo("published",true)
+                    .orderBy("postedOn_day_of_year",Query.Direction.ASCENDING)
+                    .orderBy("postedOn", Query.Direction.DESCENDING)
                     .startAfter(mLastQueriedEventItemList);
         }else{
             query = ref
                     .whereLessThanOrEqualTo("postedOn_day_of_year", queryDayOfYear)
                     .whereEqualTo("room_id",room_id)
-                    .whereEqualTo("published",true);
+                    .whereEqualTo("published",true)
+                    .orderBy("postedOn_day_of_year",Query.Direction.ASCENDING)
+                    .orderBy("postedOn", Query.Direction.DESCENDING);
         }
 
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

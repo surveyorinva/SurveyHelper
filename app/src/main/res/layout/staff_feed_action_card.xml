@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.MaterialComponents.CardView"
+    app:cardElevation="@dimen/app_card_elevation"
+    android:layout_marginStart="@dimen/app_card_margins"
+    android:layout_marginEnd="@dimen/app_card_margins"
+    android:layout_marginTop="@dimen/app_card_margin_top"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="ContentDescription">
+
+    <Button
+        android:id="@+id/item_action_button"
+        android:background="@color/colorTransparent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_current_user_image"
+                android:layout_margin="10dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/default_message_in_action_card"
+                android:text="What's on your mind?"
+                style="@style/Labels.Title.Dark"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/grey_400"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <RelativeLayout
+                android:layout_marginStart="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_camera_in_feed_action_camera"
+                    android:src="@drawable/ic_photo_camera_dark_24dp"
+                    android:tint="@color/colorPrimaryDark"
+                    android:layout_centerVertical="true"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+                <TextView
+                    android:text="@string/staff_feed_action_Photo"
+                    android:layout_toEndOf="@+id/iv_camera_in_feed_action_camera"
+                    android:layout_marginStart="10dp"
+                    style="@style/Labels.Emphasis.Dark"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginStart="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_camera_in_feed_action_check_in"
+                    android:src="@drawable/ic_add_location_dark_24dp"
+                    android:tint="@color/colorPrimaryDark"
+                    android:layout_centerVertical="true"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
+
+                <TextView
+                    android:text="@string/staff_feed_action_Check_In"
+                    android:layout_toEndOf="@+id/iv_camera_in_feed_action_check_in"
+                    android:layout_marginStart="10dp"
+                    style="@style/Labels.Emphasis.Dark"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+</android.support.design.card.MaterialCardView>

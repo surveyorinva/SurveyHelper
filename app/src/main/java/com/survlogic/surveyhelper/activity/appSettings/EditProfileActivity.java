@@ -287,6 +287,7 @@ public class EditProfileActivity extends AppCompatActivity implements EditProfil
                 year,month,day);
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getDatePicker().findViewById(getResources().getIdentifier("year","id","android")).setVisibility(View.GONE);
         dialog.show();
     }
 

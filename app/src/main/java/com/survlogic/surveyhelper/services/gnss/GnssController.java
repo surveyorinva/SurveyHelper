@@ -40,14 +40,11 @@ public class GnssController {
             @Override
             public void run() {
                 if(hasFilteredLocation){
-                    Log.d(TAG, "to_delete: Gnss has Filtered Location ");
                     mListenerToGeneralInterface.returnBestPosition(mCurrentLocationPredicted);
                 }else if(hasLocation){
-                    Log.d(TAG, "to_delete: Gnss has raw Location");
                     mListenerToGeneralInterface.returnBestPosition(mCurrentLocationRaw);
                 }else{
                     //no GPS Position, call network loader
-                    Log.d(TAG, "to_delete: No Location ");
                     mListenerToGeneralInterface.returnGnssError(true);
                 }
             }
@@ -232,26 +229,21 @@ public class GnssController {
     }
 
     private void unregisterLocationReceiver(){
-        Log.d(TAG, "to_delete: Unregister Location Receivers ");
         try{
             if(rawLocationReceiver !=null){
-                Log.d(TAG, "to_delete: rawLocationReceiver ");
                 mActivity.unregisterReceiver(rawLocationReceiver);
 
             }
 
             if (predictedLocationReceiver != null) {
-                Log.d(TAG, "to_delete: predictedLocationReceiver ");
                 mActivity.unregisterReceiver(predictedLocationReceiver);
             }
 
             if(gnssStatusReceiver !=null){
-                Log.d(TAG, "to_delete: gnssStatusReceiver ");
                 mActivity.unregisterReceiver(gnssStatusReceiver);
             }
 
             if(locationMetadataReceiver !=null){
-                Log.d(TAG, "to_delete: locationMetadataReceiver ");
                 mActivity.unregisterReceiver(locationMetadataReceiver);
             }
 

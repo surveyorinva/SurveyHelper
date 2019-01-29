@@ -8,10 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.survlogic.surveyhelper.R;
 import com.survlogic.surveyhelper.activity.staffFeed.model.Feed;
 import com.survlogic.surveyhelper.activity.staffFeed.model.FeedEvent;
+import com.survlogic.surveyhelper.activity.staffFeed.model.FeedItem;
+import com.survlogic.surveyhelper.activity.staffFeed.view.actions.CardFeedActionItem;
 import com.survlogic.surveyhelper.activity.staffFeed.view.announcement.CardFeedAnnouncement;
 import com.survlogic.surveyhelper.activity.staffFeed.view.birthday.CardFeedBirthday;
 import com.survlogic.surveyhelper.activity.staffFeed.view.birthday.CardFeedBirthdayHeader;
@@ -51,6 +54,7 @@ public class StaffFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public final static int FEED_SYSTEM_DEFAULT = 0,
                             FEED_SYSTEM_EMPTY = 1,
+                            FEED_SYSTEM_ACTION_ITEM = 2,
                             FEED_ANNOUNCEMENT = 101,
                             FEED_EVENT = 201,
                             FEED_BIRTHDAY_HEADER_TODAY = 301,
@@ -66,6 +70,8 @@ public class StaffFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.mAdapterListener = listener;
         this.mFeedList = feedList;
 
+        setHasStableIds(true);
+
     }
 
     @NonNull
@@ -75,6 +81,11 @@ public class StaffFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         LayoutInflater mInflater = LayoutInflater.from(parent.getContext());
 
         switch (viewType){
+            case FEED_SYSTEM_ACTION_ITEM:
+                View vActionItem = mInflater.inflate(R.layout.staff_feed_action_card,parent,false);
+                viewHolder = new CardFeedActionItem(vActionItem,mContext,mAdapterListener);
+                break;
+
             case FEED_ANNOUNCEMENT:
                 View vAnnouncement = mInflater.inflate(R.layout.staff_feed_item_announcement_card,parent,false);
                 viewHolder = new CardFeedAnnouncement(vAnnouncement,mContext,mAdapterListener);
@@ -127,6 +138,17 @@ public class StaffFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemCount() {
+        return mFeedList == null ? 0 : mFeedList.size();
+    }
+
+
+    @Override
     public int getItemViewType(int position) {
         Feed feed = mFeedList.get(position);
         return feed.getFeed_type();
@@ -143,6 +165,11 @@ public class StaffFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         switch (viewHolder.getItemViewType()){
+
+            case FEED_SYSTEM_ACTION_ITEM:
+                CardFeedActionItem vhActionItem = (CardFeedActionItem) viewHolder;
+                vhActionItem.configureViewHolder(position);
+                break;
 
             case FEED_ANNOUNCEMENT:
                 CardFeedAnnouncement vhAnnouncement = (CardFeedAnnouncement) viewHolder;
@@ -178,6 +205,7 @@ public class StaffFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 CardViewFeedMessage vhFeedItem = (CardViewFeedMessage) viewHolder;
                 vhFeedItem.configureViewHolder(mFeedList,position);
 
+
                 break;
 
             case FEED_SYSTEM_EMPTY:
@@ -186,12 +214,6 @@ public class StaffFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
 
     }
-
-    @Override
-    public int getItemCount() {
-        return mFeedList == null ? 0 : mFeedList.size();
-    }
-
 
     public void swapItems(ArrayList<Feed> items) {
         this.mFeedList = items;

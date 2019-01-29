@@ -27,7 +27,7 @@ public class BottomSheetCompiler {
         void returnActionsError(boolean isError);
     }
 
-    public class RoomActions{
+    public class RoomActions {
         private String roomActionName;
         private Drawable roomActionDrawable;
         private int action_id;
@@ -215,11 +215,14 @@ public class BottomSheetCompiler {
             if(isReflectionMorningNow){
                 //Add reflection to array list
                 reflectionsToReturn.add(reflectionMorning);
+
             }
+
         }
 
 
         FeedReflections reflectionEvening = preferenceLoader.getFeedReflectionDailyEveningLocal();
+
         boolean isReflectionEveningComplete = isLocalReflectionCompletedToday(PreferenceLoader.REFLECTION_EVENING,reflectionEvening);
 
         if(!isReflectionEveningComplete){
@@ -234,6 +237,7 @@ public class BottomSheetCompiler {
 
         FeedReflections reflectionsWeekly = preferenceLoader.getFeedReflectionWeeklyLocal();
         boolean isReflectionWeeklyComplete = isLocalReflectionCompletedThisWeek(PreferenceLoader.REFLECTION_WEEKLY,reflectionsWeekly);
+        Log.d(TAG, "to_delete: generateReflectionsCurrent: Is Reflection Weekly Complete: " + isReflectionWeeklyComplete);
 
         if(!isReflectionWeeklyComplete){
             reflectionsToReturn.add(reflectionsWeekly);
@@ -248,7 +252,8 @@ public class BottomSheetCompiler {
 
         if(reflection.isComplete()){
             Date dateUserCompleted = new Date(reflection.getCompletedOn());
-            if(dateUserCompleted.compareTo(dateNow)!=0){
+
+            if(compareToDay(dateNow, dateUserCompleted)!=0){
                 reflection.setComplete(false);
                 reflection.setAnswer(null);
                 reflection.setCompletedOn(0);
@@ -261,6 +266,14 @@ public class BottomSheetCompiler {
         }else{
             return false;
         }
+    }
+
+    public static int compareToDay(Date date1, Date date2) {
+        if (date1 == null || date2 == null) {
+            return 0;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        return sdf.format(date1).compareTo(sdf.format(date2));
     }
 
     private boolean isLocalReflectionCompletedThisWeek(int category, FeedReflections reflection){
